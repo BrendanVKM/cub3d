@@ -1,0 +1,80 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/11/04 14:41:21 by bvictoir          #+#    #+#              #
+#    Updated: 2025/03/25 10:24:40 by bvictoir         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+MAKEFLAGS	+= -s
+
+NAME		= cub3d
+
+SRC_PATH	= srcs/
+OBJ_PATH	= obj/
+INC_PATH	= incs/
+LIBFT_PATH	= libft/
+MLX			= mlx/
+
+
+SRC			= main.c			
+SRCS		= ${addprefix $(SRC_PATH), $(SRC)}
+
+OBJ			= $(SRC:.c=.o)
+OBJS		= ${addprefix $(OBJ_PATH), $(OBJ)}
+
+LIBFTLIB	= libft.a
+MINILIBX	= $(MLX)libmlx.a
+LIB			= $(LIBFTLIB) $(MINILIBX)
+
+CC			= cc
+CFLAGS		= -Wall -Wextra -Werror
+
+INCLUDES	= -I $(INC_PATH) -I $(MLX)
+MLXFLAG		= -L $(MLX) -Imlx_linuux -lXext -lX11 -lm -lz
+
+RM			= rm -rfd
+
+RED			:= "\033[0;31m\033[1m"
+GREEN		:= "\033[0;32m\033[1m"
+BLUE		:= "\033[0;34m\033[1m"
+YELLOW		:= "\033[1;33m\033[1m"
+PURPLE		:= "\033[0;35m\033[1m"
+CYAN		:= "\033[0;36m\033[1m"
+WHITE		:= "\033[0;37m\033[1m"
+NO_STYLE	:= "\033[0m"
+
+
+all:		$(OBJ_PATH) $(NAME)
+
+$(OBJ_PATH)%.o: $(SRC_PATH)%.c
+			$(CC) $(CFLAGS) $(INCLUDES) -c  $< -o $@
+
+$(OBJ_PATH):
+			mkdir -p $(OBJ_PATH)
+
+$(NAME): $(OBJS)
+		make -C $(MLX)
+		make -C $(LIBFT_PATH)
+		mv $(LIBFT_PATH)$(LIBFTLIB) .
+		$(CC) $(FLAGS) $(MLXFLAG) $(OBJS) -o $(NAME) $(INCLUDES) $(LIB)
+		echo $(GREEN)$(NAME) compiled!$(NO_STYLE)
+
+clean:	
+		$(RM) $(OBJ_PATH)
+		make clean -C $(LIBFT_PATH)
+		echo $(YELLOW)object clean! $(NO_STYLE)
+
+fclean: 	
+		$(RM) $(OBJ_PATH) $(NAME) $(LIBFTLIB)
+		make fclean -C $(LIBFT_PATH)
+		echo $(RED)$(NAME) deleted!$(NO_STYLE)
+
+re: fclean all
+		echo $(PURPLE)$(NAME) reloaded!$(NO_STYLE)
+
+.PHONY:  all clean fclean re
