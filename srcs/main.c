@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:10:46 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/03/25 11:43:44 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/03/25 17:09:37 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	ft_check_args(int ac, char **av)
 	int fd;
 	
 	if (ac != 2)
-		exit(ft_printf(2, "Error: Wrong number of arguments\n"));
+		exit(ft_printf(2, "Error: Wrong number of arguments\n"));//need "error\n"
 	if (ft_check_file_extension(av[1], ".cub") == 0)
 		exit(ft_printf(2, "Error: Wrong file extension\n"));
 	fd = open(av[1], O_RDONLY);

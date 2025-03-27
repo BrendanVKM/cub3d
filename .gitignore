@@ -2,3 +2,5 @@
 *.cub
 libft.a
 cub3d
+test.c
+assets
