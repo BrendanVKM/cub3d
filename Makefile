@@ -6,7 +6,7 @@
 #    By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/04 14:41:21 by bvictoir          #+#    #+#              #
-#    Updated: 2025/03/25 10:24:40 by bvictoir         ###   ########.fr        #
+#    Updated: 2025/03/27 10:50:26 by bvictoir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ LIBFT_PATH	= libft/
 MLX			= mlx/
 
 
-SRC			= main.c			
+SRC			=	parse_file.c	\
+				main.c
 SRCS		= ${addprefix $(SRC_PATH), $(SRC)}
 
 OBJ			= $(SRC:.c=.o)
@@ -32,10 +33,11 @@ MINILIBX	= $(MLX)libmlx.a
 LIB			= $(LIBFTLIB) $(MINILIBX)
 
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -g3
 
 INCLUDES	= -I $(INC_PATH) -I $(MLX)
-MLXFLAG		= -L $(MLX) -Imlx_linuux -lXext -lX11 -lm -lz
+# MLXFLAG		= -L $(MLX) -Imlx_linuux -lXext -lX11 -lm -lz
+MLXFLAG		= -L $(MLX) -lmlx -lXext -lX11 -lm -lz
 
 RM			= rm -rfd
 
@@ -61,7 +63,7 @@ $(NAME): $(OBJS)
 		make -C $(MLX)
 		make -C $(LIBFT_PATH)
 		mv $(LIBFT_PATH)$(LIBFTLIB) .
-		$(CC) $(FLAGS) $(MLXFLAG) $(OBJS) -o $(NAME) $(INCLUDES) $(LIB)
+		$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(INCLUDES) $(LIB) $(MLXFLAG)
 		echo $(GREEN)$(NAME) compiled!$(NO_STYLE)
 
 clean:	

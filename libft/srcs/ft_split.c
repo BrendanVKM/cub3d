@@ -6,7 +6,7 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 21:56:38 by bvkm              #+#    #+#             */
-/*   Updated: 2024/07/16 14:55:50 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/03/27 11:35:47 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,12 @@ static int	count_words(const char *str, char c)
 	int	count;
 
 	i = 0;
-	count = 0;
+	count = 1;
 	while (str[i])
 	{
-		while (str[i] && str[i] == c)
-			i++;
-		if (str[i] && str[i] != c)
+		if (str[i] && str[i] == c)
 			count++;
-		while (str[i] && str[i] != c)
-			i++;
+		i++;
 	}
 	return (count);
 }
@@ -67,19 +64,16 @@ static char	**ft_spliting(const char *str, char c, char **strs)
 	word = 0;
 	while (str[i])
 	{
-		while (str[i] && str[i] == c)
-			i++;
 		j = i;
 		while (str[j] && str[j] != c)
 			j++;
-		if (j != i)
-		{
-			strs[word] = ft_strndup(str, i, j);
-			if (!strs[word])
-				return (free_array(strs, word));
-			word++;
-		}
+		strs[word] = ft_strndup(str, i, j);
+		if (!strs[word])
+			return (free_array(strs, word));
+		word++;
 		i = j;
+		if (str[i])
+			i++;
 	}
 	strs[word] = NULL;
 	return (strs);

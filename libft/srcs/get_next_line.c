@@ -6,7 +6,7 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 11:15:22 by bvictoir          #+#    #+#             */
-/*   Updated: 2024/11/04 14:40:51 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/03/27 13:44:18 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static char	*ft_trim(char *line, char *buf)
 		buf = ft_strcpy(buf, line + i);
 	else
 		buf[0] = '\0';
-	rest = ft_substr(line, 0, i);
+	rest = ft_substr(line, 0, i - 1);
 	free(line);
 	return (rest);
 }
