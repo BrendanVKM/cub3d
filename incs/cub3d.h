@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 14:14:34 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/03/26 16:01:11 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/03/27 13:54:20 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,35 @@
 # define A 97
 # define S 115
 # define D 100
-#endif
+
+typedef struct s_color
+{
+	int r;
+	int g;
+	int b;
+}	t_color;
+
+typedef struct s_config
+{
+	char	*no;
+	char	*so;
+	char	*we;
+	char	*ea;
+	t_color floor;
+	t_color ceiling;
+	char	**map;
+}	t_config;
 
 typedef struct s_data
 {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
+	void	*mlx;
+	void	*win;
+	t_config	config;
 }	t_data;
+
+
+void	parse_file(t_config *config, int fd);
+
+#endif
+
+

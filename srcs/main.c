@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:10:46 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/03/25 17:09:37 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/03/27 13:54:55 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,20 @@ static int	ft_check_args(int ac, char **av)
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
 		exit(ft_printf(2, "Error: File does not exist\n"));
-	close(fd);
+	if (read(fd, NULL, 0) == -1)
+	{
+		close(fd);
+		exit(ft_printf(2, "Error: File is not readable\n"));
+	}
 	return (fd);
 }
 
 int	main(int ac, char **av)
 {
 	int fd;
+	t_config config;
 	
 	fd = ft_check_args(ac, av);
-	
+	parse_file(&config, fd);
+	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/04 14:41:17 by bvictoir          #+#    #+#              #
-#    Updated: 2024/11/04 14:41:18 by bvictoir         ###   ########.fr        #
+#    Updated: 2025/03/27 11:47:50 by bvictoir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRC			= ft_isalpha.c				\
 				ft_isalnum.c			\
 				ft_isprint.c			\
 				ft_isdigit.c			\
+				ft_isnum.c				\
 				ft_isascii.c			\
 				ft_strlen.c				\
 				ft_memset.c				\
