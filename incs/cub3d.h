@@ -6,7 +6,7 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 14:14:34 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/03/27 11:03:06 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/03/31 11:33:38 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@
 
 typedef struct s_color
 {
-	int r;
-	int g;
-	int b;
+	int	r;
+	int	g;
+	int	b;
 }	t_color;
 
 typedef struct s_config
@@ -42,21 +42,18 @@ typedef struct s_config
 	char	*so;
 	char	*we;
 	char	*ea;
-	t_color floor;
-	t_color ceiling;
+	t_color	floor;
+	t_color	ceiling;
 	char	**map;
 }	t_config;
 
 typedef struct s_data
 {
-	void	*mlx;
-	void	*win;
+	void		*mlx;
+	void		*win;
 	t_config	config;
 }	t_data;
-
 
 void	parse_file(t_config *config, int fd);
 
 #endif
-
-

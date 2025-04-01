@@ -6,12 +6,11 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:10:46 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/03/27 13:45:15 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/03/31 11:34:40 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
 
 static int	ft_check_file_extension(char *file, char *extension)
 {
@@ -28,8 +27,8 @@ static int	ft_check_file_extension(char *file, char *extension)
 
 static int	ft_check_args(int ac, char **av)
 {
-	int fd;
-	
+	int	fd;
+
 	if (ac != 2)
 		exit(ft_printf(2, "Error: Wrong number of arguments\n"));
 	if (ft_check_file_extension(av[1], ".cub") == 0)
@@ -47,9 +46,9 @@ static int	ft_check_args(int ac, char **av)
 
 int	main(int ac, char **av)
 {
-	int fd;
-	t_config config;
-	
+	int			fd;
+	t_config	config;
+
 	fd = ft_check_args(ac, av);
 	parse_file(&config, fd);
 	return (0);

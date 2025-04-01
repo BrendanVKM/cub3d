@@ -6,7 +6,7 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 21:56:38 by bvkm              #+#    #+#             */
-/*   Updated: 2025/03/27 11:35:47 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/03/31 11:29:46 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ static char	**ft_spliting(const char *str, char c, char **strs)
 		if (str[i])
 			i++;
 	}
+	if (str[i - 1] == c)
+		strs[word++] = ft_strdup("");
 	strs[word] = NULL;
 	return (strs);
 }

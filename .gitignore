@@ -1,0 +1,7 @@
+*.cub
+*.o
+*/obj
+.vscode
+*test*
+cub3d
+libft.a
