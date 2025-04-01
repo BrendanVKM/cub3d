@@ -6,15 +6,18 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 10:11:59 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/03/27 13:48:17 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/04/01 14:44:35 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+// static char	*get_wall(char *file)
+// {
+	
+// }
 
-
-static t_color	get_color(char *line)
+static t_color	get_floor_ceiling(char *line)
 {
 	t_color	color;
 	char	**rgb;
@@ -45,8 +48,9 @@ static t_color	get_color(char *line)
 	return (color);
 }
 
-void	get_textures(t_config *config, char *line)
+static int	get_textures(t_config *config, char *line)
 {
+	printf("line: %s\n", line);
 	if (!ft_strncmp(line, "NO ", 3))
 		config->no = ft_strdup(line + 3);
 	else if (!ft_strncmp(line, "SO ", 3))
@@ -56,9 +60,12 @@ void	get_textures(t_config *config, char *line)
 	else if (!ft_strncmp(line, "EA ", 3))
 		config->ea = ft_strdup(line + 3);
 	else if (!ft_strncmp(line, "F ", 2))
-		config->floor = get_color(line + 2);
+		config->floor = get_floor_ceiling(line + 2);
 	else if (!ft_strncmp(line, "C ", 2))
-		config->ceiling = get_color(line + 2);
+		config->ceiling = get_floor_ceiling(line + 2);
+	else if (line && line[0] != '\0')
+		return (1);
+	return (0);
 }
 
 void	parse_file(t_config *config, int fd)
@@ -72,7 +79,9 @@ void	parse_file(t_config *config, int fd)
 			free(line);
 			continue ;
 		}
-		get_textures(config, line);
+		if (get_textures(config, line))
+			// verif_textures(config);
+			continue;
 		free(line);
 	}
 	free(line);
