@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 14:14:34 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/03/27 13:54:20 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/03/31 12:47:42 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 # include "mlx_int.h"
 # include <math.h>
 
+#define TILE_SIZE 30 //float? how big is a square in the map
+#define FOV //field of vision of player, static
+#define ROT_SPEED
 
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 720
