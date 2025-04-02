@@ -6,23 +6,36 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 10:11:59 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/04/01 14:44:35 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/04/02 11:30:12 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-// static char	*get_wall(char *file)
-// {
+static char	*get_wall(char *line)
+{
+	char	*path;
 	
-// }
+	if (ft_strlen(line) < 3)
+		exit(ft_printf(2, "Error: Invalid texture\n")); // a proteger
+	if (line[2] != ' ')
+		exit(ft_printf(2, "Error: Missing space for texture\n")); // a proteger
+	path = ft_strtrim(line + 3, " ");
+	if (!path || path[0] == '\0')
+		exit(ft_printf(2, "Error: No Path\n")); // a proteger
+	return (path);
+	
+}
 
 static t_color	get_floor_ceiling(char *line)
 {
 	t_color	color;
+	char	*line_t;
 	char	**rgb;
 	
-	rgb = ft_split(line, ',');
+	line_t = ft_strtrim(line, "");
+	rgb = ft_split(line_t, ',');
+	free(line_t);
 	if (!rgb)
 		exit(ft_printf(2, "Error: Split fail\n")); // a proteger
 	if (!rgb[0] || !rgb[1] || !rgb[2] || rgb[3] )
@@ -51,17 +64,17 @@ static t_color	get_floor_ceiling(char *line)
 static int	get_textures(t_config *config, char *line)
 {
 	printf("line: %s\n", line);
-	if (!ft_strncmp(line, "NO ", 3))
-		config->no = ft_strdup(line + 3);
-	else if (!ft_strncmp(line, "SO ", 3))
-		config->so = ft_strdup(line + 3);
-	else if (!ft_strncmp(line, "WE ", 3))
-		config->we = ft_strdup(line + 3);
-	else if (!ft_strncmp(line, "EA ", 3))
-		config->ea = ft_strdup(line + 3);
-	else if (!ft_strncmp(line, "F ", 2))
+	if (!ft_strncmp(line, "NO", 2))
+		config->no = get_wall(line);
+	else if (!ft_strncmp(line, "SO", 2))
+		config->so = ft_strdup(line + 2);
+	else if (!ft_strncmp(line, "WE", 2))
+		config->we = ft_strdup(line + 2);
+	else if (!ft_strncmp(line, "EA", 2))
+		config->ea = ft_strdup(line + 2);
+	else if (!ft_strncmp(line, "F", 1))
 		config->floor = get_floor_ceiling(line + 2);
-	else if (!ft_strncmp(line, "C ", 2))
+	else if (!ft_strncmp(line, "C", 1))
 		config->ceiling = get_floor_ceiling(line + 2);
 	else if (line && line[0] != '\0')
 		return (1);
