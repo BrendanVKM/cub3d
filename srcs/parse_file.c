@@ -6,11 +6,19 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 10:11:59 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/04/02 11:30:12 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/04/03 10:57:47 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static int	all_textures_set(t_config *config)
+{
+	
+	if (config->no && config->so && config->we && config->ea)
+		return (1);
+	return (0);
+}
 
 static char	*get_wall(char *line)
 {
@@ -63,20 +71,19 @@ static t_color	get_floor_ceiling(char *line)
 
 static int	get_textures(t_config *config, char *line)
 {
-	printf("line: %s\n", line);
 	if (!ft_strncmp(line, "NO", 2))
 		config->no = get_wall(line);
 	else if (!ft_strncmp(line, "SO", 2))
-		config->so = ft_strdup(line + 2);
+		config->so = get_wall(line);
 	else if (!ft_strncmp(line, "WE", 2))
-		config->we = ft_strdup(line + 2);
+		config->we = get_wall(line);
 	else if (!ft_strncmp(line, "EA", 2))
-		config->ea = ft_strdup(line + 2);
+		config->ea = get_wall(line);
 	else if (!ft_strncmp(line, "F", 1))
 		config->floor = get_floor_ceiling(line + 2);
 	else if (!ft_strncmp(line, "C", 1))
 		config->ceiling = get_floor_ceiling(line + 2);
-	else if (line && line[0] != '\0')
+	else if (line)
 		return (1);
 	return (0);
 }
@@ -92,9 +99,16 @@ void	parse_file(t_config *config, int fd)
 			free(line);
 			continue ;
 		}
+		if (all_textures_set(config))
+		{
+			free(line);
+			return ;
+		}
 		if (get_textures(config, line))
-			// verif_textures(config);
-			continue;
+		{
+			free(line);
+			exit(ft_printf(2, "Error: Invalid line in file\n")); // a proteger
+		}
 		free(line);
 	}
 	free(line);

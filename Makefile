@@ -6,7 +6,7 @@
 #    By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/04 14:41:21 by bvictoir          #+#    #+#              #
-#    Updated: 2025/03/31 12:13:17 by bvictoir         ###   ########.fr        #
+#    Updated: 2025/04/03 10:57:22 by bvictoir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ LIBFT_PATH	= libft/
 MLX			= mlx/
 
 
-SRC			=	parse_file.c	\
+SRC			=	init.c	\
+				parse_file.c	\
 				main.c
 SRCS		= ${addprefix $(SRC_PATH), $(SRC)}
 

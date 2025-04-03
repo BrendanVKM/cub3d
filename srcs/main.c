@@ -6,7 +6,7 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:10:46 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/03/31 11:34:40 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/04/03 10:56:24 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	main(int ac, char **av)
 	t_config	config;
 
 	fd = ft_check_args(ac, av);
+	init_config(&config);
 	parse_file(&config, fd);
 	return (0);
 }
