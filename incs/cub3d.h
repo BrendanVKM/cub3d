@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 14:14:34 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/03/31 12:47:42 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/04/07 16:39:39 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 # include "mlx_int.h"
 # include <math.h>
 
-#define TILE_SIZE 30 //float? how big is a square in the map
-#define FOV //field of vision of player, static
-#define ROT_SPEED
+#define TILE_SIZE 30 
+#define FOV 66
+#define SPEED 4
 
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 720
@@ -52,15 +52,32 @@ typedef struct s_config
 	char	**map;
 }	t_config;
 
+typedef struct s_vec
+{
+	double	x;
+	double	y;
+}	t_vec;
+
+typedef struct s_player
+{
+	double	pos_x;
+	double	pos_y;
+	t_vec	p_dir;
+	t_vec	ray_dir;
+	t_vec	plane;
+}	t_player;
+
 typedef struct s_data
 {
 	void	*mlx;
 	void	*win;
-	t_config	config;
+	t_config	*config;//error accessing data.config->map[y][x]
+	t_player	*player;
 }	t_data;
 
 
 void	parse_file(t_config *config, int fd);
+void	init_vector(t_vec *vector, double x, double y);
 
 #endif
 

@@ -6,7 +6,7 @@
 #    By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/04 14:41:21 by bvictoir          #+#    #+#              #
-#    Updated: 2025/03/27 13:54:47 by lemarian         ###   ########.fr        #
+#    Updated: 2025/04/04 15:32:56 by lemarian         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ MINILIBX	= $(MLX)libmlx.a
 LIB			= $(LIBFTLIB) $(MINILIBX)
 
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -g3
+CFLAGS		= -Wall -Wextra -Werror -g3 -lm #check, flag for math library
 
 INCLUDES	= -I $(INC_PATH) -I $(MLX)
 # MLXFLAG		= -L $(MLX) -Imlx_linuux -lXext -lX11 -lm -lz

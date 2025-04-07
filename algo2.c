@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 17:28:14 by lemarian          #+#    #+#             */
-/*   Updated: 2025/04/01 17:23:27 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/04/02 15:30:32 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int main()
 		else //
 		{
 			step_x = 1;
-			side_dist_x = (map_x + 1.0 - pos_x) * delta_dist_x;
+			side_dist_x = (map_x + 1.0 - pos_x) * delta_dist_x;//what's the 1.0 for?
 		}
 		if (ray_dir_y < 0) // side dist is distance from ray starting position to first y line above or below
 		{
@@ -65,5 +65,40 @@ int main()
 			step_y = 1;
 			side_dist_y = (map_y + 1.0 - pos_y) * delta_dist_y;
 		}
+
+		while (hit == 0)//move on y or x axis, until wall is hit
+		{
+			if (side_dist_x < side_dist_y) // move to closest x or y line intersection
+			{
+				side_dist_x += delta_dist_x;
+				map_x += step_x;
+				side = 0;
+			}
+			else
+			{
+				side_dist_y += delta_dist_y;
+				map_y += step_y;
+				side = 1;
+			}
+			if (map[map_x][map_y] > 0)
+				hit = 1;
+		}
+		double perp_wall_dist;// distance from camera plane to wall (not from player, avoid fisheye effect)
+		if (side == 0)
+			perp_wall_dist = (side_dist_x - delta_dist_x); // delta_dist and side_dist were both scaled by a factor of ray_dir, side_dist is almost same size as per_wall_dist
+		else
+			perp_wall_dist = (side_dist_y - delta_dist_y);
+		
+		int line_height;
+		int draw_start;
+		int draw_end;
+		line_height = (int)(WIN_HEIGHT / perp_wall_dist);
+		draw_start = -line_height / 2 + WIN_HEIGHT / 2;
+		if (draw_start < 0)
+			draw_start = 0;
+		draw_end = line_height / 2 + WIN_HEIGHT / 2;
+		if (draw_end >= WIN_HEIGHT)
+			draw_end = WIN_HEIGHT - 1;
+		draw_line();
 	}
 }
