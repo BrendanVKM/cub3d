@@ -6,7 +6,7 @@
 #    By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/04 14:41:21 by bvictoir          #+#    #+#              #
-#    Updated: 2025/04/04 15:32:56 by lemarian         ###   ########.fr        #
+#    Updated: 2025/04/08 15:10:24 by lemarian         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,9 @@ MLX			= mlx/
 
 
 SRC			=	parse_file.c	\
-				main.c
+				main.c			\
+				init_rc.c		\
+				raycast.c		\
 SRCS		= ${addprefix $(SRC_PATH), $(SRC)}
 
 OBJ			= $(SRC:.c=.o)

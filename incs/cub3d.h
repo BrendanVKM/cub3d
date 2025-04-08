@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 14:14:34 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/04/07 16:39:39 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/04/08 15:06:52 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,26 +58,42 @@ typedef struct s_vec
 	double	y;
 }	t_vec;
 
-typedef struct s_player
+typedef struct s_raycast
+{
+	t_vec	p_pos;
+	t_vec	p_dir;
+	t_vec	plane;
+	t_vec	ray_dir;
+	t_vec	ray_pos;
+	t_vec	delta_d;
+	t_vec	side_d;
+	int		step_x; //use vec and cast in code?
+	int		step_y;
+}	t_raycast;
+
+/*typedef struct s_player
 {
 	double	pos_x;
 	double	pos_y;
 	t_vec	p_dir;
 	t_vec	ray_dir;
 	t_vec	plane;
-}	t_player;
+}	t_player; */
 
 typedef struct s_data
 {
 	void	*mlx;
 	void	*win;
+	int		p_pos_x;
+	int		p_pos_y;
 	t_config	*config;//error accessing data.config->map[y][x]
-	t_player	*player;
+	//t_player	*player;
 }	t_data;
 
 
 void	parse_file(t_config *config, int fd);
 void	init_vector(t_vec *vector, double x, double y);
+void	init_player_dir(t_data *data, t_raycast *rc, int x, int y);
 
 #endif
 

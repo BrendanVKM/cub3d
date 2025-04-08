@@ -5,98 +5,98 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/02 15:39:16 by lemarian          #+#    #+#             */
-/*   Updated: 2025/04/07 17:26:56 by lemarian         ###   ########.fr       */
+/*   Created: 2025/04/08 14:25:32 by lemarian          #+#    #+#             */
+/*   Updated: 2025/04/08 15:07:10 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-//step has to be int
-
-double	get_step(t_vec *ray_dir, char c)
+double	get_wall_dist(t_raycast *rc, int side)
 {
-	double	step;
+	double	wall_dist;
 
-	if (c == 'x')
-	{
-		if (ray_dir->x < 0)
-			step = -1;
-		else
-			step = 1;
-	}
+	if (side == 0)
+		wall_dist = (rc->side_d.x - rc->delta_d.x);
 	else
-	{
-		if (ray_dir->y < 0)
-			step = -1;
-		else
-			step = 1;
-	}
-	return (step);
+		wall_dist = (rc->side_d.y - rc->delta_d.y);
+	return (wall_dist);
 }
 
-double	dda(t_data *data, t_vec *side_dist, t_vec delta_dist, t_vec step)
+double	dda(t_data *data, t_raycast *rc)
 {
 	int	side;
 	int	map_x;
 	int	map_y;
-	double	wall_dist;
 
-	map_x = (int)data->player->pos_x;
-	map_y = (int)data->player->pos_y;
+	map_x = (int)rc->p_pos.x;
+	map_y = (int)rc->p_pos.y;
 	while (1)
 	{
-		if (side_dist->x < side_dist->y)
+		if (rc->side_d.x < rc->side_d.y)
 		{
-			side_dist->x += delta_dist.x;
-			map_x += (int)step.y;
+			rc->side_d.x += rc->delta_d.x;
+			map_x += rc->step_x;
 			side = 0;
 		}
 		else
 		{
-			side_dist->y += delta_dist.y;
-			map_y += (int)step.y;
+			rc->side_d.y += rc->delta_d.y;
+			map_y += rc->step_y;
 			side = 1;
 		}
-		if (data->config->map[map_y][map_x] == '1')//check if order x y is good
+		if (data->config->map[map_x][map_y] == '1')//check if right x y order
 			break;
 	}
-	wall_dist = measure_wall(data, idk);
+	return (get_wall_dist(rc, side));
 }
 
-double	get_dist(t_data *data, t_player *player)
+void	init_rc(t_data *data, t_raycast *rc)
 {
-	t_vec	delta_dist;
-	t_vec	step;
-	t_vec	side_dist;
-
-	delta_dist.x = fabs(1 / player->ray_dir.x);
-	delta_dist.y = fabs(1 / player->ray_dir.y);
-	step.x = get_step(&player->ray_dir, 'x');
-	step.y = get_step(&player->ray_dir, 'y');
-	if (player->ray_dir.x < 0)
-		side_dist.x = (player->pos_x - (int)player->pos_x) * delta_dist.x;
+	rc->delta_d.x = fabs(1 / rc->ray_dir.x);
+	rc->delta_d.y = fabs(1 / rc->ray_dir.y);
+	if (rc->ray_dir.x < 0)
+	{
+		rc->step_x = -1;
+		rc->side_d.x = (rc->p_pos.x - (int)rc->p_pos.x) * rc->delta_d.x;
+	}
 	else
-		side_dist.x = ((int)player->pos_x + 1.0 - player->pos_x) * delta_dist.x;
-	if (player->ray_dir.y < 0)
-		side_dist.y = (player->pos_y - (int)player->pos_y) * delta_dist.y;
+	{
+		rc->step_x = 1;
+		rc->side_d.x = ((int)rc->p_pos.x + 1.0 - rc->p_pos.x) * rc->delta_d.x;
+	}
+	if (rc->ray_dir.y < 0)
+	{
+		rc->step_y = -1;
+		rc->side_d.y = (rc->p_pos.y - (int)rc->p_pos.y) * rc->delta_d.y;
+	}
 	else
-		side_dist.y = ((int)player->pos_y + 1.0 - player->pos_y) * delta_dist.y;
-	return (dda(data, &side_dist, delta_dist, step));
+	{
+		rc->step_y = 1;
+		rc->side_d.y = ((int)rc->p_pos.y + 1.0 - rc->p_pos.y) * rc->delta_d.y;
+	}
 }
 
-void	ray_cast(t_data *data, t_player *player)//init player dir at beginning of game
+void	ray_cast(t_data *data)//init rc first
 {
 	int	x;
 	double	cam_x;
 	double	ray_dist;
+	t_raycast	*rc;
 
 	x = 0;
-	while (x < WIN_WIDTH)
+	rc = malloc(sizeof(t_raycast));
+	if (!rc)//free/print error
+		exit(1);
+	init_player_dir(data, rc, data->p_pos_x, data->p_pos_y);
+	while(x < WIN_WIDTH)
 	{
-		cam_x = 2 * x / (double)WIN_WIDTH- 1;
-		player->ray_dir.x = player->p_dir.x + player->plane.x * cam_x;
-		player->ray_dir.y = player->p_dir.y + player->plane.y * cam_x;
-		ray_dist = get_dist(data, player);
+		cam_x = 2 * x / (double)WIN_WIDTH - 1;
+		rc->ray_dir.x = rc->p_dir.x + rc->plane.x * cam_x;
+		rc->ray_dir.y = rc->p_dir.y + rc->plane.x * cam_x;
+		init_rc(data, rc);//bad name
+		ray_dist = dda(data, rc);
+		draw_stripe(data, x, ray_dist);
+		x++;
 	}
 }
