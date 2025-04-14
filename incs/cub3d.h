@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 14:14:34 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/04/08 15:06:52 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/04/14 14:00:45 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "mlx.h"
 # include "mlx_int.h"
 # include <math.h>
+#include <stdint.h>
 
 #define TILE_SIZE 30 
 #define FOV 66
@@ -94,6 +95,7 @@ typedef struct s_data
 void	parse_file(t_config *config, int fd);
 void	init_vector(t_vec *vector, double x, double y);
 void	init_player_dir(t_data *data, t_raycast *rc, int x, int y);
+void	ray_cast(t_data *data);
 
 #endif
 
