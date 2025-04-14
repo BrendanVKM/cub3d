@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 14:14:34 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/04/14 14:00:45 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/04/14 16:06:28 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@
 
 #define TILE_SIZE 30 
 #define FOV 66
-#define SPEED 4
+#define SPEED 4 // ?
+#define TEX_WIDTH 64 // replace with var in struct later
+# define TEX_HEIGHT 64 // idem
 
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 720
@@ -68,18 +70,13 @@ typedef struct s_raycast
 	t_vec	ray_pos;
 	t_vec	delta_d;
 	t_vec	side_d;
-	int		step_x; //use vec and cast in code?
+	int		side; // not sure I'll keep this here
+	int		step_x;
 	int		step_y;
+	int		wall_height;
+	int		wall_start;
+	int		wall_end;
 }	t_raycast;
-
-/*typedef struct s_player
-{
-	double	pos_x;
-	double	pos_y;
-	t_vec	p_dir;
-	t_vec	ray_dir;
-	t_vec	plane;
-}	t_player; */
 
 typedef struct s_data
 {
@@ -87,8 +84,7 @@ typedef struct s_data
 	void	*win;
 	int		p_pos_x;
 	int		p_pos_y;
-	t_config	*config;//error accessing data.config->map[y][x]
-	//t_player	*player;
+	t_config	*config;// maybe put map in data not config
 }	t_data;
 
 
@@ -96,6 +92,7 @@ void	parse_file(t_config *config, int fd);
 void	init_vector(t_vec *vector, double x, double y);
 void	init_player_dir(t_data *data, t_raycast *rc, int x, int y);
 void	ray_cast(t_data *data);
+void	texture_rendering(t_data *data, t_raycast *rc, double ray_dist );
 
 #endif
 
