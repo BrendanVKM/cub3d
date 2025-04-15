@@ -6,13 +6,13 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 13:21:23 by lemarian          #+#    #+#             */
-/*   Updated: 2025/04/14 15:25:12 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/04/15 15:10:37 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	tex_stretch(t_data *data, t_raycast *rc)
+void	tex_stretch(t_data *data, t_raycast *rc, int *buffer, int x)
 {
 	double	step; // interval between pixels depending on line height
 	double	tex_pos;
@@ -35,10 +35,11 @@ void	tex_stretch(t_data *data, t_raycast *rc)
 	}
 }
 
-void	texture_rendering(t_data *data, t_raycast *rc, double ray_dist)
+void	texture_rendering(t_data *data, t_raycast *rc, double ray_dist, int x)
 {
 	double	wall_x; //point where ray hits wall
 	int		tex_x;
+	int		buffer[WIN_HEIGHT][WIN_WIDTH];
 
 	if (rc->side == 0)
 		wall_x = rc->p_pos.y + ray_dist * rc->ray_dir.y; // hits x side

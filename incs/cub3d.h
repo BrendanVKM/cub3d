@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 14:14:34 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/04/14 16:06:28 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/04/15 15:10:22 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,8 @@ void	parse_file(t_config *config, int fd);
 void	init_vector(t_vec *vector, double x, double y);
 void	init_player_dir(t_data *data, t_raycast *rc, int x, int y);
 void	ray_cast(t_data *data);
-void	texture_rendering(t_data *data, t_raycast *rc, double ray_dist );
+void	texture_rendering(t_data *data, t_raycast *rc, double ray_dist, int x);
+void	init_rc(t_data *data, t_raycast *rc);
 
 #endif
 

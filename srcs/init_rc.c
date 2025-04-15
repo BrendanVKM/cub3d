@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 15:19:12 by lemarian          #+#    #+#             */
-/*   Updated: 2025/04/08 15:08:04 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/04/15 14:41:39 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,32 @@ void	init_vector(t_vec *vector, double x, double y)
 {
 	vector->x = x;
 	vector->y = y;
+}
+
+void	init_rc(t_data *data, t_raycast *rc)
+{
+	rc->delta_d.x = fabs(1 / rc->ray_dir.x);
+	rc->delta_d.y = fabs(1 / rc->ray_dir.y);
+	if (rc->ray_dir.x < 0)
+	{
+		rc->step_x = -1;
+		rc->side_d.x = (rc->p_pos.x - (int)rc->p_pos.x) * rc->delta_d.x;
+	}
+	else
+	{
+		rc->step_x = 1;
+		rc->side_d.x = ((int)rc->p_pos.x + 1.0 - rc->p_pos.x) * rc->delta_d.x;
+	}
+	if (rc->ray_dir.y < 0)
+	{
+		rc->step_y = -1;
+		rc->side_d.y = (rc->p_pos.y - (int)rc->p_pos.y) * rc->delta_d.y;
+	}
+	else
+	{
+		rc->step_y = 1;
+		rc->side_d.y = ((int)rc->p_pos.y + 1.0 - rc->p_pos.y) * rc->delta_d.y;
+	}
 }
 
 void	init_player_dir(t_data *data, t_raycast *rc, int x, int y)// init before raycast game loop

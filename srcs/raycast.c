@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 14:25:32 by lemarian          #+#    #+#             */
-/*   Updated: 2025/04/14 15:30:07 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/04/15 15:10:28 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,32 +61,6 @@ double	dda(t_data *data, t_raycast *rc)
 	return (get_wall_dist(rc));
 }
 
-void	init_rc(t_data *data, t_raycast *rc)
-{
-	rc->delta_d.x = fabs(1 / rc->ray_dir.x);
-	rc->delta_d.y = fabs(1 / rc->ray_dir.y);
-	if (rc->ray_dir.x < 0)
-	{
-		rc->step_x = -1;
-		rc->side_d.x = (rc->p_pos.x - (int)rc->p_pos.x) * rc->delta_d.x;
-	}
-	else
-	{
-		rc->step_x = 1;
-		rc->side_d.x = ((int)rc->p_pos.x + 1.0 - rc->p_pos.x) * rc->delta_d.x;
-	}
-	if (rc->ray_dir.y < 0)
-	{
-		rc->step_y = -1;
-		rc->side_d.y = (rc->p_pos.y - (int)rc->p_pos.y) * rc->delta_d.y;
-	}
-	else
-	{
-		rc->step_y = 1;
-		rc->side_d.y = ((int)rc->p_pos.y + 1.0 - rc->p_pos.y) * rc->delta_d.y;
-	}
-}
-
 void	ray_cast(t_data *data)//init rc/player_dir first
 {
 	int	x;
@@ -108,7 +82,7 @@ void	ray_cast(t_data *data)//init rc/player_dir first
 		init_rc(data, rc);//bad name
 		ray_dist = dda(data, rc);
 		get_wall_height(data, rc, ray_dist);
-		texture_rendering(data, rc, ray_dist);
+		texture_rendering(data, rc, ray_dist, x);
 		x++;
 	}
 }
