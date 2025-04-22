@@ -6,7 +6,7 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 14:14:34 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/04/03 10:54:15 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/04/22 13:47:43 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,13 @@ typedef struct s_config
 	char	*ea;
 	t_color	floor;
 	t_color	ceiling;
-	char	**map;
 }	t_config;
 
 typedef struct s_data
 {
 	void		*mlx;
 	void		*win;
+	char		**map;
 	t_config	config;
 }	t_data;
 

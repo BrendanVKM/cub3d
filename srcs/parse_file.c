@@ -6,7 +6,7 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 10:11:59 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/04/03 10:57:47 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/04/22 10:26:05 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	parse_file(t_config *config, int fd)
 		{
 			free(line);
 			continue ;
-		}
+		} 
 		if (all_textures_set(config))
 		{
 			free(line);
@@ -111,5 +111,6 @@ void	parse_file(t_config *config, int fd)
 		}
 		free(line);
 	}
+	get_map(config, fd);
 	free(line);
 }
