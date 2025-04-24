@@ -6,7 +6,7 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 10:11:59 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/04/22 10:26:05 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/04/24 11:30:26 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,19 +90,19 @@ static int	get_textures(t_config *config, char *line)
 
 void	parse_file(t_config *config, int fd)
 {
-	char *line;
-
+	char	*line;
+	
 	while ((line = get_next_line(fd)))
 	{
 		if (line[0] == '\0' || line[0] == '\n')
 		{
 			free(line);
 			continue ;
-		} 
+		}
 		if (all_textures_set(config))
 		{
 			free(line);
-			return ;
+			break;
 		}
 		if (get_textures(config, line))
 		{
@@ -112,5 +112,4 @@ void	parse_file(t_config *config, int fd)
 		free(line);
 	}
 	get_map(config, fd);
-	free(line);
-}
+	}

@@ -6,7 +6,7 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 14:14:34 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/04/22 13:47:43 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/04/24 11:27:10 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,6 @@ typedef struct s_data
 
 void	init_config(t_config *config);
 void	parse_file(t_config *config, int fd);
+void	get_map(t_config *config, int fd);
 
 #endif
