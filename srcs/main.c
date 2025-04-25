@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:10:46 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/04/22 14:35:54 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/04/24 16:04:32 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,18 +48,21 @@ static int	ft_check_args(int ac, char **av)
 int	main(int ac, char **av)
 {
 	int fd;
-	t_config config;
+	t_texture text;
 	t_data	data;
 	t_raycast	rc;
 	
 	fd = ft_check_args(ac, av);
 	parse_file(&config, fd);
-	//init_data, player direction & mlx
+	//init data
+	if (!set_up_mlx(&data, &text))
+		exit(ft_printf(2, "Error: Failed to initialize mlx\n"));
+	init_player_dir(&data, &rc, x, y);//need player pos[y][x] at the start
 	raycast(&data, &rc);
 	/*
 	- mlx_hook (key_press, key_release)
 	- mlx_loop_hook (raycast)
-	- mlx_hook
+	- mlx_loop
 	*/
 	return (0);
 }

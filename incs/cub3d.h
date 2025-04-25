@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 14:14:34 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/04/22 15:35:37 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/04/25 15:48:42 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,22 +35,24 @@
 # define S 115
 # define D 100
 
-typedef struct s_color
+typedef enum e_direction
 {
-	int r;
-	int g;
-	int b;
-}	t_color;
+	NO,
+	SO,
+	EA,
+	WE
+}	t_direction;
 
-typedef struct s_config // texture struct
+typedef struct s_texture
 {
-	void	*no;
-	void	*so;
-	void	*we;
-	void	*ea;
-	t_color floor;
-	t_color ceiling;
-}	t_config;
+	void	*img[4];
+	char	*path[4];
+	int		*width[4];
+	int		*height[4];
+	char	*addr[4]; // not sure how to use yet
+	uint32_t	floor;
+	uint32_t ceiling;
+}	t_texture;
 
 typedef struct s_vec
 {
@@ -72,6 +74,7 @@ typedef struct s_raycast
 	int		side;
 	int		step_x;
 	int		step_y;
+	double	ray_dist;
 	int		wall_height;
 	int		wall_start;
 	int		wall_end;
@@ -82,16 +85,18 @@ typedef struct s_data
 	void	*mlx;
 	void	*win;
 	void	*img;
+	int		*buffer;
 	char	**map;
-	t_config	*config;
+	t_texture	*text;
 }	t_data;
 
 
 void	parse_file(t_config *config, int fd);
+int		set_up_mlx(t_data *data, t_texture *text);
 void	init_vector(t_vec *vector, double x, double y);
 void	init_player_dir(t_data *data, t_raycast *rc, int x, int y);
 void	raycast(t_data *data, t_raycast *rc);
-void	rendering(t_data *data, t_raycast *rc, double ray_dist, int x);
+void	rendering(t_data *data, t_raycast *rc, t_texture *text, int x);
 void	init_rc(t_data *data, t_raycast *rc);
 
 #endif
