@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 14:14:34 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/04/25 15:48:42 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/04/25 16:01:49 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,10 @@
 # include <math.h>
 #include <stdint.h>
 
-#define TILE_SIZE 30 
+#define TILE_SIZE 30 //where to use??
 #define FOV 66
-#define SPEED 4 // ?
+#define SPEED 4
+#define ROT 2 // rotation speed
 
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 720
@@ -49,7 +50,7 @@ typedef struct s_texture
 	char	*path[4];
 	int		*width[4];
 	int		*height[4];
-	char	*addr[4]; // not sure how to use yet
+	char	*addr[4];
 	uint32_t	floor;
 	uint32_t ceiling;
 }	t_texture;
@@ -62,7 +63,7 @@ typedef struct s_vec
 
 typedef struct s_raycast
 {
-	t_vec	p_pos;
+	t_vec	p_pos; // keep just in data?
 	t_vec	p_dir;
 	t_vec	plane;
 	t_vec	ray_dir;
@@ -87,6 +88,7 @@ typedef struct s_data
 	void	*img;
 	int		*buffer;
 	char	**map;
+	t_vec	p_pos; // player position
 	t_texture	*text;
 }	t_data;
 

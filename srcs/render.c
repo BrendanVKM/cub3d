@@ -6,11 +6,13 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 15:18:25 by lemarian          #+#    #+#             */
-/*   Updated: 2025/04/25 15:47:41 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/04/25 16:05:27 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+//need functions to render floor and ceiling as well
 
 int	get_direction(t_raycast *rc)
 {
@@ -85,4 +87,5 @@ void	rendering(t_data *data, t_raycast *rc, t_texture *text, int x)
 		data->buffer[y * WIN_WIDTH + x] = color;
 		y++;
 	}
+	//render floor and ceiling
 }
