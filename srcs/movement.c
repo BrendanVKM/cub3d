@@ -6,14 +6,13 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 15:50:23 by lemarian          #+#    #+#             */
-/*   Updated: 2025/04/25 16:08:11 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/05/02 12:01:24 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 //wip based on lodev
-//need to decide if p_pos stays in rc or data
 //key_release?
 
 void	movement(t_data *data, t_raycast *rc, int keypress)
@@ -23,17 +22,17 @@ void	movement(t_data *data, t_raycast *rc, int keypress)
 
 	if (keypress = W)
 	{
-		if (!data->map[(int)(rc->p_pos.x + rc->p_dir.x) * SPEED][(int)(rc->p_pos.y)])
-			rc->p_pos.x += rc->p_dir.x * SPEED;
-		if (!data->map[(int)(rc->p_pos.y)][(int)(rc->p_pos.y + rc->p_dir.y) * SPEED])
-			rc->p_pos.y += rc->p_dir.y * SPEED;
+		if (!data->map[(int)(data->p_pos.x + rc->p_dir.x) * SPEED][(int)(data->p_pos.y)])
+			data->p_pos.x += rc->p_dir.x * SPEED;
+		if (!data->map[(int)(data->p_pos.y)][(int)(data->p_pos.y + rc->p_dir.y) * SPEED])
+			data->p_pos.y += rc->p_dir.y * SPEED;
 	}
 	if (keypress = S)
 	{
-		if (!data->map[(int)(rc->p_pos.x - rc->p_dir.x) * SPEED][(int)(rc->p_pos.y)])
-			rc->p_pos.x -= rc->p_dir.x * SPEED;
-		if (!data->map[(int)(rc->p_pos.y)][(int)(rc->p_pos.y - rc->p_dir.y) * SPEED])
-			rc->p_pos.y -= rc->p_dir.y * SPEED;
+		if (!data->map[(int)(data->p_pos.x - rc->p_dir.x) * SPEED][(int)(data->p_pos.y)])
+			data->p_pos.x -= rc->p_dir.x * SPEED;
+		if (!data->map[(int)(data->p_pos.y)][(int)(data->p_pos.y - rc->p_dir.y) * SPEED])
+			data->p_pos.y -= rc->p_dir.y * SPEED;
 	}
 	if (keypress = D)
 	{

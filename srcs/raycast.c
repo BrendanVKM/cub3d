@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 14:30:55 by lemarian          #+#    #+#             */
-/*   Updated: 2025/04/25 15:49:07 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/05/02 13:46:31 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ double	get_wall_dist(t_raycast *rc)
 
 double	dda(t_data *data, t_raycast *rc)
 {
-	rc->map_x = (int)rc->p_pos.x;
-	rc->map_y = (int)rc->p_pos.y;
+	rc->map_x = (int)data->p_pos.x;
+	rc->map_y = (int)data->p_pos.y;
 	while (1)
 	{
 		if (rc->side_d.x < rc->side_d.y)
@@ -59,46 +59,47 @@ double	dda(t_data *data, t_raycast *rc)
 	return (get_wall_dist(rc));
 }
 
-void	start_raycast(t_raycast *rc)
+void	start_raycast(t_data *data, t_raycast *rc)
 {
 	rc->delta_d.x = fabs(1 / rc->ray_dir.x);
 	rc->delta_d.y = fabs(1 / rc->ray_dir.y);
 	if (rc->ray_dir.x < 0)
 	{
 		rc->step_x = -1;
-		rc->side_d.x = (rc->p_pos.x - (int)rc->p_pos.x) * rc->delta_d.x;
+		rc->side_d.x = (data->p_pos.x - (int)data->p_pos.x) * rc->delta_d.x;
 	}
 	else
 	{
 		rc->step_x = 1;
-		rc->side_d.x = ((int)rc->p_pos.x + 1.0 - rc->p_pos.x) * rc->delta_d.x;
+		rc->side_d.x = ((int)data->p_pos.x + 1.0 - data->p_pos.x) * rc->delta_d.x;
 	}
 	if (rc->ray_dir.y < 0)
 	{
 		rc->step_y = -1;
-		rc->side_d.y = (rc->p_pos.y - (int)rc->p_pos.y) * rc->delta_d.y;
+		rc->side_d.y = (data->p_pos.y - (int)data->p_pos.y) * rc->delta_d.y;
 	}
 	else
 	{
 		rc->step_y = 1;
-		rc->side_d.y = ((int)rc->p_pos.y + 1.0 - rc->p_pos.y) * rc->delta_d.y;
+		rc->side_d.y = ((int)data->p_pos.y + 1.0 - data->p_pos.y) * rc->delta_d.y;
 	}
 }
 
-void	raycast(t_data *data, t_raycast *rc)
+void	raycast(t_data *data)
 {
 	int	x;
 	double	cam_x;
 	double	ray_dist;
+
 	while (x < WIN_WIDTH)
 	{
 		cam_x = 2 * x / (double)WIN_WIDTH - 1;
-		rc->ray_dir.x = rc->p_dir.x + rc->plane.x * cam_x;
-		rc->ray_dir.y = rc->p_dir.y + rc->plane.x * cam_x;
-		start_raycast(rc);
-		ray_dist = dda(data, rc);
-		get_wall_height(rc, ray_dist);
-		rendering(data, rc, data->text, x);
+		data->rc->ray_dir.x = data->rc->p_dir.x + data->rc->plane.x * cam_x;
+		data->rc->ray_dir.y = data->rc->p_dir.y + data->rc->plane.x * cam_x;
+		start_raycast(data, data->rc);
+		ray_dist = dda(data, data->rc);
+		get_wall_height(data->rc, ray_dist);
+		rendering(data, data->rc, data->text, x);
 		x++;
 	}
 }

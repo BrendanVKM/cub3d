@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:10:46 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/04/24 16:04:32 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/05/02 13:47:12 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	ft_check_args(int ac, char **av)
 	int fd;
 	
 	if (ac != 2)
-		exit(ft_printf(2, "Error: Wrong number of arguments\n"));//need "error\n"
+		exit(ft_printf(2, "Error: Wrong number of arguments\n"));
 	if (ft_check_file_extension(av[1], ".cub") == 0)
 		exit(ft_printf(2, "Error: Wrong file extension\n"));
 	fd = open(av[1], O_RDONLY);
@@ -48,7 +48,7 @@ static int	ft_check_args(int ac, char **av)
 int	main(int ac, char **av)
 {
 	int fd;
-	t_texture text;
+	t_texture text;//create here or in parsing?
 	t_data	data;
 	t_raycast	rc;
 	
@@ -57,12 +57,11 @@ int	main(int ac, char **av)
 	//init data
 	if (!set_up_mlx(&data, &text))
 		exit(ft_printf(2, "Error: Failed to initialize mlx\n"));
-	init_player_dir(&data, &rc, x, y);//need player pos[y][x] at the start
-	raycast(&data, &rc);
-	/*
-	- mlx_hook (key_press, key_release)
-	- mlx_loop_hook (raycast)
-	- mlx_loop
-	*/
+	init_player_dir(&data, &rc, (int)data.p_pos.x, (int)data.p_pos.y);
+	mlx_loop_hook(data.win, raycast, &data);
+	mlx_hook(data.win, DestroyNotify, 0, &exit_game, &data);
+	mlx_hook(data.win, KeyPress, KeyPressMask, &movement, &data);
+	mlx_hook(data.win, KeyRelease, StructureNotifyMask, &movement, &data);
+	mlx_loop(data.mlx);
 	return (0);
 }

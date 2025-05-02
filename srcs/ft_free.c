@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 10:57:19 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/03/27 13:12:40 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/05/02 13:49:29 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,17 @@ void	ft_exit(t_data *data, char *mess)
 {
 	ft_free_config(&data->config);
 	ft_printf(2, "%s\n", mess);
+	exit(0);
+}
+
+void	exit_game(t_data *data)
+{
+	/*
+	- free data + map
+	- destroy images
+	- destroy window
+	- destroy display
+	- free mlx pointer
+	*/
 	exit(0);
 }

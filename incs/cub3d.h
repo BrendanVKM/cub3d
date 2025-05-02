@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 14:14:34 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/04/25 16:01:49 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/05/02 13:45:35 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@
 # include <math.h>
 #include <stdint.h>
 
-#define TILE_SIZE 30 //where to use??
+#define TILE_SIZE 30 //use??
 #define FOV 66
-#define SPEED 4
-#define ROT 2 // rotation speed
+#define SPEED 4 // test and adjust
+#define ROT 2 // test and adjust
 
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 720
@@ -63,7 +63,6 @@ typedef struct s_vec
 
 typedef struct s_raycast
 {
-	t_vec	p_pos; // keep just in data?
 	t_vec	p_dir;
 	t_vec	plane;
 	t_vec	ray_dir;
@@ -88,7 +87,8 @@ typedef struct s_data
 	void	*img;
 	int		*buffer;
 	char	**map;
-	t_vec	p_pos; // player position
+	t_vec	p_pos;
+	t_raycast *rc;
 	t_texture	*text;
 }	t_data;
 
@@ -97,9 +97,11 @@ void	parse_file(t_config *config, int fd);
 int		set_up_mlx(t_data *data, t_texture *text);
 void	init_vector(t_vec *vector, double x, double y);
 void	init_player_dir(t_data *data, t_raycast *rc, int x, int y);
-void	raycast(t_data *data, t_raycast *rc);
+void	raycast(t_data *data);
 void	rendering(t_data *data, t_raycast *rc, t_texture *text, int x);
 void	init_rc(t_data *data, t_raycast *rc);
+void	movement(t_data *data, t_raycast *rc, int keypress);
+void	exit_game(t_data *data);
 
 #endif
 

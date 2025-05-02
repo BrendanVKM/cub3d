@@ -6,13 +6,35 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 15:18:25 by lemarian          #+#    #+#             */
-/*   Updated: 2025/04/25 16:05:27 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/05/02 11:59:20 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-//need functions to render floor and ceiling as well
+void	render_ceiling(t_data *data, t_raycast *rc, t_texture *text, int x)
+{
+	int	y;
+
+	y = 0;
+	while (y < rc->wall_start)
+	{
+		data->buffer[y * WIN_WIDTH + x] = text->ceiling;
+		y++;
+	}
+}
+
+void	render_floor(t_data *data, t_raycast *rc, t_texture *text, int x)
+{
+	int	y;
+
+	y = rc->wall_end;
+	while (y < WIN_HEIGHT)
+	{
+		data->buffer[y * WIN_WIDTH + x] = text->ceiling;
+		y++;
+	}
+}
 
 int	get_direction(t_raycast *rc)
 {
@@ -32,19 +54,19 @@ int	get_direction(t_raycast *rc)
 	}
 }
 
-double	get_wall_x(t_raycast *rc)
+double	get_wall_x(t_data *data, t_raycast *rc)
 {
 	double	wall_x;
 
 	if (rc->side == 0)
-		wall_x = rc->p_pos.y + rc->ray_dist * rc->ray_dir.y;
+		wall_x = data->p_pos.y + rc->ray_dist * rc->ray_dir.y;
 	else
-		wall_x = rc->p_pos.x + rc->ray_dist * rc->ray_dir.x;
+		wall_x = data->p_pos.x + rc->ray_dist * rc->ray_dir.x;
 	wall_x = -floor(wall_x);
 	return (wall_x);
 }
 
-int	get_tex_x(t_raycast *rc, t_texture *texts)
+int	get_tex_x(t_data *data, t_raycast *rc, t_texture *texts)
 {
 	double	wall_x;
 	int	tex_width;
@@ -53,7 +75,7 @@ int	get_tex_x(t_raycast *rc, t_texture *texts)
 
 	dir = get_direction(rc);
 	tex_width = texts->width[dir];
-	wall_x = get_wall_x(rc);
+	wall_x = get_wall_x(data, rc);
 	tex_x = (int)(wall_x * (double)(tex_width));
 	if (rc->side == 0 && rc->ray_dir.x > 0)
 		tex_x = tex_width - tex_x - 1;
@@ -74,10 +96,11 @@ void	rendering(t_data *data, t_raycast *rc, t_texture *text, int x)
 	uint32_t	color;
 
 	tex_num = data->map[rc->map_x][rc->map_y] - 1;
-	tex_x = get_tex_x(rc, data->text);
+	tex_x = get_tex_x(data, rc, data->text);
 	tex_height = text->height[get_direction(rc)];
 	step = 1.0 * tex_height / rc->wall_height;
 	tex_pos = (rc->wall_start - WIN_HEIGHT / 2 + rc->wall_height) * step;
+	render_ceiling(data, rc, text, x);
 	y = rc->wall_start;
 	while (y < rc->wall_end)
 	{
@@ -87,5 +110,5 @@ void	rendering(t_data *data, t_raycast *rc, t_texture *text, int x)
 		data->buffer[y * WIN_WIDTH + x] = color;
 		y++;
 	}
-	//render floor and ceiling
+	render_floor(data, rc, text, x);
 }
