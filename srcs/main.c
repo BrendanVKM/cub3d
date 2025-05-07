@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bvkm <bvkm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:10:46 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/04/03 10:56:24 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/05/07 02:59:09 by bvkm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,23 @@ static int	ft_check_args(int ac, char **av)
 int	main(int ac, char **av)
 {
 	int			fd;
-	t_config	config;
+	t_data		*data;
 
 	fd = ft_check_args(ac, av);
-	init_config(&config);
-	parse_file(&config, fd);
+	
+	data = malloc(sizeof(t_data));
+	init(data);
+	parse_file(data, fd, av[1]);
+	close(fd);
+	printf("Textures:\n");
+	for (int i = 0; i < 4; i++)
+	{
+		printf("Texture %d: %s\n", i, data->text->path[i]);
+	}
+	printf("\nMap:\n");
+	for (int i = 0; data->map[i]; i++)
+	{
+		printf("%s\n", data->map[i]);
+	}
 	return (0);
 }

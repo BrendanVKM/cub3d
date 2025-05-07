@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bvkm <bvkm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 22:39:24 by bvkm              #+#    #+#             */
-/*   Updated: 2024/11/04 14:21:27 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/05/07 01:38:17 by bvkm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_white_space(const char c)
+int	ft_white_space(const char c)
 {
 	return ((c >= 9 && c <= 13) || c == 32);
 }

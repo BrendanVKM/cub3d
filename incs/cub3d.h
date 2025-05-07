@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bvkm <bvkm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 14:14:34 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/04/24 11:27:10 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/05/07 02:47:24 by bvkm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,13 @@
 # include "libft.h"
 # include "mlx.h"
 # include "mlx_int.h"
+# include <math.h>
+#include <stdint.h>
+
+#define TILE_SIZE 30 //use??
+#define FOV 66
+#define SPEED 4 // test and adjust
+#define ROT 2 // test and adjust
 
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 720
@@ -29,33 +36,64 @@
 # define S 115
 # define D 100
 
-typedef struct s_color
+typedef enum e_direction
 {
-	int	r;
-	int	g;
-	int	b;
-}	t_color;
+	NO,
+	SO,
+	EA,
+	WE
+}	t_direction;
 
-typedef struct s_config
+typedef struct s_texture
 {
-	char	*no;
-	char	*so;
-	char	*we;
-	char	*ea;
-	t_color	floor;
-	t_color	ceiling;
-}	t_config;
+	void	*img[4];
+	char	*path[4];
+	int		*width[4];
+	int		*height[4];
+	char	*addr[4];
+	uint32_t	floor;
+	uint32_t ceiling;
+}	t_texture;
+
+typedef struct s_vec
+{
+	double	x;
+	double	y;
+}	t_vec;
+
+typedef struct s_raycast
+{
+	t_vec	p_dir;
+	t_vec	plane;
+	t_vec	ray_dir;
+	t_vec	ray_pos;
+	int		map_x;
+	int		map_y;
+	t_vec	delta_d;
+	t_vec	side_d;
+	int		side;
+	int		step_x;
+	int		step_y;
+	double	ray_dist;
+	int		wall_height;
+	int		wall_start;
+	int		wall_end;
+}	t_raycast;
 
 typedef struct s_data
 {
-	void		*mlx;
-	void		*win;
-	char		**map;
-	t_config	config;
+	void	*mlx;
+	void	*win;
+	void	*img;
+	int		*buffer;
+	char	**map;
+	t_vec	p_pos;
+	t_raycast *rc;
+	t_texture	*text;
 }	t_data;
 
-void	init_config(t_config *config);
-void	parse_file(t_config *config, int fd);
-void	get_map(t_config *config, int fd);
+void		init(t_data *data);
+
+t_data		*parse_file(t_data *data, int fd, char *file);
 
 #endif

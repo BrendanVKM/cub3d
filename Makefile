@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+         #
+#    By: bvkm <bvkm@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/04 14:41:21 by bvictoir          #+#    #+#              #
-#    Updated: 2025/04/24 11:28:44 by bvictoir         ###   ########.fr        #
+#    Updated: 2025/05/07 02:20:23 by bvkm             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ MLX			= mlx/
 
 SRC			=	init.c			\
 				parse_file.c	\
-				map.c			\
+				ft_free.c		\
 				main.c
 SRCS		= ${addprefix $(SRC_PATH), $(SRC)}
 

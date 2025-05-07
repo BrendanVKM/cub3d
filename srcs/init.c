@@ -3,21 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bvkm <bvkm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 10:53:25 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/04/24 11:28:33 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/05/07 02:43:51 by bvkm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_config(t_config *config)
+void	init(t_data *data)
 {
-	config->no = NULL;
-	config->so = NULL;
-	config->we = NULL;
-	config->ea = NULL;
-	config->floor = (t_color){0, 0, 0};
-	config->ceiling = (t_color){0, 0, 0};
+	if (!data)
+		exit(ft_printf(2, "Error: Malloc fail\n"));
+	data->text = malloc(sizeof(t_texture));
+	if (!data->text)
+		exit(ft_printf(2, "Error: Malloc fail\n"));
 }
