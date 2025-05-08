@@ -6,7 +6,7 @@
 /*   By: bvkm <bvkm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 14:14:34 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/05/07 02:47:24 by bvkm             ###   ########.fr       */
+/*   Updated: 2025/05/08 14:52:54 by bvkm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ typedef struct s_texture
 	int		*width[4];
 	int		*height[4];
 	char	*addr[4];
+	int		*floor_rgb;
+	int		*ceiling_rgb;
 	uint32_t	floor;
 	uint32_t ceiling;
 }	t_texture;
@@ -94,6 +96,7 @@ typedef struct s_data
 
 void		init(t_data *data);
 
-t_data		*parse_file(t_data *data, int fd, char *file);
+int			parse_texture(t_data *data, char *line);
 
+t_data		*parse_file(t_data *data, int fd, char *file);
 #endif

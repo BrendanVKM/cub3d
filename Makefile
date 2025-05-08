@@ -6,13 +6,13 @@
 #    By: bvkm <bvkm@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/04 14:41:21 by bvictoir          #+#    #+#              #
-#    Updated: 2025/05/07 02:20:23 by bvkm             ###   ########.fr        #
+#    Updated: 2025/05/08 15:05:35 by bvkm             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 MAKEFLAGS	+= -s
 
-NAME		= cub3d
+NAME		= cub3D
 
 SRC_PATH	= srcs/
 OBJ_PATH	= obj/
@@ -21,9 +21,10 @@ LIBFT_PATH	= libft/
 MLX			= mlx/
 
 
-SRC			=	init.c			\
-				parse_file.c	\
-				ft_free.c		\
+SRC			=	init.c						\
+				parsing/parse_file.c		\
+				parsing/check_textures.c		\
+				ft_free.c					\
 				main.c
 SRCS		= ${addprefix $(SRC_PATH), $(SRC)}
 
@@ -53,13 +54,12 @@ WHITE		:= "\033[0;37m\033[1m"
 NO_STYLE	:= "\033[0m"
 
 
-all:		$(OBJ_PATH) $(NAME)
+all:		$(NAME)
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
+			mkdir -p $(dir $@)
 			$(CC) $(CFLAGS) $(INCLUDES) -c  $< -o $@
 
-$(OBJ_PATH):
-			mkdir -p $(OBJ_PATH)
 
 $(NAME): $(OBJS)
 		make -C $(MLX)

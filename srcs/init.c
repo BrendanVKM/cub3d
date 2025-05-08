@@ -6,7 +6,7 @@
 /*   By: bvkm <bvkm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 10:53:25 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/05/07 02:43:51 by bvkm             ###   ########.fr       */
+/*   Updated: 2025/05/08 15:45:36 by bvkm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,4 +19,7 @@ void	init(t_data *data)
 	data->text = malloc(sizeof(t_texture));
 	if (!data->text)
 		exit(ft_printf(2, "Error: Malloc fail\n"));
+	data->text->ceiling_rgb = NULL;
+	data->text->floor_rgb = NULL;
+	data->map = NULL;
 }
