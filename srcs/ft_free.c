@@ -6,42 +6,71 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 10:57:19 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/05/02 13:49:29 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/05/12 14:18:41 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-
-static void	ft_free_config(t_config *config)
+void	free_text(t_texture *text, t_data *data)
 {
-	if (config->no)
-		free(config->no);
-	if (config->so)
-		free(config->so);
-	if (config->we)
-		free(config->we);
-	if (config->ea)
-		free(config->ea);
-	if (config->map)
-		ft_free_tab(&config->map);
+	if (text->img[NO])
+		mlx_destroy_image(data->mlx, text->img[NO]);
+	if (text->img[SO])
+		mlx_destroy_image(data->mlx, text->img[SO]);
+	if (text->img[EA])
+		mlx_destroy_image(data->mlx, text->img[EA]);
+	if (text->img[WE])
+		mlx_destroy_image(data->mlx, text->img[WE]);
+	if (text->path[NO])
+		free(text->path[NO]);
+	if (text->path[SO])
+		free(text->path[NO]);
+	if (text->path[EA])
+		free(text->path[EA]);
+	if (text->path[WE])
+		free(text->path[WE]);
+	free(text);
 }
 
-void	ft_exit(t_data *data, char *mess)
+void	free_map(char **map)
 {
-	ft_free_config(&data->config);
-	ft_printf(2, "%s\n", mess);
-	exit(0);
+	size_t	i;
+
+	i = 0;
+	while (map[i])
+		free(map[i++]);
+	free(map);
+}
+
+void	exit_error(t_data *data, char *mess)
+{
+	if (data->text)
+		free_text(data->text, data);
+	if (data->map)
+		free_map(data->map);
+	if (data->img)
+		mlx_destroy_image(data->mlx, data->img);
+	if (data->win)
+		mlx_destroy_window(data->mlx,  data->win);
+	if (data->mlx)
+	{
+		mlx_destroy_display(data->mlx);
+		free(data->mlx);
+	}
+	ft_printf(2, "error : %s\n", mess);
+	exit(1);
 }
 
 void	exit_game(t_data *data)
 {
-	/*
-	- free data + map
-	- destroy images
-	- destroy window
-	- destroy display
-	- free mlx pointer
-	*/
+	free_text(data->text, data);
+	free_map(data->map);
+	if (data->img)
+		mlx_destroy_image(data->mlx, data->img);
+	if (data->win)
+		mlx_destroy_window(data->mlx,  data->win);
+	mlx_destroy_display(data->mlx);
+	free(data->mlx);
 	exit(0);
 }

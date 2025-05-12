@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 14:14:34 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/05/02 13:45:35 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/05/12 14:16:50 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <math.h>
 #include <stdint.h>
 
-#define TILE_SIZE 30 //use??
 #define FOV 66
 #define SPEED 4 // test and adjust
 #define ROT 2 // test and adjust
@@ -100,8 +99,9 @@ void	init_player_dir(t_data *data, t_raycast *rc, int x, int y);
 void	raycast(t_data *data);
 void	rendering(t_data *data, t_raycast *rc, t_texture *text, int x);
 void	init_rc(t_data *data, t_raycast *rc);
-void	movement(t_data *data, t_raycast *rc, int keypress);
+void	movement(t_data *data, t_raycast *rc, int key_code);
 void	exit_game(t_data *data);
+void	exit_error(t_data *data, char *mess);
 
 #endif
 

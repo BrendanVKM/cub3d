@@ -6,7 +6,7 @@
 #    By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/04 14:41:21 by bvictoir          #+#    #+#              #
-#    Updated: 2025/04/08 15:10:24 by lemarian         ###   ########.fr        #
+#    Updated: 2025/05/12 14:23:16 by lemarian         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,12 @@ SRC			=	parse_file.c	\
 				main.c			\
 				init_rc.c		\
 				raycast.c		\
+				ft_free.c		\
+				init.c			\
+				render.c		\
+				mlx_init.c		\
+				movement.c
+
 SRCS		= ${addprefix $(SRC_PATH), $(SRC)}
 
 OBJ			= $(SRC:.c=.o)
