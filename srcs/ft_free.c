@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 10:57:19 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/05/12 14:18:41 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/05/13 13:21:11 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,11 @@ void	exit_game(t_data *data)
 		mlx_destroy_window(data->mlx,  data->win);
 	mlx_destroy_display(data->mlx);
 	free(data->mlx);
+}
+
+void	ft_exit(t_data *data, char *mess)
+{
+	(void) data;
+	ft_printf(2, "%s\n", mess);
 	exit(0);
 }

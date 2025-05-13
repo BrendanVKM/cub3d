@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bvkm <bvkm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 11:15:22 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/03/27 13:44:18 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/05/07 02:57:19 by bvkm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static char	*ft_trim(char *line, char *buf)
 		buf = ft_strcpy(buf, line + i);
 	else
 		buf[0] = '\0';
-	rest = ft_substr(line, 0, i - 1);
+	rest = ft_substr(line, 0, i);
 	free(line);
 	return (rest);
 }

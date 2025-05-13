@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 14:33:29 by lemarian          #+#    #+#             */
-/*   Updated: 2025/04/24 16:02:27 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/05/13 13:21:31 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,15 @@ void	init_player_dir(t_data *data, t_raycast *rc, int x, int y)
 		init_vector(&rc->p_dir, -1.0f, 0.0f);
 		init_vector(&rc->plane, -tan(FOV /2), 0.0f);
 	}
+}
+void	init(t_data *data)
+{
+	if (!data)
+		exit(ft_printf(2, "Error: Malloc fail\n"));
+	data->text = malloc(sizeof(t_texture));
+	if (!data->text)
+		exit(ft_printf(2, "Error: Malloc fail\n"));
+	data->text->ceiling_rgb = NULL;
+	data->text->floor_rgb = NULL;
+	data->map = NULL;
 }

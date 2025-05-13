@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 14:14:34 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/05/12 14:16:50 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/05/13 13:20:27 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ typedef struct s_texture
 	int		*width[4];
 	int		*height[4];
 	char	*addr[4];
+	int		*floor_rgb; // a free a la fin du parsing
+	int		*ceiling_rgb; // a free a la fin du parsing
 	uint32_t	floor;
 	uint32_t ceiling;
 }	t_texture;
@@ -91,8 +93,8 @@ typedef struct s_data
 	t_texture	*text;
 }	t_data;
 
+void		init(t_data *data);
 
-void	parse_file(t_config *config, int fd);
 int		set_up_mlx(t_data *data, t_texture *text);
 void	init_vector(t_vec *vector, double x, double y);
 void	init_player_dir(t_data *data, t_raycast *rc, int x, int y);
@@ -102,7 +104,7 @@ void	init_rc(t_data *data, t_raycast *rc);
 void	movement(t_data *data, t_raycast *rc, int key_code);
 void	exit_game(t_data *data);
 void	exit_error(t_data *data, char *mess);
+int		parse_texture(t_data *data, char *line);
 
+t_data		*parse_file(t_data *data, int fd, char *file);
 #endif
-
-

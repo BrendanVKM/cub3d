@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+         #
+#    By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/04 14:41:21 by bvictoir          #+#    #+#              #
-#    Updated: 2025/05/12 14:23:16 by lemarian         ###   ########.fr        #
+#    Updated: 2025/05/13 13:19:35 by bvictoir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 MAKEFLAGS	+= -s
 
-NAME		= cub3d
+NAME		= cub3D
 
 SRC_PATH	= srcs/
 OBJ_PATH	= obj/
@@ -21,16 +21,16 @@ LIBFT_PATH	= libft/
 MLX			= mlx/
 
 
-SRC			=	parse_file.c	\
-				main.c			\
-				init_rc.c		\
+SRC			=	init_rc.c		\
 				raycast.c		\
 				ft_free.c		\
 				init.c			\
 				render.c		\
 				mlx_init.c		\
-				movement.c
-
+				movement.c		\
+				parsing/parse_file.c		\
+				parsing/check_textures.c		\
+				main.c
 SRCS		= ${addprefix $(SRC_PATH), $(SRC)}
 
 OBJ			= $(SRC:.c=.o)
@@ -44,7 +44,7 @@ CC			= cc
 CFLAGS		= -Wall -Wextra -Werror -g3 -lm #check, flag for math library
 
 INCLUDES	= -I $(INC_PATH) -I $(MLX)
-# MLXFLAG		= -L $(MLX) -Imlx_linuux -lXext -lX11 -lm -lz
+# MLXFLAG		= -L $(MLX) -Imlx_linux -lXext -lX11 -lm -lz
 MLXFLAG		= -L $(MLX) -lmlx -lXext -lX11 -lm -lz
 
 RM			= rm -rfd
@@ -59,13 +59,12 @@ WHITE		:= "\033[0;37m\033[1m"
 NO_STYLE	:= "\033[0m"
 
 
-all:		$(OBJ_PATH) $(NAME)
+all:		$(NAME)
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
+			mkdir -p $(dir $@)
 			$(CC) $(CFLAGS) $(INCLUDES) -c  $< -o $@
 
-$(OBJ_PATH):
-			mkdir -p $(OBJ_PATH)
 
 $(NAME): $(OBJS)
 		make -C $(MLX)

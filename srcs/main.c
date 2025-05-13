@@ -3,15 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+<<<<<<< HEAD
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:10:46 by bvictoir          #+#    #+#             */
 /*   Updated: 2025/05/02 13:47:12 by lemarian         ###   ########.fr       */
+=======
+/*   By: bvkm <bvkm@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/16 14:10:46 by bvictoir          #+#    #+#             */
+/*   Updated: 2025/05/07 02:59:09 by bvkm             ###   ########.fr       */
+>>>>>>> bren
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
 
 static int	ft_check_file_extension(char *file, char *extension)
 {
@@ -28,8 +34,8 @@ static int	ft_check_file_extension(char *file, char *extension)
 
 static int	ft_check_args(int ac, char **av)
 {
-	int fd;
-	
+	int	fd;
+
 	if (ac != 2)
 		exit(ft_printf(2, "Error: Wrong number of arguments\n"));
 	if (ft_check_file_extension(av[1], ".cub") == 0)
@@ -49,19 +55,32 @@ int	main(int ac, char **av)
 {
 	int fd;
 	t_texture text;//create here or in parsing?
-	t_data	data;
+	t_data *data;
 	t_raycast	rc;
 	
+	data = malloc(sizeof(t_data));
+	init(data);
 	fd = ft_check_args(ac, av);
-	parse_file(&config, fd);
+	parse_file(data, fd, av[1]);
+	close(fd);
 	//init data
 	if (!set_up_mlx(&data, &text))
 		exit(ft_printf(2, "Error: Failed to initialize mlx\n"));
-	init_player_dir(&data, &rc, (int)data.p_pos.x, (int)data.p_pos.y);
-	mlx_loop_hook(data.win, raycast, &data);
-	mlx_hook(data.win, DestroyNotify, 0, &exit_game, &data);
-	mlx_hook(data.win, KeyPress, KeyPressMask, &movement, &data);
-	mlx_hook(data.win, KeyRelease, StructureNotifyMask, &movement, &data);
-	mlx_loop(data.mlx);
+	init_player_dir(&data, &rc, (int)data->p_pos.x, (int)data->p_pos.y);
+	mlx_loop_hook(data->win, raycast, &data);
+	mlx_hook(data->win, DestroyNotify, 0, &exit_game, &data);
+	mlx_hook(data->win, KeyPress, KeyPressMask, &movement, &data);
+	mlx_hook(data->win, KeyRelease, StructureNotifyMask, &movement, &data);
+	mlx_loop(data->mlx);
+	printf("Textures:\n");
+	for (int i = 0; i < 4; i++)
+	{
+		printf("Texture %d: %s\n", i, data->text->path[i]);
+	}
+	printf("\nMap:\n");
+	for (int i = 0; data->map[i]; i++)
+	{
+		printf("%s\n", data->map[i]);
+	}
 	return (0);
 }
