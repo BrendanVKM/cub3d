@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bvkm <bvkm@student.42.fr>                  +#+  +:+       +#+         #
+#    By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/04 14:41:21 by bvictoir          #+#    #+#              #
-#    Updated: 2025/05/08 15:05:35 by bvkm             ###   ########.fr        #
+#    Updated: 2025/05/13 12:03:31 by bvictoir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ CC			= cc
 CFLAGS		= -Wall -Wextra -Werror -g3
 
 INCLUDES	= -I $(INC_PATH) -I $(MLX)
-# MLXFLAG		= -L $(MLX) -Imlx_linuux -lXext -lX11 -lm -lz
+# MLXFLAG		= -L $(MLX) -Imlx_linux -lXext -lX11 -lm -lz
 MLXFLAG		= -L $(MLX) -lmlx -lXext -lX11 -lm -lz
 
 RM			= rm -rfd

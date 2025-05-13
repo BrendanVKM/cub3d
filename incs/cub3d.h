@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvkm <bvkm@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 14:14:34 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/05/08 14:52:54 by bvkm             ###   ########.fr       */
+/*   Updated: 2025/05/13 12:01:44 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ typedef struct s_texture
 	int		*width[4];
 	int		*height[4];
 	char	*addr[4];
-	int		*floor_rgb;
-	int		*ceiling_rgb;
+	int		*floor_rgb; // a free a la fin du parsing
+	int		*ceiling_rgb; // a free a la fin du parsing
 	uint32_t	floor;
 	uint32_t ceiling;
 }	t_texture;
