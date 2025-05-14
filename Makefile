@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+         #
+#    By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/04 14:41:21 by bvictoir          #+#    #+#              #
-#    Updated: 2025/05/13 13:19:35 by bvictoir         ###   ########.fr        #
+#    Updated: 2025/05/14 12:06:56 by lemarian         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,8 +21,7 @@ LIBFT_PATH	= libft/
 MLX			= mlx/
 
 
-SRC			=	init_rc.c		\
-				raycast.c		\
+SRC			=	raycast.c		\
 				ft_free.c		\
 				init.c			\
 				render.c		\
@@ -41,7 +40,7 @@ MINILIBX	= $(MLX)libmlx.a
 LIB			= $(LIBFTLIB) $(MINILIBX)
 
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -g3 -lm #check, flag for math library
+CFLAGS		= -Wall -Wextra -Werror -g3
 
 INCLUDES	= -I $(INC_PATH) -I $(MLX)
 # MLXFLAG		= -L $(MLX) -Imlx_linux -lXext -lX11 -lm -lz

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 14:33:29 by lemarian          #+#    #+#             */
-/*   Updated: 2025/05/13 13:21:31 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/05/14 12:10:35 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,8 @@ void	init_vector(t_vec *vector, double x, double y)
 	vector->y = y;
 }
 
-void	init_player_dir(t_data *data, t_raycast *rc, int x, int y)
+void	init_player_dir(t_data *data, t_raycast *rc, int x, int y)//change to data->orientation
 {
-	//x and y are player start coordinnates
 	if (data->map[y][x] == 'N')
 	{	
 		init_vector(&rc->p_dir, 0.0f, -1.0f);//jean uses opposite values??
@@ -42,6 +41,7 @@ void	init_player_dir(t_data *data, t_raycast *rc, int x, int y)
 		init_vector(&rc->plane, -tan(FOV /2), 0.0f);
 	}
 }
+
 void	init(t_data *data)
 {
 	if (!data)

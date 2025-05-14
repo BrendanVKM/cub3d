@@ -3,17 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-<<<<<<< HEAD
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:10:46 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/05/02 13:47:12 by lemarian         ###   ########.fr       */
-=======
-/*   By: bvkm <bvkm@student.42.fr>                  +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/16 14:10:46 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/05/07 02:59:09 by bvkm             ###   ########.fr       */
->>>>>>> bren
+/*   Updated: 2025/05/14 12:08:50 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +56,10 @@ int	main(int ac, char **av)
 	fd = ft_check_args(ac, av);
 	parse_file(data, fd, av[1]);
 	close(fd);
-	//init data
-	if (!set_up_mlx(&data, &text))
+	init_player_dir(data, &rc, (int)data->p_pos.x, (int)data->p_pos.y);
+	if (!set_up_mlx(data, &text))
 		exit(ft_printf(2, "Error: Failed to initialize mlx\n"));
-	init_player_dir(&data, &rc, (int)data->p_pos.x, (int)data->p_pos.y);
-	mlx_loop_hook(data->win, raycast, &data);
+	mlx_loop_hook(data->win, &raycast, data);
 	mlx_hook(data->win, DestroyNotify, 0, &exit_game, &data);
 	mlx_hook(data->win, KeyPress, KeyPressMask, &movement, &data);
 	mlx_hook(data->win, KeyRelease, StructureNotifyMask, &movement, &data);

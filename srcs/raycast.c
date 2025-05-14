@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 14:30:55 by lemarian          #+#    #+#             */
-/*   Updated: 2025/05/02 13:46:31 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/05/14 11:33:11 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,12 +85,13 @@ void	start_raycast(t_data *data, t_raycast *rc)
 	}
 }
 
-void	raycast(t_data *data)
+int	raycast(t_data *data)
 {
 	int	x;
 	double	cam_x;
 	double	ray_dist;
 
+	x = 0;
 	while (x < WIN_WIDTH)
 	{
 		cam_x = 2 * x / (double)WIN_WIDTH - 1;
@@ -102,4 +103,5 @@ void	raycast(t_data *data)
 		rendering(data, data->rc, data->text, x);
 		x++;
 	}
+	return (0);
 }
