@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:10:46 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/05/14 12:08:50 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/05/15 13:32:30 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ static int	ft_check_args(int ac, char **av)
 int	main(int ac, char **av)
 {
 	int fd;
-	t_texture text;//create here or in parsing?
 	t_data *data;
 	t_raycast	rc;
 	
@@ -56,8 +55,9 @@ int	main(int ac, char **av)
 	fd = ft_check_args(ac, av);
 	parse_file(data, fd, av[1]);
 	close(fd);
-	init_player_dir(data, &rc, (int)data->p_pos.x, (int)data->p_pos.y);
-	if (!set_up_mlx(data, &text))
+	test(data);//remove later
+	init_player_dir(data, &rc);
+	if (!set_up_mlx(data, data->text))
 		exit(ft_printf(2, "Error: Failed to initialize mlx\n"));
 	mlx_loop_hook(data->win, &raycast, data);
 	mlx_hook(data->win, DestroyNotify, 0, &exit_game, &data);

@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 14:14:34 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/05/14 11:59:36 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/05/15 11:41:31 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ typedef struct s_data
 	int		*buffer;
 	char	**map;
 	t_vec	p_pos;
+	t_direction	orientation; // or char?
 	t_raycast *rc;
 	t_texture	*text;
 }	t_data;
@@ -97,7 +98,7 @@ void		init(t_data *data);
 
 int		set_up_mlx(t_data *data, t_texture *text);
 void	init_vector(t_vec *vector, double x, double y);
-void	init_player_dir(t_data *data, t_raycast *rc, int x, int y);
+void	init_player_dir(t_data *data, t_raycast *rc);
 int		raycast(t_data *data);
 void	rendering(t_data *data, t_raycast *rc, t_texture *text, int x);
 void	init_rc(t_data *data, t_raycast *rc);
@@ -107,4 +108,7 @@ void	exit_error(t_data *data, char *mess);
 int		parse_texture(t_data *data, char *line);
 
 t_data		*parse_file(t_data *data, int fd, char *file);
+
+
+void	test(t_data *data);
 #endif
