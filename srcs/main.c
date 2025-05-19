@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:10:46 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/05/15 13:32:30 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/05/19 12:31:42 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,6 @@ int	main(int ac, char **av)
 	init_player_dir(data, &rc);
 	if (!set_up_mlx(data, data->text))
 		exit(ft_printf(2, "Error: Failed to initialize mlx\n"));
-	mlx_loop_hook(data->win, &raycast, data);
-	mlx_hook(data->win, DestroyNotify, 0, &exit_game, &data);
-	mlx_hook(data->win, KeyPress, KeyPressMask, &movement, &data);
-	mlx_hook(data->win, KeyRelease, StructureNotifyMask, &movement, &data);
-	mlx_loop(data->mlx);
 	printf("Textures:\n");
 	for (int i = 0; i < 4; i++)
 	{
@@ -74,5 +69,11 @@ int	main(int ac, char **av)
 	{
 		printf("%s\n", data->map[i]);
 	}
+	mlx_loop_hook(data->win, &raycast, data);
+	mlx_hook(data->win, DestroyNotify, 0, &exit_game, &data);
+	mlx_hook(data->win, KeyPress, KeyPressMask, &movement, &data);
+	mlx_hook(data->win, KeyRelease, StructureNotifyMask, &movement, &data);
+	mlx_loop(data->mlx);
+	
 	return (0);
 }

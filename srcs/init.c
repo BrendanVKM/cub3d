@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 14:33:29 by lemarian          #+#    #+#             */
-/*   Updated: 2025/05/15 13:32:50 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/05/19 12:36:51 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,31 @@ void	init_player_dir(t_data *data, t_raycast *rc)//use enum or char?
 	}
 }
 
+void	init_int_array(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < 4)
+	{
+		data->text->width[i] = malloc(sizeof(int));
+		if (!data->text->width[i])
+			exit_error(data, "Malloc failed");
+		*(data->text->width[i]) = 0;
+		i++;
+	}
+	i = 0;
+	while (i < 4)
+	{
+		data->text->height[i] = malloc(sizeof(int));
+		if (!data->text->height[i])
+			exit_error(data, "Malloc failed");
+		*(data->text->height[i]) = 0;
+		i++;
+	}
+
+}
+
 void	init(t_data *data)
 {
 	if (!data)
@@ -52,7 +77,10 @@ void	init(t_data *data)
 	data->text->ceiling_rgb = NULL;
 	data->text->floor_rgb = NULL;
 	data->map = NULL;
-	ft_memset(data->text->path, '\0', sizeof(char) * 4);
-	ft_memset(data->text->height, 0, sizeof(data->text->height));//not sure about this
-	ft_memset(data->text->width, 0, sizeof(data->text->width));
+	init_int_array(data);
+								//	-> pb de uninitialized values
+	int i = 0;
+	while (i < 4)
+		data->text->path[i++] = NULL;
+	
 }

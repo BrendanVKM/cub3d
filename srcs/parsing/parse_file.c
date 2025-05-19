@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvkm <bvkm@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 10:11:59 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/05/08 15:50:42 by bvkm             ###   ########.fr       */
+/*   Updated: 2025/05/19 12:31:53 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static char	**parse_map(int fd, char *line, int i, char *file)
 	line = get_next_line(fd2);
 	while ((line = get_next_line(fd2)))
 	{
-		printf("line : %s\n", line);
 		if (line[0] == '\0' || line[0] == '\n')
 		{
 			free(line);

@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 11:33:18 by lemarian          #+#    #+#             */
-/*   Updated: 2025/05/15 12:20:58 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/05/19 12:28:34 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	texture_init(void *mlx, t_texture *text, t_data *data)
 	int	endian;
 	int size;
 	
-	text->img[NO] = mlx_xpm_file_to_image(mlx, text->path[NO], text->width[NO], text->height[NO]);//invalid write (text->width)
+	text->img[NO] = mlx_xpm_file_to_image(mlx, text->path[NO], text->width[NO], text->height[NO]);
 	printf("SO\n");
 	text->img[SO] = mlx_xpm_file_to_image(mlx, text->path[SO], text->width[SO], text->height[SO]);
 	printf("EA\n");
@@ -40,7 +40,7 @@ int	set_up_mlx(t_data *data, t_texture *text)
 		exit_error(data, "failed to initialize mlx");
 	texture_init(data->mlx, text, data);
 	data->win = mlx_new_window(data->mlx, WIN_WIDTH, WIN_HEIGHT, "Cub3d");
-	if (data->win)
+	if (!data->win)
 		exit_error(data, "failed to create window");
 	data->img = mlx_new_image(data->mlx, WIN_WIDTH, WIN_HEIGHT);
 	if (!data->img)
