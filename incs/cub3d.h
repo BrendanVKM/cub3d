@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 14:14:34 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/05/15 11:41:31 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/05/20 13:30:38 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@
 # include "mlx.h"
 # include "mlx_int.h"
 # include <math.h>
-#include <stdint.h>
+# include <stdint.h>
 
-#define FOV 66
-#define SPEED 4 // test and adjust
-#define ROT 2 // test and adjust
+# define FOV 66
+# define SPEED 4 // test and adjust
+# define ROT 2   // test and adjust
 
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 720
@@ -41,45 +41,45 @@ typedef enum e_direction
 	SO,
 	EA,
 	WE
-}	t_direction;
+}				t_direction;
 
 typedef struct s_texture
 {
-	void	*img[4];
-	char	*path[4];
-	int		*width[4];
-	int		*height[4];
-	char	*addr[4];
-	int		*floor_rgb; // a free a la fin du parsing
-	int		*ceiling_rgb; // a free a la fin du parsing
+	void		*img[4];
+	char		*path[4];
+	int			*width[4];
+	int			*height[4];
+	char		*addr[4];
+	int			*floor_rgb;   // a free a la fin du parsing
+	int			*ceiling_rgb; // a free a la fin du parsing
 	uint32_t	floor;
-	uint32_t ceiling;
-}	t_texture;
+	uint32_t	ceiling;
+}				t_texture;
 
 typedef struct s_vec
 {
-	double	x;
-	double	y;
-}	t_vec;
+	double		x;
+	double		y;
+}				t_vec;
 
 typedef struct s_raycast
 {
-	t_vec	p_dir;
-	t_vec	plane;
-	t_vec	ray_dir;
-	t_vec	ray_pos;
-	int		map_x;
-	int		map_y;
-	t_vec	delta_d;
-	t_vec	side_d;
-	int		side;
-	int		step_x;
-	int		step_y;
-	double	ray_dist;
-	int		wall_height;
-	int		wall_start;
-	int		wall_end;
-}	t_raycast;
+	t_vec		p_dir;
+	t_vec		plane;
+	t_vec		ray_dir;
+	t_vec		ray_pos;
+	int			map_x;
+	int			map_y;
+	t_vec		delta_d;
+	t_vec		side_d;
+	int			side;
+	int			step_x;
+	int			step_y;
+	double		ray_dist;
+	int			wall_height;
+	int			wall_start;
+	int			wall_end;
+}				t_raycast;
 
 typedef struct s_data
 {
@@ -87,12 +87,13 @@ typedef struct s_data
 	void	*win;
 	void	*img;
 	int		*buffer;
+	int		map_width;
 	char	**map;
 	t_vec	p_pos;
-	t_direction	orientation; // or char?
+	t_direction	orientation;
 	t_raycast *rc;
 	t_texture	*text;
-}	t_data;
+}				t_data;
 
 void		init(t_data *data);
 
@@ -101,7 +102,6 @@ void	init_vector(t_vec *vector, double x, double y);
 void	init_player_dir(t_data *data, t_raycast *rc);
 int		raycast(t_data *data);
 void	rendering(t_data *data, t_raycast *rc, t_texture *text, int x);
-void	init_rc(t_data *data, t_raycast *rc);
 int		movement(t_data *data, t_raycast *rc, int key_code);
 int		exit_game(t_data *data);
 void	exit_error(t_data *data, char *mess);
