@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 14:30:55 by lemarian          #+#    #+#             */
-/*   Updated: 2025/05/14 11:33:11 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/05/20 11:21:40 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,6 @@ int	raycast(t_data *data)
 		rendering(data, data->rc, data->text, x);
 		x++;
 	}
+	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
 	return (0);
 }

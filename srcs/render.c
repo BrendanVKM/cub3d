@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 15:18:25 by lemarian          #+#    #+#             */
-/*   Updated: 2025/05/14 11:18:12 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/05/20 13:46:14 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,21 @@ int	get_tex_x(t_data *data, t_raycast *rc, t_texture *texts)
 	return (tex_x);
 }
 
+void	my_mlx_pixel_put(void *img, int x, int y, uint32_t color)
+{
+	int	bpp;
+	int	endian;
+	int	size_line;
+	char	*dst;
+
+	dst = mlx_get_data_addr(img, &bpp, &size_line, &endian);
+	if (x >= 0 && x < WIN_WIDTH && y >= 0 && y < WIN_HEIGHT)
+	{
+		dst = dst + (y * size_line + x *(bpp / 8));
+		*(unsigned int *)dst = color;
+	}
+}
+
 void	rendering(t_data *data, t_raycast *rc, t_texture *text, int x)
 {
 	int	y;
@@ -107,7 +122,8 @@ void	rendering(t_data *data, t_raycast *rc, t_texture *text, int x)
 		tex_y = (int)tex_pos & (tex_height - 1);
 		tex_pos += step;
 		color = text->addr[tex_num][tex_height * tex_y + tex_x];
-		data->buffer[y * WIN_WIDTH + x] = color;
+		my_mlx_pixel_put(data->img, x, y, color);
+		//data->buffer[y * WIN_WIDTH + x] = color;
 		y++;
 	}
 	render_floor(data, rc, text, x);
