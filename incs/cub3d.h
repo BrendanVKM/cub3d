@@ -6,7 +6,7 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 14:14:34 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/05/20 11:27:07 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/05/20 13:30:38 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ typedef struct s_data
 	void	*win;
 	void	*img;
 	int		*buffer;
+	int		map_width;
 	char	**map;
 	t_vec	p_pos;
 	t_direction	orientation;
