@@ -6,7 +6,7 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 14:33:29 by lemarian          #+#    #+#             */
-/*   Updated: 2025/05/14 13:40:54 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/05/20 10:19:54 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,5 @@ void	init(t_data *data)
 	data->map = NULL;
 	data->p_pos.x = -1;
 	data->p_pos.y = -1;
-	data->orientation = NULL;
+	data->orientation = '\0';
 }

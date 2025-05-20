@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 15:18:25 by lemarian          #+#    #+#             */
-/*   Updated: 2025/05/02 11:59:20 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/05/20 10:21:14 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	get_tex_x(t_data *data, t_raycast *rc, t_texture *texts)
 	int	dir;
 
 	dir = get_direction(rc);
-	tex_width = texts->width[dir];
+	tex_width = *texts->width[dir];
 	wall_x = get_wall_x(data, rc);
 	tex_x = (int)(wall_x * (double)(tex_width));
 	if (rc->side == 0 && rc->ray_dir.x > 0)
@@ -97,7 +97,7 @@ void	rendering(t_data *data, t_raycast *rc, t_texture *text, int x)
 
 	tex_num = data->map[rc->map_x][rc->map_y] - 1;
 	tex_x = get_tex_x(data, rc, data->text);
-	tex_height = text->height[get_direction(rc)];
+	tex_height = *text->height[get_direction(rc)];
 	step = 1.0 * tex_height / rc->wall_height;
 	tex_pos = (rc->wall_start - WIN_HEIGHT / 2 + rc->wall_height) * step;
 	render_ceiling(data, rc, text, x);

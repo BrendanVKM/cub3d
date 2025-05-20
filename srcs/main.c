@@ -6,7 +6,7 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:10:46 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/05/14 10:49:28 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/05/20 10:42:37 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,10 @@ int	main(int ac, char **av)
 	parse_file(data, fd, av[1]);
 	close(fd);
 	//init data
-	if (!set_up_mlx(&data, &text))
-		exit(ft_printf(2, "Error: Failed to initialize mlx\n"));
-	init_player_dir(&data, &rc, (int)data->p_pos.x, (int)data->p_pos.y);
-	mlx_loop_hook(data->win, raycast, &data);
+	if (!set_up_mlx(data, &text))
+	exit(ft_printf(2, "Error: Failed to initialize mlx\n"));
+	init_player_dir(data, &rc, (int)data->p_pos.x, (int)data->p_pos.y);
+	mlx_loop_hook(data->win, &raycast, &data);
 	mlx_hook(data->win, DestroyNotify, 0, &exit_game, &data);
 	mlx_hook(data->win, KeyPress, KeyPressMask, &movement, &data);
 	mlx_hook(data->win, KeyRelease, StructureNotifyMask, &movement, &data);

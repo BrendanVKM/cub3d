@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 15:50:23 by lemarian          #+#    #+#             */
-/*   Updated: 2025/05/12 14:16:39 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/05/20 10:40:23 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,26 @@
 
 //wip based on lodev
 
-void	movement(t_data *data, t_raycast *rc, int key_code)
+int	movement(t_data *data, t_raycast *rc, int key_code) // need norme
 {
 	double	old_dir_x;
 	double	old_plane_x;
 
-	if (key_code = W)
+	if (key_code == W)
 	{
 		if (!data->map[(int)(data->p_pos.x + rc->p_dir.x) * SPEED][(int)(data->p_pos.y)])
 			data->p_pos.x += rc->p_dir.x * SPEED;
 		if (!data->map[(int)(data->p_pos.y)][(int)(data->p_pos.y + rc->p_dir.y) * SPEED])
 			data->p_pos.y += rc->p_dir.y * SPEED;
 	}
-	if (key_code = S)
+	if (key_code == S)
 	{
 		if (!data->map[(int)(data->p_pos.x - rc->p_dir.x) * SPEED][(int)(data->p_pos.y)])
 			data->p_pos.x -= rc->p_dir.x * SPEED;
 		if (!data->map[(int)(data->p_pos.y)][(int)(data->p_pos.y - rc->p_dir.y) * SPEED])
 			data->p_pos.y -= rc->p_dir.y * SPEED;
 	}
-	if (key_code = D)
+	if (key_code == D)
 	{
 		old_dir_x = rc->p_dir.x;
 		rc->p_dir.x = rc->p_dir.x * cos(-ROT) - rc->p_dir.y * sin(-ROT);
@@ -42,7 +42,7 @@ void	movement(t_data *data, t_raycast *rc, int key_code)
 		rc->plane.x = rc->plane.x * cos(-ROT) - rc->plane.y * sin(-ROT);
 		rc->plane.y = old_plane_x * sin(-ROT) + rc->plane.y * cos(-ROT);
 	}
-	if (key_code = A)
+	if (key_code == A)
 	{
 		old_dir_x = rc->p_dir.x;
 		rc->p_dir.x = rc->p_dir.x * cos(ROT) - rc->p_dir.y * sin(ROT);
@@ -51,4 +51,5 @@ void	movement(t_data *data, t_raycast *rc, int key_code)
 		rc->plane.x = rc->plane.x * cos(ROT) - rc->plane.y * sin(ROT);
 		rc->plane.y = old_plane_x * sin(ROT) + rc->plane.y * cos(ROT);
 	}
+	return (0);
 }

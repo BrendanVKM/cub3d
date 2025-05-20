@@ -6,7 +6,7 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 10:57:19 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/05/13 13:21:11 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/05/20 10:36:20 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	exit_error(t_data *data, char *mess)
 	exit(1);
 }
 
-void	exit_game(t_data *data)
+int	exit_game(t_data *data)
 {
 	free_text(data->text, data);
 	free_map(data->map);
@@ -72,6 +72,8 @@ void	exit_game(t_data *data)
 		mlx_destroy_window(data->mlx,  data->win);
 	mlx_destroy_display(data->mlx);
 	free(data->mlx);
+	exit(0);
+	return (0);
 }
 
 void	ft_exit(t_data *data, char *mess)

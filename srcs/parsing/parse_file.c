@@ -6,7 +6,7 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 10:11:59 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/05/14 11:27:58 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/05/20 10:41:43 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static char	**parse_map(int fd, char *line, int i, char *file)
 	line = get_next_line(fd2);
 	while ((line = get_next_line(fd2)))
 	{
-		printf("line : %s\n", line);
 		if (line[0] == '\0' || line[0] == '\n')
 		{
 			free(line);
