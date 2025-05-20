@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 14:30:55 by lemarian          #+#    #+#             */
-/*   Updated: 2025/05/20 13:48:32 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/05/20 15:52:34 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,10 @@ int	raycast(t_data *data)
 	while (x < WIN_WIDTH)
 	{
 		cam_x = 2 * x / (double)WIN_WIDTH - 1;
+		printf("dir x %f\n", data->rc->ray_dir.x);
+		printf("dir y %f\n", data->rc->ray_dir.y);
+		printf("plane x %f\n", data->rc->plane.x);
+		printf("plane y%f\n", data->rc->plane.y);
 		data->rc->ray_dir.x = data->rc->p_dir.x + data->rc->plane.x * cam_x;
 		data->rc->ray_dir.y = data->rc->p_dir.y + data->rc->plane.x * cam_x;
 		start_raycast(data, data->rc);

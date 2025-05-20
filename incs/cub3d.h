@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 14:14:34 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/05/20 13:30:38 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/05/20 15:16:29 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int		set_up_mlx(t_data *data, t_texture *text);
 void	init_vector(t_vec *vector, double x, double y);
 void	init_player_dir(t_data *data, t_raycast *rc);
 int		raycast(t_data *data);
-void	rendering(t_data *data, t_raycast *rc, t_texture *text, int x);
+void	render_wall(t_data *data, t_raycast *rc, t_texture *text, int x);
 int		movement(t_data *data, t_raycast *rc, int key_code);
 int		exit_game(t_data *data);
 void	exit_error(t_data *data, char *mess);
@@ -111,4 +111,6 @@ t_data		*parse_file(t_data *data, int fd, char *file);
 
 
 void	test(t_data *data);
+void	my_mlx_pixel_put(t_data *data, int x, int y, uint32_t color);
+void	rendering(t_data *data, t_raycast *rc, t_texture *text, int x);
 #endif

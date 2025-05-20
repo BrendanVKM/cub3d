@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+         #
+#    By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/04 14:41:21 by bvictoir          #+#    #+#              #
-#    Updated: 2025/05/20 11:26:43 by bvictoir         ###   ########.fr        #
+#    Updated: 2025/05/20 15:02:21 by lemarian         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,8 @@ SRC			=	raycast.c		\
 				parsing/parse_file.c		\
 				parsing/check_textures.c		\
 				main.c \
-				test.c
+				test.c \
+				new_render.c
 SRCS		= ${addprefix $(SRC_PATH), $(SRC)}
 
 OBJ			= $(SRC:.c=.o)

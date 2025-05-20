@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 14:33:29 by lemarian          #+#    #+#             */
-/*   Updated: 2025/05/20 13:48:12 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/05/20 16:02:05 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,25 @@ void	init_player_dir(t_data *data, t_raycast *rc)//use enum or char?
 	{	
 		init_vector(&rc->p_dir, 0.0f, -1.0f);//jean uses opposite values??
 		init_vector(&rc->plane, 0.0f, tan(FOV / 2));
+		init_vector(&rc->ray_dir, 0.0f, -1.0f);
 	}
 	if (data->orientation == SO)
 	{
 		init_vector(&rc->p_dir, 0.0f, 1.0f);
 		init_vector(&rc->plane, 0.0f, -tan(FOV / 2));
+		init_vector(&rc->ray_dir, 0.0f, 1.0f);
 	}
 	if (data->orientation == EA)
 	{
 		init_vector(&rc->p_dir, 1.0f, 0.0f);
 		init_vector(&rc->plane, tan(FOV /2), 0.0f);
+		init_vector(&rc->ray_dir, 1.0f, 0.0f);
 	}
 	if (data->orientation == WE)
 	{
 		init_vector(&rc->p_dir, -1.0f, 0.0f);
 		init_vector(&rc->plane, -tan(FOV /2), 0.0f);
+		init_vector(&rc->ray_dir, -1.0f, 0.0f);
 	}
 }
 
@@ -86,8 +90,7 @@ void	init(t_data *data)
 	data->p_pos.y = -1;
 	data->orientation = '\0';
 	init_int_array(data);
-	//	-> pb de uninitialized values
-	int i = 0;
+	i = 0;
 	while (i < 4)
 		data->text->path[i++] = NULL;
 	
