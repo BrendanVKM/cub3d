@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 14:33:29 by lemarian          #+#    #+#             */
-/*   Updated: 2025/05/19 12:36:51 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/05/20 11:12:49 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	init(t_data *data)
 	data->text->floor_rgb = NULL;
 	data->map = NULL;
 	init_int_array(data);
-								//	-> pb de uninitialized values
+	//	-> pb de uninitialized values
 	int i = 0;
 	while (i < 4)
 		data->text->path[i++] = NULL;

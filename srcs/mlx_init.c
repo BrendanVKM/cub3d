@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 11:33:18 by lemarian          #+#    #+#             */
-/*   Updated: 2025/05/19 12:28:34 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/05/20 11:12:35 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,8 @@ void	texture_init(void *mlx, t_texture *text, t_data *data)
 	int size;
 	
 	text->img[NO] = mlx_xpm_file_to_image(mlx, text->path[NO], text->width[NO], text->height[NO]);
-	printf("SO\n");
 	text->img[SO] = mlx_xpm_file_to_image(mlx, text->path[SO], text->width[SO], text->height[SO]);
-	printf("EA\n");
 	text->img[EA] = mlx_xpm_file_to_image(mlx, text->path[EA], text->width[EA], text->height[EA]);
-	printf("WE\n");
 	text->img[WE] = mlx_xpm_file_to_image(mlx, text->path[WE], text->width[WE], text->height[WE]);
 	if (!text->img[NO] || !text->img[SO] || !text->img[EA] || !text->img[WE])
 		exit_error(data, "failed to load textures");
