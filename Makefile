@@ -6,7 +6,7 @@
 #    By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/04 14:41:21 by bvictoir          #+#    #+#              #
-#    Updated: 2025/05/14 11:16:37 by bvictoir         ###   ########.fr        #
+#    Updated: 2025/05/20 11:26:43 by bvictoir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,15 +21,16 @@ LIBFT_PATH	= libft/
 MLX			= mlx/
 
 
-SRC			=	parsing/parse_file.c		\
-				parsing/check_textures.c		\
-				raycast.c		\
+SRC			=	raycast.c		\
 				ft_free.c		\
 				init.c			\
 				render.c		\
 				mlx_init.c		\
 				movement.c		\
-				main.c
+				parsing/parse_file.c		\
+				parsing/check_textures.c		\
+				main.c \
+				test.c
 SRCS		= ${addprefix $(SRC_PATH), $(SRC)}
 
 OBJ			= $(SRC:.c=.o)
@@ -40,7 +41,7 @@ MINILIBX	= $(MLX)libmlx.a
 LIB			= $(LIBFTLIB) $(MINILIBX)
 
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -g3 #check, flag for math library
+CFLAGS		= -Wall -Wextra -Werror -g3
 
 INCLUDES	= -I $(INC_PATH) -I $(MLX)
 MLXFLAG		= -L $(MLX) -Imlx_linux -lXext -lX11 -lm -lz

@@ -6,7 +6,7 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:10:46 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/05/20 10:42:37 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/05/20 11:22:53 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ static int	ft_check_args(int ac, char **av)
 int	main(int ac, char **av)
 {
 	int fd;
-	t_texture text;//create here or in parsing?
 	t_data *data;
 	t_raycast	rc;
 	
@@ -56,15 +55,10 @@ int	main(int ac, char **av)
 	fd = ft_check_args(ac, av);
 	parse_file(data, fd, av[1]);
 	close(fd);
-	//init data
-	if (!set_up_mlx(data, &text))
-	exit(ft_printf(2, "Error: Failed to initialize mlx\n"));
-	init_player_dir(data, &rc, (int)data->p_pos.x, (int)data->p_pos.y);
-	mlx_loop_hook(data->win, &raycast, &data);
-	mlx_hook(data->win, DestroyNotify, 0, &exit_game, &data);
-	mlx_hook(data->win, KeyPress, KeyPressMask, &movement, &data);
-	mlx_hook(data->win, KeyRelease, StructureNotifyMask, &movement, &data);
-	mlx_loop(data->mlx);
+	test(data);//remove later
+	init_player_dir(data, &rc);
+	if (!set_up_mlx(data, data->text))
+		exit(ft_printf(2, "Error: Failed to initialize mlx\n"));
 	printf("Textures:\n");
 	for (int i = 0; i < 4; i++)
 	{
@@ -75,5 +69,11 @@ int	main(int ac, char **av)
 	{
 		printf("%s\n", data->map[i]);
 	}
+	mlx_loop_hook(data->win, &raycast, data);
+	mlx_hook(data->win, DestroyNotify, 0, &exit_game, &data);
+	mlx_hook(data->win, KeyPress, KeyPressMask, &movement, &data);
+	mlx_hook(data->win, KeyRelease, StructureNotifyMask, &movement, &data);
+	mlx_loop(data->mlx);
+	
 	return (0);
 }
