@@ -102,10 +102,12 @@ void	check_map(t_data *data)
 		i++;
 	data->map_width = i;
 	for (int j = 0; data->map[j]; j++)
-		printf("%s\n", data->map[j]);
-	printf("%d\n", check_extreme(data, 0)); 
-	printf("%d\n", check_extreme(data, i-1)); // exit dans la fonction ou apres ?
-	printf("%d\n", check_interior(data, i)); // same
+	if(check_extreme(data, 0))
+		exit_error(data, "Error: Map not closed");
+	if(check_extreme(data, i-1))
+		exit_error(data, "Error: Map not closed");
+	if(check_interior(data, i))
+		exit_error(data, "Error: incorrect Map");
 	printf("Player position: (%f, %f)\n", data->p_pos.x, data->p_pos.y);
 	printf("Orientation: %c\n", data->orientation);
 }
