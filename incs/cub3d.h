@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 14:14:34 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/05/20 15:16:29 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/05/21 14:59:17 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,15 +97,18 @@ typedef struct s_data
 
 void		init(t_data *data);
 
-int		set_up_mlx(t_data *data, t_texture *text);
+void	check_map(t_data *data);
+void	exit_error(t_data *data, char *mess);
+void	init_player_dir(t_data *data, t_raycast *rc);
 void	init_vector(t_vec *vector, double x, double y);
 void	init_player_dir(t_data *data, t_raycast *rc);
 int		raycast(t_data *data);
 void	render_wall(t_data *data, t_raycast *rc, t_texture *text, int x);
 int		movement(t_data *data, t_raycast *rc, int key_code);
-int		exit_game(t_data *data);
-void	exit_error(t_data *data, char *mess);
+int		set_up_mlx(t_data *data, t_texture *text);
 int		parse_texture(t_data *data, char *line);
+int		exit_game(t_data *data);
+int		raycast(t_data *data);
 
 t_data		*parse_file(t_data *data, int fd, char *file);
 

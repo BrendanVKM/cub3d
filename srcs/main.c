@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:10:46 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/05/20 15:51:28 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/05/21 14:59:36 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	main(int ac, char **av)
 	fd = ft_check_args(ac, av);
 	parse_file(data, fd, av[1]);
 	close(fd);
+	printf("Parsing complete\n");
 	test(data);//remove later
 	init_player_dir(data, rc);
 	if (!set_up_mlx(data, data->text))
