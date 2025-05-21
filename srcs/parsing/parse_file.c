@@ -6,7 +6,7 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 10:11:59 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/05/20 11:26:10 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/05/21 14:10:22 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ static char	**parse_map(int fd, char *line, int i, char *file)
 	exit(ft_printf(2, "Error: File does not exist\n")); // a proteger
 	map = malloc(sizeof(char *) * (j - i + 1));	
 	while (i--)
-	line = get_next_line(fd2);
+		line = get_next_line(fd2);
+	i = 0;
 	while ((line = get_next_line(fd2)))
 	{
 		if (line[0] == '\0' || line[0] == '\n')
@@ -65,12 +66,10 @@ t_data	*parse_file(t_data *data, int fd, char *file)
 		exit(ft_printf(2, "Error: Duplicat/Missing Texture\n")); // a proteger
 	}
 	data->map = parse_map(fd, line, i, file);
-	if (!data->map)
-	{
-		free(line);
-		exit(ft_printf(2, "Error: Incorrect Map \n")); // a proteger
-	}
 	free(line);
+	if (!data->map)
+		exit(ft_printf(2, "Error: Incorrect Map \n")); // a proteger
+	check_map(data);
 	close(fd);
 	return (data);
 }

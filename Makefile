@@ -6,7 +6,7 @@
 #    By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/04 14:41:21 by bvictoir          #+#    #+#              #
-#    Updated: 2025/05/20 11:26:43 by bvictoir         ###   ########.fr        #
+#    Updated: 2025/05/21 11:10:45 by bvictoir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,8 +27,9 @@ SRC			=	raycast.c		\
 				render.c		\
 				mlx_init.c		\
 				movement.c		\
-				parsing/parse_file.c		\
+				parsing/parse_file.c			\
 				parsing/check_textures.c		\
+				parsing/check_map.c				\
 				main.c \
 				test.c
 SRCS		= ${addprefix $(SRC_PATH), $(SRC)}
