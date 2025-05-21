@@ -6,7 +6,7 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:10:46 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/05/20 11:22:53 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/05/21 11:04:40 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int	main(int ac, char **av)
 	fd = ft_check_args(ac, av);
 	parse_file(data, fd, av[1]);
 	close(fd);
+	printf("Parsing complete\n");
 	test(data);//remove later
 	init_player_dir(data, &rc);
 	if (!set_up_mlx(data, data->text))
