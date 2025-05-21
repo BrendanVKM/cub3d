@@ -31,13 +31,13 @@ char	set_player(t_data *data, int i, int j)
 
 int	is_wall_floor(t_data *data, int i, int j)
 {
-	if (data->map[i-1][j] != '1' && data->map[i-1][j] != '0' && !is_player(data->map[i-1][j]))
+	if (!data->map[i-1][j] && data->map[i-1][j] != '1' && data->map[i-1][j] != '0' && !is_player(data->map[i-1][j]))
 		return (2);
-	if (data->map[i+1][j] != '1' && data->map[i+1][j] != '0' && !is_player(data->map[i+1][j]))
+	if (!data->map[i+1][j] && data->map[i+1][j] != '1' && data->map[i+1][j] != '0' && !is_player(data->map[i+1][j]))
 		return (2);
-	if (data->map[i][j-1] != '1' && data->map[i][j-1] != '0' && !is_player(data->map[i][j-1]))
+	if (!data->map[i][j-1] && data->map[i][j-1] != '1' && data->map[i][j-1] != '0' && !is_player(data->map[i][j-1]))
 		return (2);
-	if (data->map[i][j+1] != '1' && data->map[i][j+1] != '0' && !is_player(data->map[i][j+1]))
+	if (!data->map[i][j+1] && data->map[i][j+1] != '1' && data->map[i][j+1] != '0' && !is_player(data->map[i][j+1]))
 		return (2);
 	return (0);
 }
@@ -101,7 +101,8 @@ void	check_map(t_data *data)
 	while (data->map[i])
 		i++;
 	data->map_width = i;
-	for (int j = 0; data->map[j]; j++)
+	if (i < 3)
+		exit_error(data, "Error: Map too small");
 	if(check_extreme(data, 0))
 		exit_error(data, "Error: Map not closed");
 	if(check_extreme(data, i-1))
