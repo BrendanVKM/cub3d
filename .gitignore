@@ -2,6 +2,5 @@
 *.cub
 libft.a
 cub3D
-assets
 */obj
 .vscode
