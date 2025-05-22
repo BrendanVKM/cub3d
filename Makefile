@@ -6,7 +6,7 @@
 #    By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/04 14:41:21 by bvictoir          #+#    #+#              #
-#    Updated: 2025/05/21 14:58:45 by lemarian         ###   ########.fr        #
+#    Updated: 2025/05/22 14:46:07 by lemarian         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,9 +30,7 @@ SRC			=	raycast.c		\
 				parsing/parse_file.c			\
 				parsing/check_textures.c		\
 				parsing/check_map.c				\
-				main.c \
-				test.c \
-				new_render.c
+				main.c
 SRCS		= ${addprefix $(SRC_PATH), $(SRC)}
 
 OBJ			= $(SRC:.c=.o)

@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:10:46 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/05/21 14:59:36 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/05/22 14:41:59 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,10 @@ int	main(int ac, char **av)
 	parse_file(data, fd, av[1]);
 	close(fd);
 	printf("Parsing complete\n");
-	test(data);//remove later
 	init_player_dir(data, rc);
 	if (!set_up_mlx(data, data->text))
 		exit(ft_printf(2, "Error: Failed to initialize mlx\n"));
+	//raycast(data);
 	mlx_loop_hook(data->mlx, raycast, data);
 	mlx_hook(data->win, DestroyNotify, 0, &exit_game, &data);
 	mlx_hook(data->win, KeyPress, KeyPressMask, &movement, &data);

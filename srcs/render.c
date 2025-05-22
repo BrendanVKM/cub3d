@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 15:18:25 by lemarian          #+#    #+#             */
-/*   Updated: 2025/05/20 16:07:56 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/05/22 11:57:52 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,24 +94,22 @@ void	render_wall(t_data *data, t_raycast *rc, t_texture *text, int x)
 	int	tex_height;
 	int	tex_num; 
 	uint32_t	color;
-	char	*tex_addr;
 
 	tex_num = data->map[rc->map_x][rc->map_y] - 1;
 	tex_x = get_tex_x(data, rc, data->text);
 	tex_height = *text->height[get_direction(rc)];
 	step = 1.0 * tex_height / rc->wall_height;
 	tex_pos = (rc->wall_start - WIN_HEIGHT / 2 + rc->wall_height) * step;
-	//render_ceiling(data, rc, text, x);
+	render_ceiling(data, rc, text, x);
 	y = rc->wall_start;
-	tex_addr = text->addr[data->orientation];
 	while (y < rc->wall_end)
 	{
 		tex_y = (int)tex_pos & (tex_height - 1);
 		tex_pos += step;
-		color = ((uint32_t *)tex_addr[tex_num])[tex_height * tex_y + tex_x];
-		my_mlx_pixel_put(data->img, x, y, color);
-		//data->buffer[y * WIN_WIDTH + x] = color;
+		color = text->addr[tex_num][tex_height * tex_y + tex_x];
+		//my_mlx_pixel_put(data->img, x, y, color);
+		data->buffer[y * WIN_WIDTH + x] = color;
 		y++;
 	}
-	//render_floor(data, rc, text, x);
+	render_floor(data, rc, text, x);
 }

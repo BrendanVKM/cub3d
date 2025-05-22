@@ -21,9 +21,16 @@ char	set_player(t_data *data, int i, int j)
 {
 	if (data->p_pos.x != -1 || data->p_pos.y != -1)
 		return ('2');
-	data->p_pos.x = i;
-	data->p_pos.y = j;
-	data->orientation = data->map[i][j];
+	data->p_pos.x = j;
+	data->p_pos.y = i;
+	if (data->map[i][j] == 'N')
+		data->orientation = NO;
+	else if (data->map[i][j] == 'S')
+		data->orientation = SO;
+	else if (data->map[i][j] == 'E')
+		data->orientation = EA;
+	else if (data->map[i][j] == 'W')
+		data->orientation = WE;
 	data->map[i][j] = '0';
 	return	('0');
 	
@@ -106,6 +113,6 @@ void	check_map(t_data *data)
 	printf("%d\n", check_extreme(data, 0)); 
 	printf("%d\n", check_extreme(data, i-1)); // exit dans la fonction ou apres ?
 	printf("%d\n", check_interior(data, i)); // same
-	printf("Player position: (%f, %f)\n", data->p_pos.x, data->p_pos.y);
-	printf("Orientation: %c\n", data->orientation);
+	printf("Player position: (%f, %f)\n", data->p_pos.y, data->p_pos.x);
+	printf("Orientation: %u\n", data->orientation);
 }
