@@ -6,11 +6,29 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 15:25:48 by lemarian          #+#    #+#             */
-/*   Updated: 2025/05/22 16:35:10 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/05/22 19:28:59 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	draw_ceiling_floor(t_raycast *rc, t_texture *text, t_image *image, int x)
+{
+	int	y;
+
+	y = 0;
+	while (y < rc->wall_start)
+	{
+		*(unsigned int *)(image->addr + (y * image->size_line + x * (image->bpp / 8))) = text->ceiling;
+		y++;
+	}
+	y = rc->wall_end;
+	while (y < WIN_HEIGHT)
+	{
+		*(unsigned int *)(image->addr + (y * image->size_line + x * (image->bpp / 8))) = text->floor;
+		y++;
+	}
+}
 
 int	get_direction(t_raycast *rc)
 {

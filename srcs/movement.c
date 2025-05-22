@@ -3,32 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 15:50:23 by lemarian          #+#    #+#             */
-/*   Updated: 2025/05/20 11:25:35 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/05/22 19:16:39 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	movement(t_data *data, t_raycast *rc, int key_code) // need norme
+int	movement(int key_code, t_data *data, t_raycast *rc) // need norme
 {
 	double	old_dir_x;
 	double	old_plane_x;
 
 	if (key_code == W)
 	{
-		if (!data->map[(int)(data->p_pos.x + rc->p_dir.x) * SPEED][(int)(data->p_pos.y)])
+		printf("x = %d\n", (int)((data->p_pos.x + rc->p_dir.x) * SPEED));
+		printf("char = %c\n", data->map[(int)(data->p_pos.y)][(int)((data->p_pos.x + rc->p_dir.x) * SPEED)]);
+		if (data->map[(int)(data->p_pos.y)][(int)((data->p_pos.x + rc->p_dir.x) * SPEED)] == '0')
 			data->p_pos.x += rc->p_dir.x * SPEED;
-		if (!data->map[(int)(data->p_pos.y)][(int)(data->p_pos.y + rc->p_dir.y) * SPEED])
+		if (data->map[(int)((data->p_pos.y + rc->p_dir.y) * SPEED)][(int)data->p_pos.x] == '0')
 			data->p_pos.y += rc->p_dir.y * SPEED;
 	}
 	if (key_code == S)
 	{
-		if (!data->map[(int)(data->p_pos.x - rc->p_dir.x) * SPEED][(int)(data->p_pos.y)])
+		if (data->map[(int)(data->p_pos.y)][(int)((data->p_pos.x - rc->p_dir.x) * SPEED)] == '0')
 			data->p_pos.x -= rc->p_dir.x * SPEED;
-		if (!data->map[(int)(data->p_pos.y)][(int)(data->p_pos.y - rc->p_dir.y) * SPEED])
+		if (data->map[(int)((data->p_pos.y - rc->p_dir.y) * SPEED)][(int)data->p_pos.x] == '0')
 			data->p_pos.y -= rc->p_dir.y * SPEED;
 	}
 	if (key_code == D)

@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 14:14:34 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/05/22 16:31:56 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/05/22 19:27:56 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # include <stdint.h>
 
 # define FOV 66
-# define SPEED 4 // test and adjust
-# define ROT 2   // test and adjust
+# define SPEED 0.03 // test and adjust
+# define ROT 0.02   // test and adjust
 
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 720
@@ -113,7 +113,7 @@ void	init_vector(t_vec *vector, double x, double y);
 void	init_player_dir(t_data *data, t_raycast *rc);
 int		raycast(t_data *data);
 void	render_wall(t_data *data, t_raycast *rc, t_texture *text, int x);
-int		movement(t_data *data, t_raycast *rc, int key_code);
+int		movement(int key_code, t_data *data, t_raycast *rc);
 int		set_up_mlx(t_data *data, t_texture *text);
 int		parse_texture(t_data *data, char *line);
 int		exit_game(t_data *data);
@@ -126,4 +126,5 @@ void	test(t_data *data);
 void	my_mlx_pixel_put(t_data *data, int x, int y, uint32_t color);
 void	rendering(t_data *data, t_raycast *rc, t_texture *text, int x);
 void	draw_wall(t_data *data, t_raycast *rc, t_texture *text, int x);
+void	draw_ceiling_floor(t_raycast *rc, t_texture *text, t_image *image, int x);
 #endif

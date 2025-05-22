@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:10:46 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/05/22 14:41:59 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/05/22 19:10:31 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,9 @@ int	main(int ac, char **av)
 		exit(ft_printf(2, "Error: Failed to initialize mlx\n"));
 	//raycast(data);
 	mlx_loop_hook(data->mlx, raycast, data);
-	mlx_hook(data->win, DestroyNotify, 0, &exit_game, &data);
-	mlx_hook(data->win, KeyPress, KeyPressMask, &movement, &data);
-	mlx_hook(data->win, KeyRelease, StructureNotifyMask, &movement, &data);
+	mlx_hook(data->win, DestroyNotify, 0, &exit_game, data);
+	mlx_hook(data->win, 02, (1L << 0), &movement, data);
+	mlx_hook(data->win, KeyRelease, StructureNotifyMask, &movement, data);
 	mlx_loop(data->mlx);
-	
 	return (0);
 }

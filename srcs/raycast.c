@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 13:35:53 by lemarian          #+#    #+#             */
-/*   Updated: 2025/05/22 16:31:41 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/05/22 19:28:24 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ int	raycast(t_data *data)
 
 	x = 0;
 	ray = data->rc;
+	mlx_clear_window(data->mlx, data->win);
 	while (x < WIN_WIDTH)
 	{
 		cam_x = 2 * x / (double)WIN_WIDTH - 1;
@@ -99,6 +100,7 @@ int	raycast(t_data *data)
 		ray->ray_dist = dda(data, data->rc);
 		get_wall_height(data->rc, ray->ray_dist);
 		draw_wall(data, data->rc, data->text, x);
+		draw_ceiling_floor(data->rc, data->text, data->image, x);
 		x++;
 	}
 	return (0);
