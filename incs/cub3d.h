@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 14:14:34 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/05/21 14:59:17 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/05/22 16:31:56 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,15 @@ typedef enum e_direction
 	EA,
 	WE
 }				t_direction;
+
+typedef struct s_image
+{
+	void	*img;
+	char	*addr;
+	int		size_line;
+	int		bpp;
+	int		endian;
+}				t_image;
 
 typedef struct s_texture
 {
@@ -85,7 +94,7 @@ typedef struct s_data
 {
 	void	*mlx;
 	void	*win;
-	void	*img;
+	t_image	*image;
 	int		*buffer;
 	int		map_width;
 	char	**map;
@@ -116,4 +125,5 @@ t_data		*parse_file(t_data *data, int fd, char *file);
 void	test(t_data *data);
 void	my_mlx_pixel_put(t_data *data, int x, int y, uint32_t color);
 void	rendering(t_data *data, t_raycast *rc, t_texture *text, int x);
+void	draw_wall(t_data *data, t_raycast *rc, t_texture *text, int x);
 #endif

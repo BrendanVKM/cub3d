@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 13:35:53 by lemarian          #+#    #+#             */
-/*   Updated: 2025/05/22 14:45:29 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/05/22 16:31:41 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int	raycast(t_data *data)
 		start_raycast(data, data->rc);
 		ray->ray_dist = dda(data, data->rc);
 		get_wall_height(data->rc, ray->ray_dist);
-		render_wall(data, data->rc, data->text, x);
+		draw_wall(data, data->rc, data->text, x);
 		x++;
 	}
 	return (0);

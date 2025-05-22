@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 10:57:19 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/05/20 11:20:19 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/05/22 15:37:09 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+//need to free arrays and image struct
 
 void	free_int_array(t_texture *text)
 {
@@ -62,8 +64,8 @@ void	exit_error(t_data *data, char *mess)
 		free_text(data->text, data);
 	if (data->map)
 		free_map(data->map);
-	if (data->img)
-		mlx_destroy_image(data->mlx, data->img);
+	if (data->image->img)
+		mlx_destroy_image(data->mlx, data->image->img);
 	if (data->win)
 		mlx_destroy_window(data->mlx,  data->win);
 	if (data->mlx)
@@ -79,8 +81,8 @@ int	exit_game(t_data *data)
 {
 	free_text(data->text, data);
 	free_map(data->map);
-	if (data->img)
-		mlx_destroy_image(data->mlx, data->img);
+	if (data->image->img)
+		mlx_destroy_image(data->mlx, data->image->img);
 	if (data->win)
 		mlx_destroy_window(data->mlx,  data->win);
 	mlx_destroy_display(data->mlx);
