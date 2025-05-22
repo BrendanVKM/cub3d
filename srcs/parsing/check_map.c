@@ -21,9 +21,16 @@ char	set_player(t_data *data, int i, int j)
 {
 	if (data->p_pos.x != -1 || data->p_pos.y != -1)
 		return ('2');
-	data->p_pos.x = i;
-	data->p_pos.y = j;
-	data->orientation = data->map[i][j];
+	data->p_pos.x = j;
+	data->p_pos.y = i;
+	if (data->map[i][j] == 'N')
+		data->orientation = NO;
+	else if (data->map[i][j] == 'S')
+		data->orientation = SO;
+	else if (data->map[i][j] == 'E')
+		data->orientation = EA;
+	else if (data->map[i][j] == 'W')
+		data->orientation = WE;
 	data->map[i][j] = '0';
 	return	('0');
 	
@@ -50,7 +57,7 @@ int check_interior(t_data *data, int end)
 	(void) end;
 
 	i = 0;
-	while (data->map[i])
+	while (i < end -1)
 	{
 		j = 1;
 		while (data->map[i][j])
@@ -109,6 +116,4 @@ void	check_map(t_data *data)
 		exit_error(data, "Error: Map not closed");
 	if(check_interior(data, i))
 		exit_error(data, "Error: incorrect Map");
-	printf("Player position: (%f, %f)\n", data->p_pos.x, data->p_pos.y);
-	printf("Orientation: %c\n", data->orientation);
 }

@@ -6,7 +6,7 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 14:14:34 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/05/21 11:10:03 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/05/22 14:14:33 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ typedef struct s_texture
 	int			*width[4];
 	int			*height[4];
 	char		*addr[4];
-	int			*floor_rgb;   // a free a la fin du parsing
-	int			*ceiling_rgb; // a free a la fin du parsing
+	int *floor_rgb;   // a free a la fin du parsing
+	int *ceiling_rgb; // a free a la fin du parsing
 	uint32_t	floor;
 	uint32_t	ceiling;
 }				t_texture;
@@ -83,24 +83,23 @@ typedef struct s_raycast
 
 typedef struct s_data
 {
-	void	*mlx;
-	void	*win;
-	void	*img;
-	int		*buffer;
-	int		map_width;
-	char	**map;
-	t_vec	p_pos;
+	void		*mlx;
+	void		*win;
+	void		*img;
+	int			*buffer;
+	int			map_width;
+	char		**map;
+	t_vec		p_pos;
 	t_direction	orientation;
-	t_raycast *rc;
+	t_raycast	*rc;
 	t_texture	*text;
 }				t_data;
 
-void		init(t_data *data);
-
+void	init(t_data *data);
 void	check_map(t_data *data);
 void	exit_error(t_data *data, char *mess);
+void	free_data_p(t_data *data, char *msg);
 void	init_player_dir(t_data *data, t_raycast *rc);
-void	init_vector(t_vec *vector, double x, double y);
 void	rendering(t_data *data, t_raycast *rc, t_texture *text, int x);
 
 int		movement(t_data *data, t_raycast *rc, int key_code);
@@ -109,7 +108,5 @@ int		parse_texture(t_data *data, char *line);
 int		exit_game(t_data *data);
 int		raycast(t_data *data);
 
-t_data		*parse_file(t_data *data, int fd, char *file);
-
-void	test(t_data *data); // a supp
+t_data	*parse_file(t_data *data, int fd, char *file);
 #endif

@@ -6,43 +6,13 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 14:33:29 by lemarian          #+#    #+#             */
-/*   Updated: 2025/05/20 11:21:43 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/05/22 14:14:45 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_vector(t_vec *vector, double x, double y)
-{
-	vector->x = x;
-	vector->y = y;
-}
-
-void	init_player_dir(t_data *data, t_raycast *rc)//use enum or char?
-{
-	if (data->orientation == NO)
-	{	
-		init_vector(&rc->p_dir, 0.0f, -1.0f);//jean uses opposite values??
-		init_vector(&rc->plane, 0.0f, tan(FOV / 2));
-	}
-	if (data->orientation == SO)
-	{
-		init_vector(&rc->p_dir, 0.0f, 1.0f);
-		init_vector(&rc->plane, 0.0f, -tan(FOV / 2));
-	}
-	if (data->orientation == EA)
-	{
-		init_vector(&rc->p_dir, 1.0f, 0.0f);
-		init_vector(&rc->plane, tan(FOV /2), 0.0f);
-	}
-	if (data->orientation == WE)
-	{
-		init_vector(&rc->p_dir, -1.0f, 0.0f);
-		init_vector(&rc->plane, -tan(FOV /2), 0.0f);
-	}
-}
-
-void	init_int_array(t_data *data)
+static void	init_int_array(t_data *data)
 {
 	int	i;
 
@@ -64,19 +34,49 @@ void	init_int_array(t_data *data)
 		*(data->text->height[i]) = 0;
 		i++;
 	}
+}
 
+static void	init_vector(t_vec *vector, double x, double y)
+{
+	vector->x = x;
+	vector->y = y;
+}
+
+void	init_player_dir(t_data *data, t_raycast *rc) // use enum or char?
+{
+	if (data->orientation == NO)
+	{
+		init_vector(&rc->p_dir, 0.0f, -1.0f); // jean uses opposite values??
+		init_vector(&rc->plane, 0.0f, tan(FOV / 2));
+	}
+	if (data->orientation == SO)
+	{
+		init_vector(&rc->p_dir, 0.0f, 1.0f);
+		init_vector(&rc->plane, 0.0f, -tan(FOV / 2));
+	}
+	if (data->orientation == EA)
+	{
+		init_vector(&rc->p_dir, 1.0f, 0.0f);
+		init_vector(&rc->plane, tan(FOV / 2), 0.0f);
+	}
+	if (data->orientation == WE)
+	{
+		init_vector(&rc->p_dir, -1.0f, 0.0f);
+		init_vector(&rc->plane, -tan(FOV / 2), 0.0f);
+	}
+	init_int_array(data);
 }
 
 void	init(t_data *data)
 {
 	int	i;
-	
+
 	i = 0;
 	if (!data)
-		exit(ft_printf(2, "Error: Malloc fail\n"));
+		free_data_p(data, "Error: Data malloc fail\n");
 	data->text = malloc(sizeof(t_texture));
 	if (!data->text)
-		exit(ft_printf(2, "Error: Malloc fail\n"));
+		free_data_p(data, "Error: Text malloc fail\n");
 	while (i < 4)
 		data->text->path[i++] = NULL;
 	data->text->ceiling_rgb = NULL;
@@ -85,5 +85,4 @@ void	init(t_data *data)
 	data->p_pos.x = -1;
 	data->p_pos.y = -1;
 	data->orientation = '\0';
-	init_int_array(data);
 }

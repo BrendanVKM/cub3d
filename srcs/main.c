@@ -6,7 +6,7 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:10:46 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/05/21 11:04:40 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/05/22 11:27:34 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,19 @@ static int	ft_check_file_extension(char *file, char *extension)
 	return (1);
 }
 
-static int	ft_check_args(int ac, char **av)
+static int	ft_check_args(int ac, char **av, t_data *data)
 {
 	int	fd;
 
 	if (ac != 2)
-		exit(ft_printf(2, "Error: Wrong number of arguments\n"));
+		free_data_p(data, "Error: Wrong number of arguments");
 	if (ft_check_file_extension(av[1], ".cub") == 0)
-		exit(ft_printf(2, "Error: Wrong file extension\n"));
+		free_data_p(data, "Error: Wrong file extension\n");
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
-		exit(ft_printf(2, "Error: File does not exist\n"));
+		free_data_p(data, "Error: File does not exist\n");
 	if (read(fd, NULL, 0) == -1)
-	{
-		close(fd);
-		exit(ft_printf(2, "Error: File is not readable\n"));
-	}
+		free_data_p(data, "Error: File is not readable\n");
 	return (fd);
 }
 
@@ -48,18 +45,14 @@ int	main(int ac, char **av)
 {
 	int fd;
 	t_data *data;
-	t_raycast	rc;
+	// t_raycast	rc;
 	
 	data = malloc(sizeof(t_data));
 	init(data);
-	fd = ft_check_args(ac, av);
+	fd = ft_check_args(ac, av, data);
 	parse_file(data, fd, av[1]);
 	close(fd);
 	printf("Parsing complete\n");
-	test(data);//remove later
-	init_player_dir(data, &rc);
-	if (!set_up_mlx(data, data->text))
-		exit(ft_printf(2, "Error: Failed to initialize mlx\n"));
 	printf("Textures:\n");
 	for (int i = 0; i < 4; i++)
 	{
@@ -70,11 +63,14 @@ int	main(int ac, char **av)
 	{
 		printf("%s\n", data->map[i]);
 	}
-	mlx_loop_hook(data->win, &raycast, data);
-	mlx_hook(data->win, DestroyNotify, 0, &exit_game, &data);
-	mlx_hook(data->win, KeyPress, KeyPressMask, &movement, &data);
-	mlx_hook(data->win, KeyRelease, StructureNotifyMask, &movement, &data);
-	mlx_loop(data->mlx);
-	
+	printf("\nPlayer position: (%f, %f, %u)\n", data->p_pos.x, data->p_pos.y, data->orientation);
+	// init_player_dir(data, &rc);
+	// if (!set_up_mlx(data, data->text))
+	// 	exit(ft_printf(2, "Error: Failed to initialize mlx\n"));
+	// mlx_loop_hook(data->win, &raycast, data);
+	// mlx_hook(data->win, DestroyNotify, 0, &exit_game, &data);
+	// mlx_hook(data->win, KeyPress, KeyPressMask, &movement, &data);
+	// mlx_hook(data->win, KeyRelease, StructureNotifyMask, &movement, &data);
+	// mlx_loop(data->mlx);
 	return (0);
 }
