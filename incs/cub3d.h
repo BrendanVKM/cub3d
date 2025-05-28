@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 14:14:34 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/05/28 14:54:49 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/05/28 15:14:57 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ typedef struct s_data
 	void		*mlx;
 	void		*win;
 	void		*img;
+	t_image		*image;
 	int			*buffer;
 	int			map_width;
 	char		*tmp_line;
@@ -114,7 +115,6 @@ void	check_map(t_data *data);
 void	exit_error(t_data *data, char *mess);
 void	free_data_p(t_data *data, char *msg);
 void	init_player_dir(t_data *data, t_raycast *rc);
-void	init_vector(t_vec *vector, double x, double y);
 int		raycast(t_data *data);
 int		movement(int key_code, t_data *data, t_raycast *rc);
 int		set_up_mlx(t_data *data, t_texture *text);

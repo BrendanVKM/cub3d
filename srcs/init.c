@@ -6,16 +6,40 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 14:33:29 by lemarian          #+#    #+#             */
-/*   Updated: 2025/05/28 14:59:17 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/05/28 15:11:19 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_vector(t_vec *vector, double x, double y)
+static void	init_vector(t_vec *vector, double x, double y)
 {
 	vector->x = x;
 	vector->y = y;
+}
+
+static void	init_int_array(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < 4)
+	{
+		data->text->width[i] = malloc(sizeof(int));
+		if (!data->text->width[i])
+			exit_error(data, "Malloc failed");
+		*(data->text->width[i]) = 0;
+		i++;
+	}
+	i = 0;
+	while (i < 4)
+	{
+		data->text->height[i] = malloc(sizeof(int));
+		if (!data->text->height[i])
+			exit_error(data, "Malloc failed");
+		*(data->text->height[i]) = 0;
+		i++;
+	}
 }
 
 void	init_player_dir(t_data *data, t_raycast *rc)
@@ -50,36 +74,6 @@ void	init_player_dir(t_data *data, t_raycast *rc)
 		rc->plane.y = -rc->p_dir.x * plane_len;
 	}
 	init_int_array(data);
-}
-
-static void	init_int_array(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	while (i < 4)
-	{
-		data->text->width[i] = malloc(sizeof(int));
-		if (!data->text->width[i])
-			exit_error(data, "Malloc failed");
-		*(data->text->width[i]) = 0;
-		i++;
-	}
-	i = 0;
-	while (i < 4)
-	{
-		data->text->height[i] = malloc(sizeof(int));
-		if (!data->text->height[i])
-			exit_error(data, "Malloc failed");
-		*(data->text->height[i]) = 0;
-		i++;
-	}
-}
-
-static void	init_vector(t_vec *vector, double x, double y)
-{
-	vector->x = x;
-	vector->y = y;
 }
 
 void	init(t_data *data)

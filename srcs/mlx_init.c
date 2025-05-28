@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 11:33:18 by lemarian          #+#    #+#             */
-/*   Updated: 2025/05/22 15:36:42 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/05/28 15:12:20 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int	set_up_mlx(t_data *data, t_texture *text)
 	if (!data->image->img)
 		exit_error(data, "failed to create image display");
 	data->image->addr = mlx_get_data_addr(data->image->img, &data->image->bpp, &data->image->size_line, &data->image->endian);
-	//data->buffer = (int *)data->img;
 	texture_init(data->mlx, text, data);
 	return (1);
 }
