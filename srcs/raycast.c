@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 13:35:53 by lemarian          #+#    #+#             */
-/*   Updated: 2025/05/22 19:28:24 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/05/28 14:38:02 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,18 @@
 
 void	get_wall_height(t_raycast *rc, double ray_dist)
 {
-	rc->wall_height = (int)(WIN_HEIGHT / ray_dist);
-	rc->wall_start = -rc->wall_height / 2 + WIN_HEIGHT / 2;
+	double	raw_start;
+	double	raw_end;
+	double	raw_height;
+	
+	raw_height = ((double)WIN_HEIGHT / ray_dist);
+	raw_start =  (WIN_HEIGHT - raw_height) / 2.0;
+	rc->wall_start = (int)ceil(raw_start);
 	if (rc->wall_start < 0)
 		rc->wall_start = 0;
-	rc->wall_end = rc->wall_height / 2 + WIN_HEIGHT / 2;
-	if (rc->wall_end < 0)
+	raw_end = raw_start + raw_height;
+	rc->wall_end = (int)floor(raw_end);
+	if (rc->wall_end >= WIN_HEIGHT)
 		rc->wall_end = WIN_HEIGHT - 1;
 }
 
@@ -85,6 +91,8 @@ int	raycast(t_data *data)
 	int	x;
 	double	cam_x;
 	t_raycast	*ray;
+	double	raw_dist;
+	double	angle_diff;
 
 	x = 0;
 	ray = data->rc;
@@ -97,7 +105,9 @@ int	raycast(t_data *data)
 		ray->ray_dir.x = ray->p_dir.x + ray->plane.x * cam_x;
 		ray->ray_dir.y = ray->p_dir.y + ray->plane.y * cam_x;
 		start_raycast(data, data->rc);
-		ray->ray_dist = dda(data, data->rc);
+		raw_dist = dda(data, data->rc);
+		angle_diff = atan2(ray->ray_dir.y, ray->ray_dir.x) - atan2(ray->p_dir.y, ray->p_dir.x);
+		ray->ray_dist = raw_dist * cos(angle_diff);
 		get_wall_height(data->rc, ray->ray_dist);
 		draw_wall(data, data->rc, data->text, x);
 		draw_ceiling_floor(data->rc, data->text, data->image, x);

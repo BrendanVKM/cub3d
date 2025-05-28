@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 14:14:34 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/05/22 19:27:56 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/05/28 14:04:17 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,13 @@
 # include <math.h>
 # include <stdint.h>
 
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
+
 # define FOV 66
-# define SPEED 0.03 // test and adjust
-# define ROT 0.02   // test and adjust
+# define SPEED 0.03 //idk
+# define ROT 0.02 //idk
 
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 720
