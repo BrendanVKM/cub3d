@@ -6,7 +6,7 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 14:33:29 by lemarian          #+#    #+#             */
-/*   Updated: 2025/05/22 14:14:45 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/05/28 14:16:33 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void	init(t_data *data)
 	data->text->ceiling_rgb = NULL;
 	data->text->floor_rgb = NULL;
 	data->map = NULL;
+	data->tmp_line = NULL;
 	data->p_pos.x = -1;
 	data->p_pos.y = -1;
 	data->orientation = '\0';

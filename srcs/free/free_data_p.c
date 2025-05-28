@@ -6,7 +6,7 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 10:57:18 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/05/22 14:36:57 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/05/28 14:40:07 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	free_data_p(t_data *data, char *msg)
 	free_texture(data, data->text);
 	if (data->map)
 		ft_free_tab(&data->map);
+	if (data->tmp_line)
+		free(data->tmp_line);
 	if (data)
 		free(data);
 	ft_printf(2, "%s\n", msg);

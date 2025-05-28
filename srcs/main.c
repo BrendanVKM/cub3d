@@ -6,7 +6,7 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:10:46 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/05/22 11:27:34 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/05/28 14:31:05 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int	main(int ac, char **av)
 		printf("%s\n", data->map[i]);
 	}
 	printf("\nPlayer position: (%f, %f, %u)\n", data->p_pos.x, data->p_pos.y, data->orientation);
+	free_data_p(data, "End of program\n");
 	// init_player_dir(data, &rc);
 	// if (!set_up_mlx(data, data->text))
 	// 	exit(ft_printf(2, "Error: Failed to initialize mlx\n"));

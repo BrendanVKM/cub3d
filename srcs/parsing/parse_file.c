@@ -6,7 +6,7 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 10:11:59 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/05/22 14:48:21 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/05/28 14:34:50 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,11 @@ t_data	*parse_file(t_data *data, int fd, char *file)
 	nb_elem = 0;
 	while ((tmp = get_next_line(fd)))
 	{
+		if (data->tmp_line)
+			free(data->tmp_line);
 		line = ft_strtrim(tmp, " \f\n\r\t\v");
 		free(tmp);
+		data->tmp_line = line;
 		if (parse_texture(data, line))
 			nb_elem++;
 		else if (line[0] == '1')

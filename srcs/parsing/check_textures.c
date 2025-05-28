@@ -6,7 +6,7 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 13:40:28 by bvkm              #+#    #+#             */
-/*   Updated: 2025/05/22 14:52:09 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/05/28 14:38:41 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,11 @@ static uint32_t	add_rgb(t_data *data, int **rgb, char *line)
 		}
 		(*rgb)[i] = ft_atoi(split[i]);
 		if ((*rgb)[i] < 0 || (*rgb)[i] > 255)
-			exit(ft_printf(2, "Error: RGB value out of range\n")); // a proteger
+		{
+			free(*rgb);
+			ft_free_tab(&split);
+			free_data_p(data, "Error: RGB value out of range\n"); // a proteger
+		}
 		i++;
 	}
 	ft_free_tab(&split);
@@ -49,14 +53,14 @@ static uint32_t	add_rgb(t_data *data, int **rgb, char *line)
 	return i;
 }
 
-static int	check_color(t_data *data, char *line)
+static int	check_color(t_data *data, char f_c, char *line)
 {
-	if (!ft_strncmp(line, "F ", 2) && data->text->floor_rgb)
+	if (f_c == 'F' && data->text->floor_rgb)
 	{
 		free(line);
 		free_data_p(data, "Error: Floor color already set\n");
 	}
-	else if (!ft_strncmp(line, "C ", 2) && data->text->ceiling_rgb)
+	else if (f_c == 'C' && data->text->ceiling_rgb)
 	{
 		free(line);
 		free_data_p(data, "Error: Ceiling color already set\n");
@@ -67,24 +71,17 @@ static int	check_color(t_data *data, char *line)
 static void	get_color(t_data *data, char *line)
 {
 	char	*tmp;
+	char	f_c;
 	
+	f_c = line[0];
 	tmp = ft_strtrim(line + 2, " \f\n\r\t\v");
+	check_color(data, f_c, tmp);
 	if (!tmp)
-	{
-		free(line);
 		free_data_p(data, "Error: get_color memory allocation failed\n");
-	}
-	check_color(data, line);
-	if (!ft_strncmp(line, "F ", 2))
-	{
-		free(line);
+	if (f_c == 'F')
 		data->text->floor = add_rgb(data, &data->text->floor_rgb, tmp);
-	}
-	else if (!ft_strncmp(line, "C ", 2))
-	{
-		free(line);
+	else if (f_c == 'C')
 		data->text->ceiling = add_rgb(data, &data->text->ceiling_rgb, tmp);
-	}
 }
 
 int	parse_texture(t_data *data, char *line)
