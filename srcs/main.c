@@ -6,7 +6,7 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:10:46 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/05/28 14:31:05 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/05/28 14:49:35 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	main(int ac, char **av)
 {
 	int fd;
 	t_data *data;
-	// t_raycast	rc;
+	t_raycast	rc;
 	
 	data = malloc(sizeof(t_data));
 	init(data);
@@ -64,14 +64,13 @@ int	main(int ac, char **av)
 		printf("%s\n", data->map[i]);
 	}
 	printf("\nPlayer position: (%f, %f, %u)\n", data->p_pos.x, data->p_pos.y, data->orientation);
-	free_data_p(data, "End of program\n");
-	// init_player_dir(data, &rc);
-	// if (!set_up_mlx(data, data->text))
-	// 	exit(ft_printf(2, "Error: Failed to initialize mlx\n"));
-	// mlx_loop_hook(data->win, &raycast, data);
-	// mlx_hook(data->win, DestroyNotify, 0, &exit_game, &data);
-	// mlx_hook(data->win, KeyPress, KeyPressMask, &movement, &data);
-	// mlx_hook(data->win, KeyRelease, StructureNotifyMask, &movement, &data);
-	// mlx_loop(data->mlx);
+	init_player_dir(data, &rc);
+	if (!set_up_mlx(data, data->text))
+		exit(ft_printf(2, "Error: Failed to initialize mlx\n"));
+	mlx_loop_hook(data->win, &raycast, data);
+	mlx_hook(data->win, DestroyNotify, 0, &exit_game, &data);
+	mlx_hook(data->win, KeyPress, KeyPressMask, &movement, &data);
+	mlx_hook(data->win, KeyRelease, StructureNotifyMask, &movement, &data);
+	mlx_loop(data->mlx);
 	return (0);
 }
