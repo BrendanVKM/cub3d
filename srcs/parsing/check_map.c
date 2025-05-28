@@ -31,6 +31,16 @@ char	set_player(t_data *data, int i, int j)
 		data->orientation = EA;
 	else if (data->map[i][j] == 'W')
 		data->orientation = WE;
+	data->p_pos.x = j;
+	data->p_pos.y = i;
+	if (data->map[i][j] == 'N')
+		data->orientation = NO;
+	else if (data->map[i][j] == 'S')
+		data->orientation = SO;
+	else if (data->map[i][j] == 'E')
+		data->orientation = EA;
+	else if (data->map[i][j] == 'W')
+		data->orientation = WE;
 	data->map[i][j] = '0';
 	return	('0');
 	
@@ -38,13 +48,13 @@ char	set_player(t_data *data, int i, int j)
 
 int	is_wall_floor(t_data *data, int i, int j)
 {
-	if (data->map[i-1][j] != '1' && data->map[i-1][j] != '0' && !is_player(data->map[i-1][j]))
+	if (!data->map[i-1][j] && data->map[i-1][j] != '1' && data->map[i-1][j] != '0' && !is_player(data->map[i-1][j]))
 		return (2);
-	if (data->map[i+1][j] != '1' && data->map[i+1][j] != '0' && !is_player(data->map[i+1][j]))
+	if (!data->map[i+1][j] && data->map[i+1][j] != '1' && data->map[i+1][j] != '0' && !is_player(data->map[i+1][j]))
 		return (2);
-	if (data->map[i][j-1] != '1' && data->map[i][j-1] != '0' && !is_player(data->map[i][j-1]))
+	if (!data->map[i][j-1] && data->map[i][j-1] != '1' && data->map[i][j-1] != '0' && !is_player(data->map[i][j-1]))
 		return (2);
-	if (data->map[i][j+1] != '1' && data->map[i][j+1] != '0' && !is_player(data->map[i][j+1]))
+	if (!data->map[i][j+1] && data->map[i][j+1] != '1' && data->map[i][j+1] != '0' && !is_player(data->map[i][j+1]))
 		return (2);
 	return (0);
 }
@@ -57,7 +67,7 @@ int check_interior(t_data *data, int end)
 	(void) end;
 
 	i = 0;
-	while (data->map[i])
+	while (i < end -1)
 	{
 		j = 1;
 		while (data->map[i][j])
@@ -108,11 +118,12 @@ void	check_map(t_data *data)
 	while (data->map[i])
 		i++;
 	data->map_width = i;
-	for (int j = 0; data->map[j]; j++)
-		printf("%s\n", data->map[j]);
-	printf("%d\n", check_extreme(data, 0)); 
-	printf("%d\n", check_extreme(data, i-1)); // exit dans la fonction ou apres ?
-	printf("%d\n", check_interior(data, i)); // same
-	printf("Player position: (%f, %f)\n", data->p_pos.y, data->p_pos.x);
-	printf("Orientation: %u\n", data->orientation);
+	if (i < 3)
+		exit_error(data, "Error: Map too small");
+	if(check_extreme(data, 0))
+		exit_error(data, "Error: Map not closed");
+	if(check_extreme(data, i-1))
+		exit_error(data, "Error: Map not closed");
+	if(check_interior(data, i))
+		exit_error(data, "Error: incorrect Map");
 }

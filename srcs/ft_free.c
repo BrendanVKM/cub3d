@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 10:57:19 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/05/22 15:37:09 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/05/28 14:56:14 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,3 @@ int	exit_game(t_data *data)
 	return (0);
 }
 
-void	ft_exit(t_data *data, char *mess)
-{
-	(void) data;
-	ft_printf(2, "%s\n", mess);
-	exit(0);
-}

@@ -6,7 +6,7 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 10:11:59 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/05/21 14:10:22 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/05/28 14:34:50 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ static char	**parse_map(int fd, char *line, int i, char *file)
 		j++;
 	fd2 = open(file, O_RDONLY);
 	if (fd2 == -1)
-	exit(ft_printf(2, "Error: File does not exist\n")); // a proteger
-	map = malloc(sizeof(char *) * (j - i + 1));	
+		exit(ft_printf(2, "Error: File does not exist\n")); // a proteger
+	map = malloc(sizeof(char *) * (j - i + 2));
 	while (i--)
 		line = get_next_line(fd2);
 	i = 0;
@@ -38,27 +38,33 @@ static char	**parse_map(int fd, char *line, int i, char *file)
 		line = ft_strtrim(line, "\n");
 		map[i++] = ft_strdup(line);
 	}
+	map[i] = NULL;
 	return (map);
 }
-
 
 t_data	*parse_file(t_data *data, int fd, char *file)
 {
 	char	*line;
+	char	*tmp;
 	int		i;
 	int		nb_elem;
-	
+
 	i = 0;
 	nb_elem = 0;
-	while ((line = get_next_line(fd)))
+	while ((tmp = get_next_line(fd)))
 	{
-		line = ft_strtrim(line, " \f\n\r\t\v");
+		if (data->tmp_line)
+			free(data->tmp_line);
+		line = ft_strtrim(tmp, " \f\n\r\t\v");
+		free(tmp);
+		data->tmp_line = line;
 		if (parse_texture(data, line))
 			nb_elem++;
 		else if (line[0] == '1')
-			break;
+			break ;
+		else if (line[0] != '\0' && line[0] != '\n')
+			exit(ft_printf(2, "Error: Incorrect File\n")); // a proteger
 		i++;
-		free(line);
 	}
 	if (nb_elem != 6)
 	{

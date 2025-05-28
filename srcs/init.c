@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 14:33:29 by lemarian          #+#    #+#             */
-/*   Updated: 2025/05/28 14:05:54 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/05/28 14:59:17 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,10 @@ void	init_player_dir(t_data *data, t_raycast *rc)
 		rc->plane.x = rc->p_dir.y * plane_len;
 		rc->plane.y = -rc->p_dir.x * plane_len;
 	}
+	init_int_array(data);
 }
 
-void	init_int_array(t_data *data)
+static void	init_int_array(t_data *data)
 {
 	int	i;
 
@@ -73,30 +74,31 @@ void	init_int_array(t_data *data)
 		*(data->text->height[i]) = 0;
 		i++;
 	}
+}
 
+static void	init_vector(t_vec *vector, double x, double y)
+{
+	vector->x = x;
+	vector->y = y;
 }
 
 void	init(t_data *data)
 {
 	int	i;
-	
+
 	i = 0;
 	if (!data)
-		exit(ft_printf(2, "Error: Malloc fail\n"));
+		free_data_p(data, "Error: Data malloc fail\n");
 	data->text = malloc(sizeof(t_texture));
 	if (!data->text)
-		exit(ft_printf(2, "Error: Malloc fail\n"));
+		free_data_p(data, "Error: Text malloc fail\n");
 	while (i < 4)
 		data->text->path[i++] = NULL;
 	data->text->ceiling_rgb = NULL;
 	data->text->floor_rgb = NULL;
 	data->map = NULL;
+	data->tmp_line = NULL;
 	data->p_pos.x = -1;
 	data->p_pos.y = -1;
 	data->orientation = '\0';
-	init_int_array(data);
-	i = 0;
-	while (i < 4)
-		data->text->path[i++] = NULL;
-	
 }

@@ -3,70 +3,100 @@
 /*                                                        :::      ::::::::   */
 /*   check_textures.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 13:40:28 by bvkm              #+#    #+#             */
-/*   Updated: 2025/05/15 11:46:35 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/05/28 14:38:41 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static uint32_t add_rgb(t_data *data, int **rgb, char *line)
+static uint32_t	add_rgb(t_data *data, int **rgb, char *line)
 {
-	int		i;
+	uint32_t		i;
 	char	**split;
-	(void)	data; // pour free ensuite
-	
+
+	i = 0;
 	split = ft_split(line, ',');
 	*rgb = malloc(sizeof(int) * 3);
 	if (!split || !*rgb)
-		exit(ft_printf(2, "Error: Malloc fail\n")); // a proteger
-	i = 0;
+		{
+			if (split)
+				ft_free_tab(&split);
+			if (*rgb)
+				free(*rgb);
+			free(line);
+			free_data_p(data, "Error: add_rgb memory allocation failed\n");
+		}
+	free(line);
 	while (split[i])
 	{
 		if (i > 2)
-		exit(ft_printf(2, "Error: Too many RGB values\n")); // a proteger
+		{
+			free(*rgb);
+			ft_free_tab(&split);
+			free_data_p(data, "Error: Too many RGB values\n");
+		}
 		(*rgb)[i] = ft_atoi(split[i]);
 		if ((*rgb)[i] < 0 || (*rgb)[i] > 255)
-			exit(ft_printf(2, "Error: RGB value out of range\n")); // a proteger
+		{
+			free(*rgb);
+			ft_free_tab(&split);
+			free_data_p(data, "Error: RGB value out of range\n"); // a proteger
+		}
 		i++;
 	}
 	ft_free_tab(&split);
-	return (((*rgb)[0] << 16) | ((*rgb)[1] << 8) | (*rgb)[2]);
+	i = (*rgb)[0] << 16 | (*rgb)[1] << 8 | (*rgb)[2];
+	free(*rgb);
+	return i;
 }
 
-static int check_color(t_data *data, char *line)
+static int	check_color(t_data *data, char f_c, char *line)
 {
-	if (!ft_strncmp(line, "F ", 2) && data->text->floor_rgb)
-		exit(ft_printf(2, "Error: Floor color already set\n")); // a proteger
-	else if (!ft_strncmp(line, "C ", 2) && data->text->ceiling_rgb)
-		exit(ft_printf(2, "Error: Ceiling color already set\n")); // a proteger
+	if (f_c == 'F' && data->text->floor_rgb)
+	{
+		free(line);
+		free_data_p(data, "Error: Floor color already set\n");
+	}
+	else if (f_c == 'C' && data->text->ceiling_rgb)
+	{
+		free(line);
+		free_data_p(data, "Error: Ceiling color already set\n");
+	}
 	return (1);
 }
 
-static void get_color(t_data *data, char *line)
+static void	get_color(t_data *data, char *line)
 {
-	check_color(data, line);
-	if (!ft_strncmp(line, "F ", 2))
-	data->text->floor = add_rgb(data, &data->text->floor_rgb, line + 2);
-	else if (!ft_strncmp(line, "C ", 2))
-	data->text->ceiling = add_rgb(data, &data->text->ceiling_rgb, line + 2);
+	char	*tmp;
+	char	f_c;
+	
+	f_c = line[0];
+	tmp = ft_strtrim(line + 2, " \f\n\r\t\v");
+	check_color(data, f_c, tmp);
+	if (!tmp)
+		free_data_p(data, "Error: get_color memory allocation failed\n");
+	if (f_c == 'F')
+		data->text->floor = add_rgb(data, &data->text->floor_rgb, tmp);
+	else if (f_c == 'C')
+		data->text->ceiling = add_rgb(data, &data->text->ceiling_rgb, tmp);
 }
 
 int	parse_texture(t_data *data, char *line)
 {
-	if(!ft_strncmp(line, "NO ", 3) && !data->text->path[NO])
+	if (!ft_strncmp(line, "NO ", 3) && !data->text->path[NO])
 		return (data->text->path[NO] = ft_strdup(line + 3), 1);
-	else if(!ft_strncmp(line, "SO ", 3) && !data->text->path[SO])
+	else if (!ft_strncmp(line, "SO ", 3) && !data->text->path[SO])
 		return (data->text->path[SO] = ft_strdup(line + 3), 1);
-	else if(!ft_strncmp(line, "WE ", 3) && !data->text->path[WE])
+	else if (!ft_strncmp(line, "WE ", 3) && !data->text->path[WE])
 		return (data->text->path[WE] = ft_strdup(line + 3), 1);
-	else if(!ft_strncmp(line, "EA ", 3) && !data->text->path[EA])
+	else if (!ft_strncmp(line, "EA ", 3) && !data->text->path[EA])
 		return (data->text->path[EA] = ft_strdup(line + 3), 1);
-	else if(!ft_strncmp(line, "F ", 2))
+	else if (!ft_strncmp(line, "F ", 2))
 		return (get_color(data, line), 1);
-	else if(!ft_strncmp(line, "C ", 2))
+	else if (!ft_strncmp(line, "C ", 2))
 		return (get_color(data, line), 1);
 	return (0);
 }

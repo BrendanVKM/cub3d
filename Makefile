@@ -6,7 +6,7 @@
 #    By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/04 14:41:21 by bvictoir          #+#    #+#              #
-#    Updated: 2025/05/22 16:35:16 by lemarian         ###   ########.fr        #
+#    Updated: 2025/05/28 14:55:40 by lemarian         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ MLX			= mlx/
 
 
 SRC			=	raycast.c		\
+				render.c		\
 				ft_free.c		\
 				init.c			\
 				mlx_init.c		\
@@ -29,8 +30,8 @@ SRC			=	raycast.c		\
 				parsing/parse_file.c			\
 				parsing/check_textures.c		\
 				parsing/check_map.c				\
-				main.c \
-				render.c
+				free/free_data_p.c				\
+				main.c
 SRCS		= ${addprefix $(SRC_PATH), $(SRC)}
 
 OBJ			= $(SRC:.c=.o)
