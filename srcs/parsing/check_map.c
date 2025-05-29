@@ -109,11 +109,11 @@ void	check_map(t_data *data)
 		i++;
 	data->map_width = i;
 	if (i < 3)
-		exit_error(data, "Error: Map too small");
+		free_data_p(data, "Error: Map too small");
 	if(check_extreme(data, 0))
-		exit_error(data, "Error: Map not closed");
+		free_data_p(data, "Error: Map not closed");
 	if(check_extreme(data, i-1))
-		exit_error(data, "Error: Map not closed");
+		free_data_p(data, "Error: Map not closed");
 	if(check_interior(data, i))
-		exit_error(data, "Error: incorrect Map");
+		free_data_p(data, "Error: incorrect Map");
 }
