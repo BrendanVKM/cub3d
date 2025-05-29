@@ -6,7 +6,7 @@
 /*   By: bvkm <bvkm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 10:11:59 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/05/29 12:17:47 by bvkm             ###   ########.fr       */
+/*   Updated: 2025/05/29 13:00:45 by bvkm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,16 +82,16 @@ t_data	*parse_file(t_data *data, int fd, char *file)
 		else if (line[0] == '1')
 			break ;
 		else if (line[0] != '\0' && line[0] != '\n')
-			free_data_p(data, "Error: Incorrect File\n");
+			exit_data_p(data, "Error: Incorrect File\n");
 		i++;
 	}
 	if (nb_elem != 6)
-		free_data_p(data, "Error: Missing Texture\n");
+		exit_data_p(data, "Error: Missing Texture\n");
 	data->map = parse_map(fd, line, i, file);
 	free(line);
 	data->tmp_line = NULL;
 	if (!data->map)
-		free_data_p(data, "Error: Incorrect Map file\n"); 
+		exit_data_p(data, "Error: Incorrect Map file\n"); 
 	check_map(data);
 	close(fd);
 	return (data);

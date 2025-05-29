@@ -6,7 +6,7 @@
 /*   By: bvkm <bvkm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 10:57:18 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/05/29 10:40:22 by bvkm             ###   ########.fr       */
+/*   Updated: 2025/05/29 13:10:12 by bvkm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,14 @@ static void	free_texture(t_data *data, t_texture *text)
 		free(data->text);
 }
 
-void	free_data_p(t_data *data, char *msg)
+void	free_end_p(t_data *data)
+{
+	close_fds();
+	if (data->tmp_line)
+		free(data->tmp_line);
+}
+
+void	exit_data_p(t_data *data, char *msg)
 {
 	free_texture(data, data->text);
 	if (data->map)
@@ -45,7 +52,7 @@ void	free_data_p(t_data *data, char *msg)
 		free(data->tmp_line);
 	if (data)
 		free(data);
-	ft_printf(2, "%s\n", msg);
 	close_fds();
+	ft_printf(2, "%s\n", msg);
 	exit(EXIT_FAILURE);
 }

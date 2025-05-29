@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bvkm <bvkm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 14:14:34 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/05/28 11:29:09 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/05/29 13:10:58 by bvkm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,9 @@ typedef struct s_data
 
 void	init(t_data *data);
 void	check_map(t_data *data);
+void	free_end_p(t_data *data);
 void	exit_error(t_data *data, char *mess);
-void	free_data_p(t_data *data, char *msg);
+void	exit_data_p(t_data *data, char *msg);
 void	init_player_dir(t_data *data, t_raycast *rc);
 void	rendering(t_data *data, t_raycast *rc, t_texture *text, int x);
 
