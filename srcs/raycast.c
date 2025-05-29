@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gael <gael@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 13:35:53 by lemarian          #+#    #+#             */
-/*   Updated: 2025/05/28 14:38:02 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/05/29 17:14:43 by gael             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	get_wall_height(t_raycast *rc, double ray_dist)
 	double	raw_height;
 	
 	raw_height = ((double)WIN_HEIGHT / ray_dist);
+	rc->wall_height = (int)raw_height;
 	raw_start =  (WIN_HEIGHT - raw_height) / 2.0;
 	rc->wall_start = (int)ceil(raw_start);
 	if (rc->wall_start < 0)
@@ -108,6 +109,8 @@ int	raycast(t_data *data)
 		raw_dist = dda(data, data->rc);
 		angle_diff = atan2(ray->ray_dir.y, ray->ray_dir.x) - atan2(ray->p_dir.y, ray->p_dir.x);
 		ray->ray_dist = raw_dist * cos(angle_diff);
+		if (ray->ray_dist < 0.01)
+			ray->ray_dist = 0.01;
 		get_wall_height(data->rc, ray->ray_dist);
 		draw_wall(data, data->rc, data->text, x);
 		draw_ceiling_floor(data->rc, data->text, data->image, x);
