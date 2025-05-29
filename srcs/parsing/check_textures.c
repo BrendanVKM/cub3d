@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_textures.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bvkm <bvkm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 13:40:28 by bvkm              #+#    #+#             */
-/*   Updated: 2025/05/28 14:38:41 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/05/29 10:55:00 by bvkm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,9 @@ static void	get_color(t_data *data, char *line)
 	
 	f_c = line[0];
 	tmp = ft_strtrim(line + 2, " \f\n\r\t\v");
-	check_color(data, f_c, tmp);
 	if (!tmp)
 		free_data_p(data, "Error: get_color memory allocation failed\n");
+	check_color(data, f_c, tmp);
 	if (f_c == 'F')
 		data->text->floor = add_rgb(data, &data->text->floor_rgb, tmp);
 	else if (f_c == 'C')
