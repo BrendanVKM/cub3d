@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bvkm <bvkm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 10:11:59 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/05/28 14:34:50 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/05/29 10:41:46 by bvkm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ t_data	*parse_file(t_data *data, int fd, char *file)
 	}
 	data->map = parse_map(fd, line, i, file);
 	free(line);
+	data->tmp_line = NULL;
 	if (!data->map)
 		exit(ft_printf(2, "Error: Incorrect Map \n")); // a proteger
 	check_map(data);
