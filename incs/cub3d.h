@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 14:14:34 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/05/28 15:52:25 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/06/02 15:52:47 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@
 #define M_PI 3.14159265358979323846
 #endif
 
-# define FOV 66
-# define SPEED 0.03 //idk
-# define ROT 0.02 //idk
+# define FOV 60
+# define SPEED 0.05 //idk
+# define ROT 0.05 //idk
 
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 720
@@ -116,7 +116,7 @@ void	exit_error(t_data *data, char *mess);
 void	free_data_p(t_data *data, char *msg);
 void	init_player_dir(t_data *data, t_raycast *rc);
 int		raycast(t_data *data);
-int		movement(int key_code, t_data *data, t_raycast *rc);
+int		movement(int key_code, t_data *data);
 int		set_up_mlx(t_data *data, t_texture *text);
 int		parse_texture(t_data *data, char *line);
 int		exit_game(t_data *data);
