@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_render.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gael <gael@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:03:36 by gael              #+#    #+#             */
-/*   Updated: 2025/05/29 17:18:28 by gael             ###   ########.fr       */
+/*   Updated: 2025/06/02 11:43:15 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ int	get_tex_x(t_data *data, t_raycast *rc, t_texture *text)
 
 	dir = get_direction(rc);
 	if (rc->side == 0)
-		wall_x = data->p_pos.y + rc->ray_dist * rc->ray_dir.x;
+		wall_x = data->p_pos.y + rc->ray_dist * rc->ray_dir.y;
 	else
-		wall_x = data->p_pos.x + rc->ray_dist * rc->ray_dir.y;
+		wall_x = data->p_pos.x + rc->ray_dist * rc->ray_dir.x;
 	wall_x -= floor(wall_x);
 	tex_x = (int)(wall_x * *text->width[dir]);
 	if (tex_x < 0)

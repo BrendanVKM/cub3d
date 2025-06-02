@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 14:14:34 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/05/28 15:14:57 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/05/28 15:52:25 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ int		parse_texture(t_data *data, char *line);
 int		exit_game(t_data *data);
 int		raycast(t_data *data);
 
-t_data		*parse_file(t_data *data, int fd, char *file);
+t_data	*parse_file(t_data *data, int fd, char *file);
 void	draw_wall(t_data *data, t_raycast *rc, t_texture *text, int x);
 void	draw_ceiling_floor(t_raycast *rc, t_texture *text, t_image *image, int x);
 #endif
