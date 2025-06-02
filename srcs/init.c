@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 14:33:29 by lemarian          #+#    #+#             */
-/*   Updated: 2025/06/02 12:08:00 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/06/02 14:41:28 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,29 +50,15 @@ void	init_player_dir(t_data *data, t_raycast *rc)
 	fov_rad = FOV * M_PI / 180.0;
 	plane_len = tan(fov_rad / 2.0);
 	if (data->orientation == NO)
-	{	
 		init_vector(&rc->p_dir, 0.0f, -1.0f);
-		rc->plane.x = rc->p_dir.y * plane_len;
-		rc->plane.y = -rc->p_dir.x * plane_len;
-	}
 	if (data->orientation == SO)
-	{
 		init_vector(&rc->p_dir, 0.0f, 1.0f);
-		rc->plane.x = rc->p_dir.y * plane_len;
-		rc->plane.y = -rc->p_dir.x * plane_len;
-	}
 	if (data->orientation == EA)
-	{
 		init_vector(&rc->p_dir, 1.0f, 0.0f);
-		rc->plane.x = rc->p_dir.y * plane_len;
-		rc->plane.y = -rc->p_dir.x * plane_len;
-	}
 	if (data->orientation == WE)
-	{
 		init_vector(&rc->p_dir, -1.0f, 0.0f);
-		rc->plane.x = rc->p_dir.y * plane_len;
-		rc->plane.y = -rc->p_dir.x * plane_len;
-	}
+	rc->plane.x = -rc->p_dir.y * plane_len;
+	rc->plane.y = rc->p_dir.x * plane_len;
 	init_int_array(data);
 }
 
