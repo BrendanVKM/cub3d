@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvkm <bvkm@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 10:11:59 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/05/29 13:00:45 by bvkm             ###   ########.fr       */
+/*   Updated: 2025/06/03 10:40:45 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static char	**parse_map(int fd, char *line, int i, char *file)
 		j++;
 	}
 	fd2 = open(file, O_RDONLY);
+	map = NULL;
 	map = malloc(sizeof(char *) * (j - i + 2));
 	if (fd2 == -1 || !map)
 	{
@@ -45,6 +46,9 @@ static char	**parse_map(int fd, char *line, int i, char *file)
 		if (line[0] == '\0' || line[0] == '\n')
 		{
 			free(line);
+			while (i--)
+				free(map[i]);
+			free(map);
 			return (NULL);
 		}
 		tmp = ft_strtrim(line, "\n");
