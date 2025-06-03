@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_textures.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bvkm <bvkm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 13:40:28 by bvkm              #+#    #+#             */
-/*   Updated: 2025/05/28 14:38:41 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/05/29 13:00:45 by bvkm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static uint32_t	add_rgb(t_data *data, int **rgb, char *line)
 			if (*rgb)
 				free(*rgb);
 			free(line);
-			free_data_p(data, "Error: add_rgb memory allocation failed\n");
+			exit_data_p(data, "Error: add_rgb memory allocation failed\n");
 		}
 	free(line);
 	while (split[i])
@@ -36,14 +36,14 @@ static uint32_t	add_rgb(t_data *data, int **rgb, char *line)
 		{
 			free(*rgb);
 			ft_free_tab(&split);
-			free_data_p(data, "Error: Too many RGB values\n");
+			exit_data_p(data, "Error: Too many RGB values\n");
 		}
 		(*rgb)[i] = ft_atoi(split[i]);
 		if ((*rgb)[i] < 0 || (*rgb)[i] > 255)
 		{
 			free(*rgb);
 			ft_free_tab(&split);
-			free_data_p(data, "Error: RGB value out of range\n"); // a proteger
+			exit_data_p(data, "Error: RGB value out of range\n"); // a proteger
 		}
 		i++;
 	}
@@ -58,12 +58,12 @@ static int	check_color(t_data *data, char f_c, char *line)
 	if (f_c == 'F' && data->text->floor_rgb)
 	{
 		free(line);
-		free_data_p(data, "Error: Floor color already set\n");
+		exit_data_p(data, "Error: Floor color already set\n");
 	}
 	else if (f_c == 'C' && data->text->ceiling_rgb)
 	{
 		free(line);
-		free_data_p(data, "Error: Ceiling color already set\n");
+		exit_data_p(data, "Error: Ceiling color already set\n");
 	}
 	return (1);
 }
@@ -75,9 +75,9 @@ static void	get_color(t_data *data, char *line)
 	
 	f_c = line[0];
 	tmp = ft_strtrim(line + 2, " \f\n\r\t\v");
-	check_color(data, f_c, tmp);
 	if (!tmp)
-		free_data_p(data, "Error: get_color memory allocation failed\n");
+		exit_data_p(data, "Error: get_color memory allocation failed\n");
+	check_color(data, f_c, tmp);
 	if (f_c == 'F')
 		data->text->floor = add_rgb(data, &data->text->floor_rgb, tmp);
 	else if (f_c == 'C')

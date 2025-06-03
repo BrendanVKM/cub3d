@@ -42,39 +42,45 @@ char	set_player(t_data *data, int i, int j)
 	else if (data->map[i][j] == 'W')
 		data->orientation = WE;
 	data->map[i][j] = '0';
-	return	('0');
-	
-} 
+	return ('0');
+}
 
 int	is_wall_floor(t_data *data, int i, int j)
 {
-	if (!data->map[i-1][j] && data->map[i-1][j] != '1' && data->map[i-1][j] != '0' && !is_player(data->map[i-1][j]))
+	if (!data->map[i - 1] || !data->map[i + 1] || !data->map[i][j - 1]
+		|| !data->map[i][j + 1])
 		return (2);
-	if (!data->map[i+1][j] && data->map[i+1][j] != '1' && data->map[i+1][j] != '0' && !is_player(data->map[i+1][j]))
+	if (data->map[i - 1][j] != '1' && data->map[i - 1][j] != '0'
+		&& !is_player(data->map[i - 1][j]))
 		return (2);
-	if (!data->map[i][j-1] && data->map[i][j-1] != '1' && data->map[i][j-1] != '0' && !is_player(data->map[i][j-1]))
+	if (data->map[i + 1][j] != '1' && data->map[i + 1][j] != '0'
+		&& !is_player(data->map[i + 1][j]))
 		return (2);
-	if (!data->map[i][j+1] && data->map[i][j+1] != '1' && data->map[i][j+1] != '0' && !is_player(data->map[i][j+1]))
+	if (data->map[i][j - 1] != '1' && data->map[i][j - 1] != '0'
+		&& !is_player(data->map[i][j - 1]))
+		return (2);
+	if (data->map[i][j + 1] != '1' && data->map[i][j + 1] != '0'
+		&& !is_player(data->map[i][j + 1]))
 		return (2);
 	return (0);
 }
 
-
-int check_interior(t_data *data, int end)
+int	check_interior(t_data *data, int end)
 {
 	int	i;
 	int	j;
-	(void) end;
 
+	(void)end;
 	i = 0;
-	while (i < end -1)
+	while (i < end - 1)
 	{
 		j = 1;
 		while (data->map[i][j])
 		{
 			if (is_player(data->map[i][j]))
 				data->map[i][j] = set_player(data, i, j);
-			if (!(data->map[i][j] == '1' || data->map[i][j] == '0' || data->map[i][j] == ' ')) 
+			if (!(data->map[i][j] == '1' || data->map[i][j] == '0'
+					|| data->map[i][j] == ' '))
 				return (2);
 			if (data->map[i][j] == '0')
 				if (is_wall_floor(data, i, j))
@@ -87,7 +93,6 @@ int check_interior(t_data *data, int end)
 	}
 	return (0);
 }
-
 
 int	check_extreme(t_data *data, int nb)
 {
@@ -119,11 +124,11 @@ void	check_map(t_data *data)
 		i++;
 	data->map_width = i;
 	if (i < 3)
-		exit_error(data, "Error: Map too small");
-	if(check_extreme(data, 0))
-		exit_error(data, "Error: Map not closed");
-	if(check_extreme(data, i-1))
-		exit_error(data, "Error: Map not closed");
-	if(check_interior(data, i))
-		exit_error(data, "Error: incorrect Map");
+		exit_data_p(data, "Error: Map too small");
+	if (check_extreme(data, 0))
+		exit_data_p(data, "Error: Map not closed");
+	if (check_extreme(data, i - 1))
+		exit_data_p(data, "Error: Map not closed");
+	if (check_interior(data, i))
+		exit_data_p(data, "Error: incorrect Map");
 }
