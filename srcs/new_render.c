@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:03:36 by gael              #+#    #+#             */
-/*   Updated: 2025/06/02 14:31:36 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/06/03 14:32:16 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ int	get_direction(t_raycast *rc)
 
 int	get_tex_x(t_data *data, t_raycast *rc, t_texture *text)
 {
-	double	wall_x;
-	int	tex_x;
+	double		wall_x;
+	int			tex_x;
 	t_direction	dir;
 
 	dir = get_direction(rc);
@@ -72,12 +72,12 @@ int	get_tex_x(t_data *data, t_raycast *rc, t_texture *text)
 void	draw_wall(t_data *data, t_raycast *rc, t_texture *text, int x)
 {
 	t_direction	dir;
-	int	tex_x;
-	double	step;
-	double	tex_pos;
-	int	y;
-	int	tex_y;
-	t_image	tex_data;
+	int			tex_x;
+	double		step;
+	double		tex_pos;
+	int			y;
+	int			tex_y;
+	t_image		tex_data;
 
 	dir = get_direction(rc);
 	tex_x = get_tex_x(data, rc, text);

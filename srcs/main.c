@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:10:46 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/06/03 11:25:46 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/06/03 14:31:32 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ static int	ft_check_args(int ac, char **av, t_data *data)
 
 int	main(int ac, char **av)
 {
-	int fd;
-	t_data *data;
+	int			fd;
+	t_data		*data;
 	t_raycast	*rc;
 	
 	data = malloc(sizeof(t_data));
@@ -65,3 +65,4 @@ int	main(int ac, char **av)
 	mlx_loop(data->mlx);
 	return (0);
 }
+

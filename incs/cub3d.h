@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 14:14:34 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/06/03 11:26:04 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/06/03 14:29:28 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 #endif
 
 # define FOV 60
-# define SPEED 0.05 //idk
-# define ROT 0.05 //idk
+# define SPEED 0.03
+# define ROT 0.02
 
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 720

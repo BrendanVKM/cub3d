@@ -6,13 +6,11 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 10:57:19 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/06/02 14:50:19 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/06/03 14:31:44 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-//need to free arrays and image struct
 
 void	free_int_array(t_texture *text)
 {
@@ -87,7 +85,11 @@ int	exit_game(t_data *data)
 		mlx_destroy_window(data->mlx,  data->win);
 	mlx_destroy_display(data->mlx);
 	free(data->mlx);
+	free(data->rc);
+	free(data->image);
+	free(data);
 	exit(0);
 	return (0);
 }
+
 

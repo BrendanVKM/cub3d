@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gael <gael@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 13:35:53 by lemarian          #+#    #+#             */
-/*   Updated: 2025/05/29 17:14:43 by gael             ###   ########.fr       */
+/*   Updated: 2025/06/03 14:32:31 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,11 @@ void	start_raycast(t_data *data, t_raycast *rc)
 
 int	raycast(t_data *data)
 {
-	int	x;
-	double	cam_x;
+	int			x;
+	double		cam_x;
 	t_raycast	*ray;
-	double	raw_dist;
-	double	angle_diff;
+	double		raw_dist;
+	double		angle_diff;
 
 	x = 0;
 	ray = data->rc;
