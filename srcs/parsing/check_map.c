@@ -131,4 +131,6 @@ void	check_map(t_data *data)
 		exit_data_p(data, "Error: Map not closed");
 	if (check_interior(data, i))
 		exit_data_p(data, "Error: incorrect Map");
+	if (data->p_pos.x == -1 || data->p_pos.y == -1)
+		exit_data_p(data, "Error: Player not found in Map");
 }
