@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 14:14:34 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/06/02 15:52:47 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/06/03 11:26:04 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,9 @@ typedef struct s_data
 
 void	init(t_data *data);
 void	check_map(t_data *data);
+void	free_end_p(t_data *data);
 void	exit_error(t_data *data, char *mess);
-void	free_data_p(t_data *data, char *msg);
+void	exit_data_p(t_data *data, char *msg);
 void	init_player_dir(t_data *data, t_raycast *rc);
 int		raycast(t_data *data);
 int		movement(int key_code, t_data *data);

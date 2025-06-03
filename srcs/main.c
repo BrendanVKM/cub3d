@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:10:46 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/06/02 15:51:14 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/06/03 11:25:46 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,14 @@ static int	ft_check_args(int ac, char **av, t_data *data)
 	int	fd;
 
 	if (ac != 2)
-		free_data_p(data, "Error: Wrong number of arguments");
+		exit_data_p(data, "Error: Wrong number of arguments");
 	if (ft_check_file_extension(av[1], ".cub") == 0)
-		free_data_p(data, "Error: Wrong file extension\n");
+		exit_data_p(data, "Error: Wrong file extension\n");
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
-		free_data_p(data, "Error: File does not exist\n");
+		exit_data_p(data, "Error: File does not exist\n");
 	if (read(fd, NULL, 0) == -1)
-		free_data_p(data, "Error: File is not readable\n");
+		exit_data_p(data, "Error: File is not readable\n");
 	return (fd);
 }
 
@@ -53,7 +53,6 @@ int	main(int ac, char **av)
 	fd = ft_check_args(ac, av, data);
 	data->rc = rc;
 	parse_file(data, fd, av[1]);
-	close(fd);
 	printf("Parsing complete\n");
 	init_player_dir(data, rc);
 	if (!set_up_mlx(data, data->text))
