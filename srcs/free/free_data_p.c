@@ -6,7 +6,7 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 10:57:18 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/06/04 10:35:19 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/06/04 11:47:31 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	free_texture(t_data *data)
 
 	i = 0;
 	if (!data->text)
-		return;
+		return ;
 	while (i < 4)
 	{
 		if (data->text->path[i])
