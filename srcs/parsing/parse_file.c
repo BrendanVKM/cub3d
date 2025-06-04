@@ -6,11 +6,26 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 10:11:59 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/06/04 11:28:04 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/06/04 14:02:51 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static	void	skip_lines(int fd, int i, t_data *data)
+{
+	char	*line;
+
+	line = NULL;
+	while (i--)
+	{
+		free(line);
+		line = get_next_line(fd);
+		if (!line)
+			exit_data_p(data, "Error: Incorrect File");
+	}
+	free(line);
+}
 
 static char	**parse_map(int fd, char *line, int i, char *file)
 {
@@ -27,6 +42,7 @@ static char	**parse_map(int fd, char *line, int i, char *file)
 	}
 	if (j == i && !line)
 		return (NULL);
+	free(line);
 	fd2 = open(file, O_RDONLY);
 	map = NULL;
 	map = malloc(sizeof(char *) * (j - i + 2));
@@ -36,13 +52,8 @@ static char	**parse_map(int fd, char *line, int i, char *file)
 			free(map);
 		return (NULL);
 	}
-	while (i--)
-	{
-		free(line);
-		line = get_next_line(fd2);
-	}
+	skip_lines(fd2, i, NULL);
 	i = 0;
-	free(line);
 	while ((line = get_next_line(fd2)))
 	{
 		if (line[0] == '\0' || line[0] == '\n')
