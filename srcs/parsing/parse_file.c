@@ -6,7 +6,7 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 10:11:59 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/06/04 10:55:01 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/06/04 11:28:04 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static char	**parse_map(int fd, char *line, int i, char *file)
 	char	*tmp;
 	int		j;
 	int		fd2;
-	
+
 	j = i;
 	while ((line = get_next_line(fd)))
 	{
@@ -99,7 +99,7 @@ t_data	*parse_file(t_data *data, int fd, char *file)
 	free(line);
 	data->tmp_line = NULL;
 	if (!data->map)
-		exit_data_p(data, "Error: Incorrect Map file\n"); 
+		exit_data_p(data, "Error: Incorrect Map file\n");
 	check_map(data);
 	close(fd);
 	return (data);

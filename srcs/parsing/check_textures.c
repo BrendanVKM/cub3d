@@ -6,7 +6,7 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 13:40:28 by bvkm              #+#    #+#             */
-/*   Updated: 2025/06/04 10:32:26 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/06/04 11:28:57 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 
 static uint32_t	add_rgb(t_data *data, int **rgb, char *line)
 {
-	uint32_t		i;
-	char	**split;
+	uint32_t	i;
+	char		**split;
 
 	i = 0;
 	split = ft_split(line, ',');
 	*rgb = malloc(sizeof(int) * 3);
 	if (!split || !*rgb)
-		{
-			if (split)
-				ft_free_tab(&split);
-			if (*rgb)
-				free(*rgb);
-			free(line);
-			exit_data_p(data, "Error: add_rgb memory allocation failed\n");
-		}
+	{
+		if (split)
+			ft_free_tab(&split);
+		if (*rgb)
+			free(*rgb);
+		free(line);
+		exit_data_p(data, "Error: add_rgb memory allocation failed\n");
+	}
 	free(line);
 	while (split[i])
 	{
@@ -50,7 +50,7 @@ static uint32_t	add_rgb(t_data *data, int **rgb, char *line)
 	ft_free_tab(&split);
 	i = (*rgb)[0] << 16 | (*rgb)[1] << 8 | (*rgb)[2];
 	free(*rgb);
-	return i;
+	return (i);
 }
 
 static int	check_color(t_data *data, char f_c, char *line)
@@ -72,7 +72,7 @@ static void	get_color(t_data *data, char *line)
 {
 	char	*tmp;
 	char	f_c;
-	
+
 	f_c = line[0];
 	tmp = ft_strtrim(line + 2, " \f\n\r\t\v");
 	if (!tmp)
