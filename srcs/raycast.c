@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 13:35:53 by lemarian          #+#    #+#             */
-/*   Updated: 2025/06/03 14:32:31 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/06/04 16:55:43 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ int	raycast(t_data *data)
 
 	x = 0;
 	ray = data->rc;
-	mlx_clear_window(data->mlx, data->win);
 	while (x < WIN_WIDTH)
 	{
 		cam_x = 2 * x / (double)WIN_WIDTH - 1;

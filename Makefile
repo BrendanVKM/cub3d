@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gael <gael@student.42.fr>                  +#+  +:+       +#+         #
+#    By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/04 14:41:21 by bvictoir          #+#    #+#              #
-#    Updated: 2025/05/29 15:17:59 by gael             ###   ########.fr        #
+#    Updated: 2025/06/04 13:36:45 by lemarian         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ MLX			= mlx/
 
 
 SRC			=	raycast.c		\
-				new_render.c		\
+				render.c		\
 				ft_free.c		\
 				init.c			\
 				mlx_init.c		\
