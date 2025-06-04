@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:03:36 by gael              #+#    #+#             */
-/*   Updated: 2025/06/04 16:33:19 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/06/04 17:12:12 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,5 +105,4 @@ void	draw_wall(t_data *data, t_raycast *rc, t_texture *text, int x)
 			*(unsigned int *)(tex_data.addr + (tex_y * tex_data.size_line + tex_x * small_img_bpp));
 		y++;
 	}
-	mlx_put_image_to_window(data->mlx, data->win, data->image->img, 0, 0);
 }
