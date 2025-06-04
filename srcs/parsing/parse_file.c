@@ -6,7 +6,7 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 10:11:59 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/06/04 10:33:30 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/06/04 10:55:01 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ static char	**parse_map(int fd, char *line, int i, char *file)
 		free(line);
 		j++;
 	}
+	if (j == i && !line)
+		return (NULL);
 	fd2 = open(file, O_RDONLY);
 	map = NULL;
 	map = malloc(sizeof(char *) * (j - i + 2));
