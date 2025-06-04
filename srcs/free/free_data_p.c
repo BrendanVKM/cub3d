@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_data_p.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvkm <bvkm@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 10:57:18 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/05/29 13:10:12 by bvkm             ###   ########.fr       */
+/*   Updated: 2025/06/04 10:35:19 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,17 @@ static void	close_fds(void)
 		close(fd++);
 }
 
-static void	free_texture(t_data *data, t_texture *text)
+static void	free_texture(t_data *data)
 {
 	int	i;
 
 	i = 0;
+	if (!data->text)
+		return;
 	while (i < 4)
 	{
-		if (text->path[i])
-			free(text->path[i]);
+		if (data->text->path[i])
+			free(data->text->path[i]);
 		i++;
 	}
 	if (data->text)
@@ -45,7 +47,12 @@ void	free_end_p(t_data *data)
 
 void	exit_data_p(t_data *data, char *msg)
 {
-	free_texture(data, data->text);
+	if (!data)
+	{
+		ft_printf(2, "%s\n", msg);
+		exit(EXIT_FAILURE);
+	}
+	free_texture(data);
 	if (data->map)
 		ft_free_tab(&data->map);
 	if (data->tmp_line)

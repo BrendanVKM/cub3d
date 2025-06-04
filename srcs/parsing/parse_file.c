@@ -6,7 +6,7 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 10:11:59 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/06/03 10:40:45 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/06/04 10:33:30 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ t_data	*parse_file(t_data *data, int fd, char *file)
 			free(data->tmp_line);
 		line = ft_strtrim(tmp, " \f\n\r\t\v");
 		free(tmp);
+		if (!line)
+			exit_data_p(data, "Error: Memory allocation failed");
 		data->tmp_line = line;
 		if (parse_texture(data, line))
 			nb_elem++;
