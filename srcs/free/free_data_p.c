@@ -6,7 +6,7 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 10:57:18 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/06/04 11:47:31 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/06/04 13:35:02 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,15 @@ static void	free_texture(t_data *data)
 	}
 	if (data->text)
 		free(data->text);
+}
+
+void	rgb_error(t_data *data, int **rgb, char **split)
+{
+	if (split)
+		ft_free_tab(&split);
+	if (rgb && *rgb)
+		free(*rgb);
+	exit_data_p(data, "Error: Invalid RGB values");
 }
 
 void	free_end_p(t_data *data)

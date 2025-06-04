@@ -6,7 +6,7 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 13:40:28 by bvkm              #+#    #+#             */
-/*   Updated: 2025/06/04 11:28:57 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/06/04 13:35:34 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,31 +20,16 @@ static uint32_t	add_rgb(t_data *data, int **rgb, char *line)
 	i = 0;
 	split = ft_split(line, ',');
 	*rgb = malloc(sizeof(int) * 3);
-	if (!split || !*rgb)
-	{
-		if (split)
-			ft_free_tab(&split);
-		if (*rgb)
-			free(*rgb);
-		free(line);
-		exit_data_p(data, "Error: add_rgb memory allocation failed\n");
-	}
 	free(line);
+	if (!split || !*rgb)
+		rgb_error(data, rgb, split);
 	while (split[i])
 	{
 		if (i > 2)
-		{
-			free(*rgb);
-			ft_free_tab(&split);
-			exit_data_p(data, "Error: Too many RGB values\n");
-		}
+			rgb_error(data, rgb, split);
 		(*rgb)[i] = ft_atoi(split[i]);
 		if ((*rgb)[i] < 0 || (*rgb)[i] > 255)
-		{
-			free(*rgb);
-			ft_free_tab(&split);
-			exit_data_p(data, "Error: RGB value out of range\n"); // a proteger
-		}
+			rgb_error(data, rgb, split);
 		i++;
 	}
 	ft_free_tab(&split);

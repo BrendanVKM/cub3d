@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvkm <bvkm@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 14:14:34 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/05/29 13:10:58 by bvkm             ###   ########.fr       */
+/*   Updated: 2025/06/04 13:30:48 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ void	free_end_p(t_data *data);
 void	exit_error(t_data *data, char *mess);
 void	exit_data_p(t_data *data, char *msg);
 void	init_player_dir(t_data *data, t_raycast *rc);
+void	rgb_error(t_data *data, int **rgb, char **split);
 void	rendering(t_data *data, t_raycast *rc, t_texture *text, int x);
 
 int		movement(t_data *data, t_raycast *rc, int key_code);
