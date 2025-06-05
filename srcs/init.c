@@ -6,11 +6,19 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 14:33:29 by lemarian          #+#    #+#             */
-/*   Updated: 2025/06/03 11:28:03 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/06/05 13:51:55 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	init_raycast(t_data *data, t_raycast *ray, double cam_x)
+{
+	ray->map_x = (int)data->p_pos.x;
+	ray->map_y = (int)data->p_pos.y;
+	ray->ray_dir.x = ray->p_dir.x + ray->plane.x * cam_x;
+	ray->ray_dir.y = ray->p_dir.y + ray->plane.y * cam_x;
+}
 
 static void	init_vector(t_vec *vector, double x, double y)
 {

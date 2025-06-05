@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 13:35:53 by lemarian          #+#    #+#             */
-/*   Updated: 2025/06/04 17:12:18 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/06/05 13:52:13 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ void	get_wall_height(t_raycast *rc, double ray_dist)
 	double	raw_start;
 	double	raw_end;
 	double	raw_height;
-	
+
 	raw_height = ((double)WIN_HEIGHT / ray_dist);
 	rc->wall_height = (int)raw_height;
-	raw_start =  (WIN_HEIGHT - raw_height) / 2.0;
+	raw_start = (WIN_HEIGHT - raw_height) / 2.0;
 	rc->wall_start = (int)ceil(raw_start);
 	if (rc->wall_start < 0)
 		rc->wall_start = 0;
@@ -63,8 +63,10 @@ double	dda(t_data *data, t_raycast *rc)
 
 void	start_raycast(t_data *data, t_raycast *rc)
 {
-	rc->delta_d.x = sqrt(1 + (rc->ray_dir.y * rc->ray_dir.y) / (rc->ray_dir.x * rc->ray_dir.x)); // old : fabs(1 / rc->ray_dir.x);
-	rc->delta_d.y = sqrt(1 + (rc->ray_dir.x * rc->ray_dir.x) / (rc->ray_dir.y * rc->ray_dir.y));
+	rc->delta_d.x = sqrt(1 + (rc->ray_dir.y * rc->ray_dir.y)
+			/ (rc->ray_dir.x * rc->ray_dir.x));
+	rc->delta_d.y = sqrt(1 + (rc->ray_dir.x * rc->ray_dir.x)
+			/ (rc->ray_dir.y * rc->ray_dir.y));
 	if (rc->ray_dir.x < 0)
 	{
 		rc->step_x = -1;
@@ -100,16 +102,12 @@ int	raycast(t_data *data)
 	while (x < WIN_WIDTH)
 	{
 		cam_x = 2 * x / (double)WIN_WIDTH - 1;
-		ray->map_x = (int)data->p_pos.x;
-		ray->map_y = (int)data->p_pos.y;
-		ray->ray_dir.x = ray->p_dir.x + ray->plane.x * cam_x;
-		ray->ray_dir.y = ray->p_dir.y + ray->plane.y * cam_x;
+		init_raycast(data, ray, cam_x);
 		start_raycast(data, data->rc);
 		raw_dist = dda(data, data->rc);
-		angle_diff = atan2(ray->ray_dir.y, ray->ray_dir.x) - atan2(ray->p_dir.y, ray->p_dir.x);
+		angle_diff = atan2(ray->ray_dir.y, ray->ray_dir.x)
+			- atan2(ray->p_dir.y, ray->p_dir.x);
 		ray->ray_dist = raw_dist * cos(angle_diff);
-		if (ray->ray_dist < 0.01)
-			ray->ray_dist = 0.01;
 		get_wall_height(data->rc, ray->ray_dist);
 		draw_wall(data, data->rc, data->text, x);
 		draw_ceiling_floor(data->rc, data->text, data->image, x);

@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 14:14:34 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/06/04 16:55:35 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/06/05 14:13:18 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,12 @@ typedef struct s_texture
 	int			*width[4];
 	int			*height[4];
 	char		*addr[4];
-	int *floor_rgb;   // a free a la fin du parsing
-	int *ceiling_rgb; // a free a la fin du parsing
+	int *floor_rgb;
+	int *ceiling_rgb;
 	uint32_t	floor;
 	uint32_t	ceiling;
+	t_image		*data;
+	t_direction	*dir;
 }				t_texture;
 
 typedef struct s_vec
@@ -126,4 +128,6 @@ int		raycast(t_data *data);
 t_data	*parse_file(t_data *data, int fd, char *file);
 void	draw_wall(t_data *data, t_raycast *rc, t_texture *text, int x);
 void	draw_ceiling_floor(t_raycast *rc, t_texture *text, t_image *image, int x);
+void	init_raycast(t_data *data, t_raycast *ray, double cam_x);
+
 #endif

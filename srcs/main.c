@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:10:46 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/06/04 16:55:26 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/06/05 13:42:39 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	main(int ac, char **av)
 	int			fd;
 	t_data		*data;
 	t_raycast	*rc;
-	
+
 	data = malloc(sizeof(t_data));
 	rc = malloc(sizeof(t_raycast));
 	init(data);
@@ -64,4 +64,3 @@ int	main(int ac, char **av)
 	mlx_loop(data->mlx);
 	return (0);
 }
-

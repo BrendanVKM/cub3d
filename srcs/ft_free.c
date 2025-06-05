@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 10:57:19 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/06/03 14:31:44 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/06/05 13:41:59 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	exit_error(t_data *data, char *mess)
 	if (data->image->img)
 		mlx_destroy_image(data->mlx, data->image->img);
 	if (data->win)
-		mlx_destroy_window(data->mlx,  data->win);
+		mlx_destroy_window(data->mlx, data->win);
 	if (data->mlx)
 	{
 		mlx_destroy_display(data->mlx);
@@ -82,7 +82,7 @@ int	exit_game(t_data *data)
 	if (data->image->img)
 		mlx_destroy_image(data->mlx, data->image->img);
 	if (data->win)
-		mlx_destroy_window(data->mlx,  data->win);
+		mlx_destroy_window(data->mlx, data->win);
 	mlx_destroy_display(data->mlx);
 	free(data->mlx);
 	free(data->rc);
@@ -91,5 +91,3 @@ int	exit_game(t_data *data)
 	exit(0);
 	return (0);
 }
-
-
