@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 11:33:18 by lemarian          #+#    #+#             */
-/*   Updated: 2025/06/05 13:44:46 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/06/05 14:28:50 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ int	set_up_mlx(t_data *data, t_texture *text)
 {
 	data->mlx = mlx_init();
 	data->image = malloc(sizeof(t_image));
+	if (!data->image)
+		exit_error(data, "Malloc failed");
 	if (!data->mlx)
 		exit_error(data, "failed to initialize mlx");
 	data->win = mlx_new_window(data->mlx, WIN_WIDTH, WIN_HEIGHT, "Cub3d");

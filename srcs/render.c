@@ -6,30 +6,32 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:03:36 by gael              #+#    #+#             */
-/*   Updated: 2025/06/04 17:12:12 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/06/05 14:44:30 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	draw_ceiling_floor(t_raycast *rc, t_texture *text, t_image *image, int x)
+void	draw_ceiling_floor(t_raycast *rc, t_texture *text, t_image *img, int x)
 {
 	int	y;
 	int	small_bpp;
 	int	test;
 
 	y = 0;
-	small_bpp = image->bpp / 8;
+	small_bpp = img->bpp / 8;
 	test = x * small_bpp;
 	while (y < rc->wall_start)
 	{
-		*(unsigned int *)(image->addr + (y * image->size_line + test)) = text->ceiling;
+		*(unsigned int *)(img->addr + (y * img->size_line + test))
+			= text->ceiling;
 		y++;
 	}
 	y = rc->wall_end;
 	while (y < WIN_HEIGHT)
 	{
-		*(unsigned int *)(image->addr + (y * image->size_line + test)) = text->floor;
+		*(unsigned int *)(img->addr + (y * img->size_line + test))
+			= text->floor;
 		y++;
 	}
 }
@@ -51,7 +53,6 @@ int	get_direction(t_raycast *rc)
 			return (SO);
 	}
 }
-
 
 int	get_tex_x(t_data *data, t_raycast *rc, t_texture *text)
 {
@@ -90,7 +91,8 @@ void	draw_wall(t_data *data, t_raycast *rc, t_texture *text, int x)
 	step = ((double)*text->height[dir] / rc->wall_height);
 	tex_pos = (rc->wall_start - WIN_HEIGHT / 2 + rc->wall_height / 2) * step;
 	y = rc->wall_start;
-	tex_data.addr = mlx_get_data_addr(text->img[dir], &tex_data.bpp, &tex_data.size_line, &tex_data.endian);
+	tex_data.addr = mlx_get_data_addr(text->img[dir], &tex_data.bpp,
+			&tex_data.size_line, &tex_data.endian);
 	small_img_bpp = data->image->bpp / 8;
 	small_tex_bpp = tex_data.bpp / 8;
 	while (y < rc->wall_end)
@@ -101,8 +103,10 @@ void	draw_wall(t_data *data, t_raycast *rc, t_texture *text, int x)
 		if (tex_y >= *text->height[dir])
 			tex_y = *text->height[dir] - 1;
 		tex_pos += step;
-		*(unsigned int *)(data->image->addr + (y * data->image->size_line + x * small_img_bpp)) = 
-			*(unsigned int *)(tex_data.addr + (tex_y * tex_data.size_line + tex_x * small_img_bpp));
+		*(unsigned int *)(data->image->addr + (y * data->image->size_line
+					+ x * small_img_bpp))
+			= *(unsigned int *)(tex_data.addr + (tex_y * tex_data.size_line
+					+ tex_x * small_img_bpp));
 		y++;
 	}
 }

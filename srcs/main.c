@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:10:46 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/06/05 13:42:39 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/06/05 14:28:12 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,11 @@ int	main(int ac, char **av)
 	t_raycast	*rc;
 
 	data = malloc(sizeof(t_data));
+	if (!data)
+		exit_error(data, "Malloc failed");
 	rc = malloc(sizeof(t_raycast));
+	if (!rc)
+		exit_error(data, "Malloc failed");
 	init(data);
 	fd = ft_check_args(ac, av, data);
 	data->rc = rc;
