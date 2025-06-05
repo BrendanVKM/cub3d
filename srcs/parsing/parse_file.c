@@ -6,26 +6,12 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 10:11:59 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/06/04 14:02:51 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/06/05 11:22:43 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static	void	skip_lines(int fd, int i, t_data *data)
-{
-	char	*line;
-
-	line = NULL;
-	while (i--)
-	{
-		free(line);
-		line = get_next_line(fd);
-		if (!line)
-			exit_data_p(data, "Error: Incorrect File");
-	}
-	free(line);
-}
 
 static char	**parse_map(int fd, char *line, int i, char *file)
 {
@@ -37,6 +23,8 @@ static char	**parse_map(int fd, char *line, int i, char *file)
 	j = i;
 	while ((line = get_next_line(fd)))
 	{
+		if (!line)
+			return (NULL);
 		free(line);
 		j++;
 	}
@@ -52,7 +40,11 @@ static char	**parse_map(int fd, char *line, int i, char *file)
 			free(map);
 		return (NULL);
 	}
-	skip_lines(fd2, i, NULL);
+	while (i--)
+	{
+		line = get_next_line(fd2);
+		free(line);
+	}
 	i = 0;
 	while ((line = get_next_line(fd2)))
 	{
