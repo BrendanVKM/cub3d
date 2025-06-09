@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 10:57:19 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/06/05 13:41:59 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/06/09 11:46:51 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,18 +58,28 @@ void	free_map(char **map)
 
 void	exit_error(t_data *data, char *mess)
 {
-	if (data->text)
-		free_text(data->text, data);
-	if (data->map)
-		free_map(data->map);
-	if (data->image->img)
-		mlx_destroy_image(data->mlx, data->image->img);
-	if (data->win)
-		mlx_destroy_window(data->mlx, data->win);
-	if (data->mlx)
+	if (data)
 	{
-		mlx_destroy_display(data->mlx);
-		free(data->mlx);
+		if (data->text)
+			free_text(data->text, data);
+		if (data->image)
+		{	
+			if (data->image->img)
+				mlx_destroy_image(data->mlx, data->image->img);
+			free(data->image);
+		}
+		if (data->win)
+			mlx_destroy_window(data->mlx, data->win);
+		if (data->mlx)
+		{
+			mlx_destroy_display(data->mlx);
+			free(data->mlx);
+		}
+		if (data->rc)
+			free(data->rc);
+		if (data->map)
+			free_map(data->map);
+		free(data);
 	}
 	ft_printf(2, "error : %s\n", mess);
 	exit(1);
