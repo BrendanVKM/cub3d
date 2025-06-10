@@ -1,6 +1,6 @@
 *.o
-*.cub
 libft.a
 cub3D
 */obj
 .vscode
+test_cub.sh
