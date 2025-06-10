@@ -6,7 +6,7 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 12:27:02 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/06/10 12:41:24 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/06/10 14:16:26 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ static int	ft_check_args(int ac, char **av, t_data *data)
 	if (ac != 2)
 		exit_data_p(data, "Error: Wrong number of arguments");
 	if (ft_check_file_extension(av[1], ".cub") == 0)
-		exit_data_p(data, "Error: Wrong file extension\n");
+		exit_data_p(data, "Error: Wrong file extension");
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
-		exit_data_p(data, "Error: File does not exist\n");
+		exit_data_p(data, "Error: File does not exist");
 	if (read(fd, NULL, 0) == -1)
-		exit_data_p(data, "Error: File is not readable\n");
+		exit_data_p(data, "Error: File is not readable");
 	return (fd);
 }
 

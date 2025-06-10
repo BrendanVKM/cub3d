@@ -6,7 +6,7 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 13:40:28 by bvkm              #+#    #+#             */
-/*   Updated: 2025/06/05 12:12:14 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/06/10 14:16:42 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ static int	check_color(t_data *data, char f_c, char *line)
 	if (f_c == 'F' && data->text->floor_rgb)
 	{
 		free(line);
-		exit_data_p(data, "Error: Floor color already set\n");
+		exit_data_p(data, "Error: Floor color already set");
 	}
 	else if (f_c == 'C' && data->text->ceiling_rgb)
 	{
 		free(line);
-		exit_data_p(data, "Error: Ceiling color already set\n");
+		exit_data_p(data, "Error: Ceiling color already set");
 	}
 	return (1);
 }
@@ -61,7 +61,7 @@ static void	get_color(t_data *data, char *line)
 	f_c = line[0];
 	tmp = ft_strtrim(line + 2, " \f\n\r\t\v");
 	if (!tmp)
-		exit_data_p(data, "Error: get_color memory allocation failed\n");
+		exit_data_p(data, "Error: get_color memory allocation failed");
 	check_color(data, f_c, tmp);
 	if (f_c == 'F')
 		data->text->floor = add_rgb(data, &data->text->floor_rgb, tmp);

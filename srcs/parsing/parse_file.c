@@ -6,7 +6,7 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 10:11:59 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/06/10 11:18:29 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/06/10 14:20:35 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int	process_texture_line(t_data *data, char *line, int *nb_elem)
 	else if (line[0] == '1')
 		return (0);
 	else if (line[0] != '\0' && line[0] != '\n')
-		exit_data_p(data, "Error: Incorrect File\n");
+		exit_data_p(data, "Error: Incorrect File");
 	return (1);
 }
 
@@ -71,7 +71,7 @@ static int	parse_texture_section(t_data *data, int fd)
 		i++;
 	}
 	if (nb_elem != 6)
-		exit_data_p(data, "Error: Missing Texture\n");
+		exit_data_p(data, "Error: Missing Texture");
 	return (i);
 }
 
@@ -81,7 +81,7 @@ static void	finalize_parsing(t_data *data, int fd, char *line)
 		free(line);
 	data->tmp_line = NULL;
 	if (!data->map)
-		exit_data_p(data, "Error: Incorrect Map file\n");
+		exit_data_p(data, "Error: Incorrect Map file");
 	check_map(data);
 	close(fd);
 }

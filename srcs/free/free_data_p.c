@@ -6,7 +6,7 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 10:57:18 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/06/10 12:42:27 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/06/10 14:28:46 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	rgb_error(t_data *data, int **rgb, char **split)
 		free(*rgb);
 	exit_data_p(data, "Error: Invalid RGB values");
 }
-
 
 void	exit_data_p(t_data *data, char *msg)
 {
