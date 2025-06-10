@@ -6,7 +6,7 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 12:27:28 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/06/10 12:39:17 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/06/10 12:56:39 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,6 @@ typedef struct s_data
 {
 	void		*mlx;
 	void		*win;
-	void		*img;
 	t_image		*image;
 	int			*buffer;
 	int			map_width;
