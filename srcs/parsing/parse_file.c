@@ -6,7 +6,7 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 10:11:59 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/06/05 14:28:56 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/06/10 10:30:35 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,11 +149,21 @@ static char	*read_and_trim_line(t_data *data, int fd)
 	if (!tmp)
 		return (NULL);
 	if (data->tmp_line)
+	{
 		free(data->tmp_line);
+		data->tmp_line = NULL;
+	}
 	line = ft_strtrim(tmp, " \f\n\r\t\v");
 	free(tmp);
 	if (!line)
+	{
+		if (data->tmp_line)
+		{
+			free(data->tmp_line);
+			data->tmp_line = NULL;
+		}
 		exit_data_p(data, "Error: Memory allocation failed");
+	}
 	data->tmp_line = line;
 	return (line);
 }

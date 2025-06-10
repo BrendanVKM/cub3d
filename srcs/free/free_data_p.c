@@ -6,7 +6,7 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 10:57:18 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/06/04 13:35:02 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/06/10 10:31:54 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,10 @@ void	exit_data_p(t_data *data, char *msg)
 	if (data->map)
 		ft_free_tab(&data->map);
 	if (data->tmp_line)
+	{
 		free(data->tmp_line);
+		data->tmp_line = NULL;
+	}
 	if (data)
 		free(data);
 	close_fds();
