@@ -6,7 +6,7 @@
 /*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:00:01 by lemarian          #+#    #+#             */
-/*   Updated: 2025/06/05 15:30:26 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/06/10 17:24:55 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ int	get_direction(t_raycast *rc)
 	else
 	{
 		if (rc->ray_dir.y < 0)
-			return (NO);
-		else
 			return (SO);
+		else
+			return (NO);
 	}
 }
