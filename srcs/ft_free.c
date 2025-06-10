@@ -6,7 +6,7 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 10:57:19 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/06/10 11:50:48 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/06/10 12:00:32 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,7 @@ void	exit_error(t_data *data, char *mess)
 		mlx_destroy_display(data->mlx);
 		free(data->mlx);
 	}
-	write(2, mess, ft_strlen(mess)); 
-	write(2, "\n", 1);
+	ft_printf(2, "error : %s\n", mess);
 	exit(1);
 }
 

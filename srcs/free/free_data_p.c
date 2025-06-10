@@ -6,7 +6,7 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 10:57:18 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/06/10 11:23:16 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/06/10 12:00:43 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,7 @@ void	exit_data_p(t_data *data, char *msg)
 {
 	if (!data)
 	{
-		write(2, "Error: ", 7);
-		write(2, msg, ft_strlen(msg)); 
-		write(2, "\n", 1);
+		ft_printf(2, "%s\n", msg);
 		exit(EXIT_FAILURE);
 	}
 	free_texture(data);
@@ -74,7 +72,6 @@ void	exit_data_p(t_data *data, char *msg)
 	if (data)
 		free(data);
 	close_fds();
-	write(2, msg, ft_strlen(msg)); 
-	write(2, "\n", 1);
+	ft_printf(2, "%s\n", msg);
 	exit(EXIT_FAILURE);
 }
