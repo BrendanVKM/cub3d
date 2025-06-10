@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+         #
+#    By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/04 14:41:21 by bvictoir          #+#    #+#              #
-#    Updated: 2025/06/05 15:29:05 by lemarian         ###   ########.fr        #
+#    Updated: 2025/06/10 12:23:32 by bvictoir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,8 @@ SRC			=	raycast.c		\
 				mlx_init.c		\
 				movement.c		\
 				parsing/parse_file.c			\
+				parsing/parse_map.c				\
+				parsing/read_map.c				\
 				parsing/check_textures.c		\
 				parsing/check_map.c				\
 				free/free_data_p.c				\

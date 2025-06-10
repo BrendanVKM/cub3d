@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_textures.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvkm <bvkm@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 13:40:28 by bvkm              #+#    #+#             */
-/*   Updated: 2025/05/29 13:00:45 by bvkm             ###   ########.fr       */
+/*   Updated: 2025/06/05 12:12:14 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,43 +14,28 @@
 
 static uint32_t	add_rgb(t_data *data, int **rgb, char *line)
 {
-	uint32_t		i;
-	char	**split;
+	uint32_t	i;
+	char		**split;
 
 	i = 0;
 	split = ft_split(line, ',');
 	*rgb = malloc(sizeof(int) * 3);
-	if (!split || !*rgb)
-		{
-			if (split)
-				ft_free_tab(&split);
-			if (*rgb)
-				free(*rgb);
-			free(line);
-			exit_data_p(data, "Error: add_rgb memory allocation failed\n");
-		}
 	free(line);
+	if (!split || !*rgb)
+		rgb_error(data, rgb, split);
+	if (!split [1] || split[3])
+		rgb_error(data, rgb, split);
 	while (split[i])
 	{
-		if (i > 2)
-		{
-			free(*rgb);
-			ft_free_tab(&split);
-			exit_data_p(data, "Error: Too many RGB values\n");
-		}
 		(*rgb)[i] = ft_atoi(split[i]);
 		if ((*rgb)[i] < 0 || (*rgb)[i] > 255)
-		{
-			free(*rgb);
-			ft_free_tab(&split);
-			exit_data_p(data, "Error: RGB value out of range\n"); // a proteger
-		}
+			rgb_error(data, rgb, split);
 		i++;
 	}
 	ft_free_tab(&split);
 	i = (*rgb)[0] << 16 | (*rgb)[1] << 8 | (*rgb)[2];
 	free(*rgb);
-	return i;
+	return (i);
 }
 
 static int	check_color(t_data *data, char f_c, char *line)
@@ -72,7 +57,7 @@ static void	get_color(t_data *data, char *line)
 {
 	char	*tmp;
 	char	f_c;
-	
+
 	f_c = line[0];
 	tmp = ft_strtrim(line + 2, " \f\n\r\t\v");
 	if (!tmp)

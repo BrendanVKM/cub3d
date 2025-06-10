@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/22 14:33:29 by lemarian          #+#    #+#             */
-/*   Updated: 2025/06/05 14:27:33 by lemarian         ###   ########.fr       */
+/*   Created: 2025/06/10 12:26:44 by bvictoir          #+#    #+#             */
+/*   Updated: 2025/06/10 12:26:47 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,17 +76,17 @@ void	init(t_data *data)
 
 	i = 0;
 	if (!data)
-		exit_data_p(data, "Error: Data malloc failed\n");
-	data->text = malloc(sizeof(t_texture));
-	if (!data->text)
-		exit_data_p(data, "Error: Text malloc failed\n");
-	while (i < 4)
-		data->text->path[i++] = NULL;
-	data->text->ceiling_rgb = NULL;
-	data->text->floor_rgb = NULL;
+		exit_data_p(data, "Error: Data malloc fail");
 	data->map = NULL;
 	data->tmp_line = NULL;
 	data->p_pos.x = -1;
 	data->p_pos.y = -1;
 	data->orientation = '\0';
+	data->text = malloc(sizeof(t_texture));
+	if (!data->text)
+		exit_data_p(data, "Error: Text malloc fail");
+	while (i < 4)
+		data->text->path[i++] = NULL;
+	data->text->ceiling_rgb = NULL;
+	data->text->floor_rgb = NULL;
 }

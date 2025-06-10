@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/11 14:14:34 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/06/05 15:26:57 by lemarian         ###   ########.fr       */
+/*   Created: 2025/06/10 12:27:28 by bvictoir          #+#    #+#             */
+/*   Updated: 2025/06/10 12:28:38 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 # include <math.h>
 # include <stdint.h>
 
-#ifndef M_PI
-#define M_PI 3.14159265358979323846
-#endif
+# ifndef M_PI
+#  define M_PI 3.14159265358979323846
+# endif
 
 # define FOV 60
 # define SPEED 0.03
@@ -49,11 +49,11 @@ typedef enum e_direction
 
 typedef struct s_image
 {
-	void	*img;
-	char	*addr;
-	int		size_line;
-	int		bpp;
-	int		endian;
+	void		*img;
+	char		*addr;
+	int			size_line;
+	int			bpp;
+	int			endian;
 }				t_image;
 
 typedef struct s_texture
@@ -63,8 +63,8 @@ typedef struct s_texture
 	int			*width[4];
 	int			*height[4];
 	char		*addr[4];
-	int *floor_rgb;
-	int *ceiling_rgb;
+	int			*floor_rgb;
+	int			*ceiling_rgb;
 	uint32_t	floor;
 	uint32_t	ceiling;
 	t_image		*data;
@@ -112,24 +112,29 @@ typedef struct s_data
 	t_texture	*text;
 }				t_data;
 
-void	init(t_data *data);
-void	check_map(t_data *data);
-void	free_end_p(t_data *data);
-void	exit_error(t_data *data, char *mess);
-void	exit_data_p(t_data *data, char *msg);
-void	init_player_dir(t_data *data, t_raycast *rc);
-int		raycast(t_data *data);
-int		movement(int key_code, t_data *data);
-int		set_up_mlx(t_data *data, t_texture *text);
-int		parse_texture(t_data *data, char *line);
-int		exit_game(t_data *data);
-int		raycast(t_data *data);
+void			init(t_data *data);
+void			check_map(t_data *data);
+void			free_end_p(t_data *data);
+void			exit_error(t_data *data, char *mess);
+void			exit_data_p(t_data *data, char *msg);
+void			init_player_dir(t_data *data, t_raycast *rc);
+void			rgb_error(t_data *data, int **rgb, char **split);
+void			init_raycast(t_data *data, t_raycast *ray, double cam_x);
+void			draw_wall(t_data *data, t_raycast *rc, t_texture *text, int x);
+void			draw_ceiling_floor(t_raycast *rc, t_texture *text,
+					t_image *image, int x);
 
-t_data	*parse_file(t_data *data, int fd, char *file);
-void	draw_wall(t_data *data, t_raycast *rc, t_texture *text, int x);
-void	draw_ceiling_floor(t_raycast *rc, t_texture *text, t_image *image, int x);
-void	init_raycast(t_data *data, t_raycast *ray, double cam_x);
-int		get_direction(t_raycast *rc);
-int		get_tex_y(double tex_pos, t_texture *text);
+int				get_tex_y(double tex_pos, t_texture *text);
+int				set_up_mlx(t_data *data, t_texture *text);
+int				parse_texture(t_data *data, char *line);
+int				movement(int key_code, t_data *data);
+int				get_direction(t_raycast *rc);
+int				exit_game(t_data *data);
+int				raycast(t_data *data);
+
+char			**parse_map(int fd, int texture_lines, char *file);
+char			**read_map_content(int fd2, char **map, int map_size);
+
+t_data			*parse_file(t_data *data, int fd, char *file);
 
 #endif

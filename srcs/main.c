@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/16 14:10:46 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/06/05 14:28:12 by lemarian         ###   ########.fr       */
+/*   Created: 2025/06/10 12:27:02 by bvictoir          #+#    #+#             */
+/*   Updated: 2025/06/10 12:27:05 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static int	ft_check_file_extension(char *file, char *extension)
 {
-	int		i;
-	int		j;
+	int	i;
+	int	j;
 
 	i = ft_strlen(file) - 1;
 	j = ft_strlen(extension) - 1;

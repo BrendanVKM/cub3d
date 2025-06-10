@@ -6,97 +6,92 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 10:11:59 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/06/03 10:40:45 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/06/10 11:18:29 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static char	**parse_map(int fd, char *line, int i, char *file)
+static char	*read_and_trim_line(t_data *data, int fd)
 {
-	char	**map;
 	char	*tmp;
-	int		j;
-	int		fd2;
-	
-	j = i;
-	while ((line = get_next_line(fd)))
-	{
-		free(line);
-		j++;
-	}
-	fd2 = open(file, O_RDONLY);
-	map = NULL;
-	map = malloc(sizeof(char *) * (j - i + 2));
-	if (fd2 == -1 || !map)
-	{
-		if (map)
-			free(map);
+	char	*line;
+
+	tmp = get_next_line(fd);
+	if (!tmp)
 		return (NULL);
-	}
-	while (i--)
+	if (data->tmp_line)
 	{
-		free(line);
-		line = get_next_line(fd2);
+		free(data->tmp_line);
+		data->tmp_line = NULL;
 	}
-	i = 0;
-	free(line);
-	while ((line = get_next_line(fd2)))
+	line = ft_strtrim(tmp, " \f\n\r\t\v");
+	free(tmp);
+	if (!line)
 	{
-		if (line[0] == '\0' || line[0] == '\n')
+		if (data->tmp_line)
 		{
-			free(line);
-			while (i--)
-				free(map[i]);
-			free(map);
-			return (NULL);
+			free(data->tmp_line);
+			data->tmp_line = NULL;
 		}
-		tmp = ft_strtrim(line, "\n");
-		map[i++] = ft_strdup(tmp);
-		free(tmp);
-		free(line);
-		if (!map[i - 1])
-		{
-			ft_free_tab(&map);
-			return (NULL);
-		}
+		exit_data_p(data, "Error: Memory allocation failed");
 	}
-	map[i] = NULL;
-	return (map);
+	data->tmp_line = line;
+	return (line);
 }
 
-t_data	*parse_file(t_data *data, int fd, char *file)
+static int	process_texture_line(t_data *data, char *line, int *nb_elem)
+{
+	if (parse_texture(data, line))
+	{
+		(*nb_elem)++;
+		return (1);
+	}
+	else if (line[0] == '1')
+		return (0);
+	else if (line[0] != '\0' && line[0] != '\n')
+		exit_data_p(data, "Error: Incorrect File\n");
+	return (1);
+}
+
+static int	parse_texture_section(t_data *data, int fd)
 {
 	char	*line;
-	char	*tmp;
 	int		i;
 	int		nb_elem;
 
 	i = 0;
 	nb_elem = 0;
-	while ((tmp = get_next_line(fd)))
+	line = read_and_trim_line(data, fd);
+	while (line)
 	{
-		if (data->tmp_line)
-			free(data->tmp_line);
-		line = ft_strtrim(tmp, " \f\n\r\t\v");
-		free(tmp);
-		data->tmp_line = line;
-		if (parse_texture(data, line))
-			nb_elem++;
-		else if (line[0] == '1')
+		if (!process_texture_line(data, line, &nb_elem))
 			break ;
-		else if (line[0] != '\0' && line[0] != '\n')
-			exit_data_p(data, "Error: Incorrect File\n");
+		line = read_and_trim_line(data, fd);
 		i++;
 	}
 	if (nb_elem != 6)
 		exit_data_p(data, "Error: Missing Texture\n");
-	data->map = parse_map(fd, line, i, file);
-	free(line);
+	return (i);
+}
+
+static void	finalize_parsing(t_data *data, int fd, char *line)
+{
+	if (line)
+		free(line);
 	data->tmp_line = NULL;
 	if (!data->map)
-		exit_data_p(data, "Error: Incorrect Map file\n"); 
+		exit_data_p(data, "Error: Incorrect Map file\n");
 	check_map(data);
 	close(fd);
+}
+
+t_data	*parse_file(t_data *data, int fd, char *file)
+{
+	int	texture_lines;
+
+	texture_lines = parse_texture_section(data, fd);
+	data->map = parse_map(fd, texture_lines, file);
+	finalize_parsing(data, fd, data->tmp_line);
 	return (data);
 }
