@@ -6,7 +6,7 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 12:27:28 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/06/10 12:28:38 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/06/10 12:39:17 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,6 @@ typedef struct s_data
 
 void			init(t_data *data);
 void			check_map(t_data *data);
-void			free_end_p(t_data *data);
 void			exit_error(t_data *data, char *mess);
 void			exit_data_p(t_data *data, char *msg);
 void			init_player_dir(t_data *data, t_raycast *rc);

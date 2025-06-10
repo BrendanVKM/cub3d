@@ -6,7 +6,7 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 12:27:02 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/06/10 12:27:05 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/06/10 12:41:24 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,14 @@ int	main(int ac, char **av)
 	data = malloc(sizeof(t_data));
 	if (!data)
 		exit_error(data, "Malloc failed");
+	init(data);
+	fd = ft_check_args(ac, av, data);
+	parse_file(data, fd, av[1]);
+	printf("Parsing complete\n");
 	rc = malloc(sizeof(t_raycast));
 	if (!rc)
 		exit_error(data, "Malloc failed");
-	init(data);
-	fd = ft_check_args(ac, av, data);
 	data->rc = rc;
-	parse_file(data, fd, av[1]);
-	printf("Parsing complete\n");
 	init_player_dir(data, rc);
 	if (!set_up_mlx(data, data->text))
 		exit(ft_printf(2, "Error: Failed to initialize mlx\n"));

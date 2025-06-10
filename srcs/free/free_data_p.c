@@ -6,7 +6,7 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 10:57:18 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/06/10 12:00:43 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/06/10 12:42:27 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,6 @@ void	rgb_error(t_data *data, int **rgb, char **split)
 	exit_data_p(data, "Error: Invalid RGB values");
 }
 
-void	free_end_p(t_data *data)
-{
-	close_fds();
-	if (data->tmp_line)
-		free(data->tmp_line);
-}
 
 void	exit_data_p(t_data *data, char *msg)
 {
@@ -69,8 +63,7 @@ void	exit_data_p(t_data *data, char *msg)
 		free(data->tmp_line);
 		data->tmp_line = NULL;
 	}
-	if (data)
-		free(data);
+	free(data);
 	close_fds();
 	ft_printf(2, "%s\n", msg);
 	exit(EXIT_FAILURE);
