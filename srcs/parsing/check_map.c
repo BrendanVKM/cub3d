@@ -6,7 +6,7 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 13:35:10 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/06/10 11:12:50 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/06/10 15:11:15 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,8 @@ static char	set_player(t_data *data, int i, int j)
 {
 	if (data->p_pos.x != -1 || data->p_pos.y != -1)
 		return ('2');
-	data->p_pos.x = j;
-	data->p_pos.y = i;
-	if (data->map[i][j] == 'N')
-		data->orientation = NO;
-	else if (data->map[i][j] == 'S')
-		data->orientation = SO;
-	else if (data->map[i][j] == 'E')
-		data->orientation = EA;
-	else if (data->map[i][j] == 'W')
-		data->orientation = WE;
-	data->p_pos.x = j;
-	data->p_pos.y = i;
+	data->p_pos.x = j + 0.5;
+	data->p_pos.y = i + 0.5;
 	if (data->map[i][j] == 'N')
 		data->orientation = NO;
 	else if (data->map[i][j] == 'S')
