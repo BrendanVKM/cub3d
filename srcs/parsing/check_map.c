@@ -6,7 +6,7 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 13:35:10 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/06/05 14:29:35 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/06/10 10:20:18 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ static int	is_wall_floor(t_data *data, int i, int j)
 	if (!data->map[i - 1] || !data->map[i + 1] || !data->map[i][j - 1]
 		|| !data->map[i][j + 1])
 		return (2);
-	if (!strchr("NSWE1 0", data->map[i - 1][j]))
+	if (!strchr("NSWE10", data->map[i - 1][j]))
 		return (2);
-	if (!strchr("NSWE1 0", data->map[i + 1][j]))
+	if (!strchr("NSWE10", data->map[i + 1][j]))
 		return (2);
-	if (!strchr("NSWE1 0", data->map[i][j - 1]))
+	if (!strchr("NSWE10", data->map[i][j - 1]))
 		return (2);
-	if (!strchr("NSWE1 0", data->map[i][j + 1]))
+	if (!strchr("NSWE10", data->map[i][j + 1]))
 		return (2);
 	return (0);
 }
@@ -68,7 +68,7 @@ static int	check_interior(t_data *data, int end)
 					return (2);
 			j++;
 		}
-		if (data->map[i][j - 1] != '1')
+		if (!strchr("1 ", data->map[i][j - 1]))
 			return (2);
 		i++;
 	}
@@ -82,14 +82,14 @@ static int	check_extreme(t_data *data, int nb)
 	i = 0;
 	while (data->map[nb][i])
 	{
-		if (data->map[nb][i] != '1')
+		if (!strchr("1 ", data->map[nb][i]))
 			return (1);
 		i++;
 	}
 	i = 0;
 	while (data->map[i] && data->map[i][0])
 	{
-		if (data->map[i][0] != '1')
+		if (!strchr("1 ", data->map[i][0]))
 			return (4);
 		i++;
 	}
