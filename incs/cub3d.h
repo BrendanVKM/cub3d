@@ -6,7 +6,7 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 14:14:34 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/06/04 13:30:48 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/06/10 11:17:25 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,9 @@ int		set_up_mlx(t_data *data, t_texture *text);
 int		parse_texture(t_data *data, char *line);
 int		exit_game(t_data *data);
 int		raycast(t_data *data);
+
+char	**parse_map(int fd, int texture_lines, char *file);
+char	**read_map_content(int fd2, char **map, int map_size);
 
 t_data	*parse_file(t_data *data, int fd, char *file);
 #endif

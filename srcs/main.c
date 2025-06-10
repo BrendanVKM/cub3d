@@ -6,7 +6,7 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 14:10:46 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/06/05 11:49:22 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/06/10 11:12:40 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,14 @@ int	main(int ac, char **av)
 	init(data);
 	fd = ft_check_args(ac, av, data);
 	parse_file(data, fd, av[1]);
-	printf("Textures:\n");
-	for (int i = 0; i < 4; i++)
-		printf("Texture %d: %s\n", i, data->text->path[i]);
-	printf("\nMap:\n");
-	for (int i = 0; data->map[i]; i++)
-		printf("%s\n", data->map[i]);
-	printf("\nPlayer position: (%f, %f, %u)\n", data->p_pos.x, data->p_pos.y,
-		data->orientation);
+	// printf("Textures:\n");
+	// for (int i = 0; i < 4; i++)
+	// 	printf("Texture %d: %s\n", i, data->text->path[i]);
+	// printf("\nMap:\n");
+	// for (int i = 0; data->map[i]; i++)
+	// 	printf("%s\n", data->map[i]);
+	// printf("\nPlayer position: (%f, %f, %u)\n", data->p_pos.x, data->p_pos.y,
+	// 	data->orientation);
 	exit_data_p(data, "End parsing");
 		// a modif par free_end_p si besoin rajouter des trucs a free.
 	// init_player_dir(data, &rc);

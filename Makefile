@@ -6,7 +6,7 @@
 #    By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/04 14:41:21 by bvictoir          #+#    #+#              #
-#    Updated: 2025/05/22 11:11:21 by bvictoir         ###   ########.fr        #
+#    Updated: 2025/06/10 11:17:38 by bvictoir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,8 @@ SRC			=	raycast.c		\
 				mlx_init.c		\
 				movement.c		\
 				parsing/parse_file.c			\
+				parsing/parse_map.c				\
+				parsing/read_map.c				\
 				parsing/check_textures.c		\
 				parsing/check_map.c				\
 				free/free_data_p.c				\
