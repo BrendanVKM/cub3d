@@ -16,7 +16,7 @@ NO ./assets/brick.xpm
 
 
 SO ./assets/grass.xpm
-                        ./assets/wood.xpm
+                      WE ./assets/wood.xpm
         EA ./assets/window.xpm            
 
         F 20,           20,             20
@@ -35,26 +35,4 @@ C 200,          200,200
 10001
 10001
 11111           
-
         
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

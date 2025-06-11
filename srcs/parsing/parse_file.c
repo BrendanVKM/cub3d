@@ -6,7 +6,7 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 10:11:59 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/06/10 14:20:35 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/06/11 13:37:08 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,22 @@ static int	parse_texture_section(t_data *data, int fd)
 
 static void	finalize_parsing(t_data *data, int fd, char *line)
 {
+	int		i;
+	char	*txt;
+
 	if (line)
 		free(line);
 	data->tmp_line = NULL;
+	i = 0;
+	txt = NULL;
+	while (data->text->path[i])
+	{
+		txt = ft_strtrim(data->text->path[i], " \f\n\r\t\v");
+		if (!txt)
+			exit_data_p(data, "Error: Memory allocation failed");
+		free(data->text->path[i]);
+		data->text->path[i++] = txt;
+	}
 	if (!data->map)
 		exit_data_p(data, "Error: Incorrect Map file");
 	check_map(data);

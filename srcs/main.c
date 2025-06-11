@@ -6,7 +6,7 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 12:27:02 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/06/10 14:16:26 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/06/11 14:13:38 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ int	main(int ac, char **av)
 	init(data);
 	fd = ft_check_args(ac, av, data);
 	parse_file(data, fd, av[1]);
-	printf("Parsing complete\n");
 	rc = malloc(sizeof(t_raycast));
 	if (!rc)
 		exit_error(data, "Malloc failed");

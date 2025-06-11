@@ -6,7 +6,7 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 12:27:28 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/06/10 12:56:39 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/06/11 10:26:35 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 # define SPEED 0.03
 # define ROT 0.02
 
-# define WIN_WIDTH 1280
-# define WIN_HEIGHT 720
+# define WIN_WIDTH 1920
+# define WIN_HEIGHT 1080
 
 # define ESC 65307
 # define LEFT 65361
