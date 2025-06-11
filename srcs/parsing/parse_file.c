@@ -6,7 +6,7 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 10:11:59 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/06/11 13:37:08 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/06/11 14:47:54 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ static void	finalize_parsing(t_data *data, int fd, char *line)
 	data->tmp_line = NULL;
 	i = 0;
 	txt = NULL;
-	while (data->text->path[i])
+	while (i < 4)
 	{
 		txt = ft_strtrim(data->text->path[i], " \f\n\r\t\v");
 		if (!txt)

@@ -6,7 +6,7 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 12:26:44 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/06/10 12:26:47 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/06/11 14:44:38 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ void	init(t_data *data)
 {
 	int	i;
 
-	i = 0;
 	if (!data)
 		exit_data_p(data, "Error: Data malloc fail");
 	data->map = NULL;
@@ -85,6 +84,8 @@ void	init(t_data *data)
 	data->text = malloc(sizeof(t_texture));
 	if (!data->text)
 		exit_data_p(data, "Error: Text malloc fail");
+
+	i = 0;
 	while (i < 4)
 		data->text->path[i++] = NULL;
 	data->text->ceiling_rgb = NULL;
