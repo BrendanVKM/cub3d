@@ -6,7 +6,7 @@
 #    By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/04 14:41:21 by bvictoir          #+#    #+#              #
-#    Updated: 2025/06/10 12:23:32 by bvictoir         ###   ########.fr        #
+#    Updated: 2025/06/12 11:01:07 by bvictoir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ SRC			=	raycast.c		\
 				parsing/read_map.c				\
 				parsing/check_textures.c		\
 				parsing/check_map.c				\
-				free/free_data_p.c				\
+				parsing/free_data_p.c			\
 				main.c							\
 				render_utils.c
 SRCS		= ${addprefix $(SRC_PATH), $(SRC)}

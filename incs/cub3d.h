@@ -6,7 +6,7 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 12:27:28 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/06/11 10:26:35 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/06/12 11:14:34 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ typedef struct s_texture
 	int			*ceiling_rgb;
 	uint32_t	floor;
 	uint32_t	ceiling;
-	t_image		*data;
 	int			dir;
 }				t_texture;
 
@@ -82,7 +81,6 @@ typedef struct s_raycast
 	t_vec		p_dir;
 	t_vec		plane;
 	t_vec		ray_dir;
-	t_vec		ray_pos;
 	int			map_x;
 	int			map_y;
 	t_vec		delta_d;
@@ -101,8 +99,6 @@ typedef struct s_data
 	void		*mlx;
 	void		*win;
 	t_image		*image;
-	int			*buffer;
-	int			map_width;
 	char		*tmp_line;
 	char		**map;
 	t_vec		p_pos;

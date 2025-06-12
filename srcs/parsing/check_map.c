@@ -6,7 +6,7 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 13:35:10 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/06/11 10:15:01 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/06/12 11:06:57 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,6 @@ void	check_map(t_data *data)
 	i = 0;
 	while (data->map[i])
 		i++;
-	data->map_width = i;
 	if (i < 3)
 		exit_data_p(data, "Error: Map too small");
 	if (check_extreme(data, 0))
