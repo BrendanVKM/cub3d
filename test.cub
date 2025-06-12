@@ -1,6 +1,6 @@
-C 225,30,0
+C 225,30,
 
-F 220,100,250
+F 220,100,255
 
 NO ./assets/brick.xpm
 SO ./assets/grass.xpm

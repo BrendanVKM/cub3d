@@ -6,7 +6,7 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 13:40:28 by bvkm              #+#    #+#             */
-/*   Updated: 2025/06/10 14:16:42 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/06/12 11:56:56 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ static uint32_t	add_rgb(t_data *data, int **rgb, char *line)
 	free(line);
 	if (!split || !*rgb)
 		rgb_error(data, rgb, split);
-	if (!split [1] || split[3])
+	if (!split[0] || !split [1] || !split[2] || split[3])
+		rgb_error(data, rgb, split);
+	if (!split[0][0] || !split[1][0] || !split[2][0])
 		rgb_error(data, rgb, split);
 	while (split[i])
 	{
