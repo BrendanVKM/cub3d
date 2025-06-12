@@ -6,11 +6,37 @@
 /*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 13:40:28 by bvkm              #+#    #+#             */
-/*   Updated: 2025/06/12 11:56:56 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/06/12 14:09:09 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static int	verif_color(char **split, int **rgb)
+{
+	int		i;
+	int		r;
+	char	*tmp;
+
+	if (!split || !*rgb)
+		return (0);
+	i = 0;
+	r = 1;
+	tmp = NULL;
+	while (split[i])
+	{
+		if (!split[i][0])
+			r = 0;
+		tmp = ft_strtrim(split[i], " \f\n\r\t\v");
+		if (!ft_isnum(tmp))
+			r = 0;
+		free(tmp);
+		i++;
+	}
+	if (i != 3)
+		r = 0;
+	return (r);
+}
 
 static uint32_t	add_rgb(t_data *data, int **rgb, char *line)
 {
@@ -21,11 +47,7 @@ static uint32_t	add_rgb(t_data *data, int **rgb, char *line)
 	split = ft_split(line, ',');
 	*rgb = malloc(sizeof(int) * 3);
 	free(line);
-	if (!split || !*rgb)
-		rgb_error(data, rgb, split);
-	if (!split[0] || !split [1] || !split[2] || split[3])
-		rgb_error(data, rgb, split);
-	if (!split[0][0] || !split[1][0] || !split[2][0])
+	if (!verif_color(split, rgb))
 		rgb_error(data, rgb, split);
 	while (split[i])
 	{
