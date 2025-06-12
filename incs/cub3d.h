@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 12:27:28 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/06/11 10:26:35 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/06/12 11:08:22 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@
 # define A 97
 # define S 115
 # define D 100
+# define RIGHT 65363
+# define LEFT 65361
 
 typedef enum e_direction
 {
@@ -121,6 +123,8 @@ void			init_raycast(t_data *data, t_raycast *ray, double cam_x);
 void			draw_wall(t_data *data, t_raycast *rc, t_texture *text, int x);
 void			draw_ceiling_floor(t_raycast *rc, t_texture *text,
 					t_image *image, int x);
+void			rot_left(t_raycast *rc);
+void			rot_right(t_raycast *rc);
 
 int				get_tex_y(double tex_pos, t_texture *text);
 int				set_up_mlx(t_data *data, t_texture *text);
