@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 12:27:28 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/06/12 11:08:22 by lemarian         ###   ########.fr       */
+/*   Updated: 2025/06/12 11:17:56 by bvictoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ typedef struct s_texture
 	int			*ceiling_rgb;
 	uint32_t	floor;
 	uint32_t	ceiling;
-	t_image		*data;
 	int			dir;
 }				t_texture;
 
@@ -84,7 +83,6 @@ typedef struct s_raycast
 	t_vec		p_dir;
 	t_vec		plane;
 	t_vec		ray_dir;
-	t_vec		ray_pos;
 	int			map_x;
 	int			map_y;
 	t_vec		delta_d;
@@ -103,8 +101,6 @@ typedef struct s_data
 	void		*mlx;
 	void		*win;
 	t_image		*image;
-	int			*buffer;
-	int			map_width;
 	char		*tmp_line;
 	char		**map;
 	t_vec		p_pos;
@@ -115,6 +111,8 @@ typedef struct s_data
 
 void			init(t_data *data);
 void			check_map(t_data *data);
+void			rot_left(t_raycast *rc);
+void			rot_right(t_raycast *rc);
 void			exit_error(t_data *data, char *mess);
 void			exit_data_p(t_data *data, char *msg);
 void			init_player_dir(t_data *data, t_raycast *rc);
@@ -123,8 +121,6 @@ void			init_raycast(t_data *data, t_raycast *ray, double cam_x);
 void			draw_wall(t_data *data, t_raycast *rc, t_texture *text, int x);
 void			draw_ceiling_floor(t_raycast *rc, t_texture *text,
 					t_image *image, int x);
-void			rot_left(t_raycast *rc);
-void			rot_right(t_raycast *rc);
 
 int				get_tex_y(double tex_pos, t_texture *text);
 int				set_up_mlx(t_data *data, t_texture *text);
