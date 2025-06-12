@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 10:57:19 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/06/10 12:24:50 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/06/12 11:50:16 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ void	exit_error(t_data *data, char *mess)
 {
 	if (data)
 	{
+		if (data->win)
+			mlx_destroy_window(data->mlx, data->win);
 		if (data->text)
 			free_text(data->text, data);
 		if (data->image)
@@ -68,8 +70,6 @@ void	exit_error(t_data *data, char *mess)
 				mlx_destroy_image(data->mlx, data->image->img);
 			free(data->image);
 		}
-		if (data->win)
-			mlx_destroy_window(data->mlx, data->win);
 		if (data->mlx)
 		{
 			mlx_destroy_display(data->mlx);

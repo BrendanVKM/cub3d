@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 11:33:18 by lemarian          #+#    #+#             */
-/*   Updated: 2025/06/10 13:00:13 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/06/12 11:49:20 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,14 @@ int	set_up_mlx(t_data *data, t_texture *text)
 		exit_error(data, "Malloc failed");
 	data->image->img = NULL;
 	data->win = NULL;
-	data->win = mlx_new_window(data->mlx, WIN_WIDTH, WIN_HEIGHT, "Cub3d");
-	if (!data->win)
-		exit_error(data, "failed to create window");
 	data->image->img = mlx_new_image(data->mlx, WIN_WIDTH, WIN_HEIGHT);
 	if (!data->image->img)
 		exit_error(data, "failed to create image display");
 	data->image->addr = mlx_get_data_addr(data->image->img,
 			&data->image->bpp, &data->image->size_line, &data->image->endian);
 	texture_init(data->mlx, text, data);
+	data->win = mlx_new_window(data->mlx, WIN_WIDTH, WIN_HEIGHT, "Cub3d");
+	if (!data->win)
+		exit_error(data, "failed to create window");
 	return (1);
 }
