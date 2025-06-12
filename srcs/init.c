@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvictoir <bvictoir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lemarian <lemarian@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 12:26:44 by bvictoir          #+#    #+#             */
-/*   Updated: 2025/06/11 14:44:38 by bvictoir         ###   ########.fr       */
+/*   Updated: 2025/06/12 11:09:48 by lemarian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ void	init(t_data *data)
 	data->text = malloc(sizeof(t_texture));
 	if (!data->text)
 		exit_data_p(data, "Error: Text malloc fail");
-
 	i = 0;
 	while (i < 4)
 		data->text->path[i++] = NULL;
